@@ -3,6 +3,8 @@
 **Date:** 2026-11-05 · **Scope:** decide whether the Koloses kernel (`44afe4c`) is a trustworthy base, and set up a safe, verifiable way to get the official kernel source and stock firmware for the GT-I8200.
 **Rules followed:** no kernel modifications, no compiling, no flashing, nothing written to any phone, no firmware downloaded. I fetched web *listing pages* (metadata) and read files from public Git repositories. I read two kernel images already sitting in community repositories (decompressing and inspecting them as data, never running them).
 
+> **Update (same day, after the approved computer-only build):** see [phase-2-kernel-build.md](phase-2-kernel-build.md). Built with the original toolchain and Samsung's production options, the Koloses source reproduces the genuine I8200XXUAOC1 kernel's code byte for byte (all 5,144,576 code bytes; 41,847 of 41,847 symbols identical in name, size and address; 26 bytes differ in the whole image after normalising the build-folder path). That upgrades the verdict in section 1 from "plausible" to "compiled code verified equivalent to a genuine Samsung GT-I8200 release kernel". It is still not compared with Samsung's own download.
+
 ## How to read this document
 
 | Label | Meaning |

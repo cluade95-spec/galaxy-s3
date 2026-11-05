@@ -1,0 +1,725 @@
+  GEN     /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/out-A/Makefile
+  WRAP    arch/arm/include/generated/asm/auxvec.h
+  CHK     include/linux/version.h
+  WRAP    arch/arm/include/generated/asm/bitsperlong.h
+  WRAP    arch/arm/include/generated/asm/cputime.h
+  WRAP    arch/arm/include/generated/asm/emergency-restart.h
+  UPD     include/linux/version.h
+  WRAP    arch/arm/include/generated/asm/errno.h
+  WRAP    arch/arm/include/generated/asm/ioctl.h
+  WRAP    arch/arm/include/generated/asm/irq_regs.h
+  WRAP    arch/arm/include/generated/asm/kdebug.h
+  WRAP    arch/arm/include/generated/asm/local.h
+  WRAP    arch/arm/include/generated/asm/local64.h
+  WRAP    arch/arm/include/generated/asm/percpu.h
+  WRAP    arch/arm/include/generated/asm/poll.h
+  WRAP    arch/arm/include/generated/asm/resource.h
+  WRAP    arch/arm/include/generated/asm/sections.h
+  WRAP    arch/arm/include/generated/asm/siginfo.h
+  WRAP    arch/arm/include/generated/asm/sizes.h
+  Using /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental as source for kernel
+  CHK     include/generated/utsrelease.h
+  UPD     include/generated/utsrelease.h
+  HOSTCC  scripts/kallsyms
+  HOSTCC  scripts/cgitinfo
+  CC      scripts/mod/empty.o
+  Generating include/generated/mach-types.h
+  HOSTCC  scripts/mod/mk_elfconfig
+  CC      kernel/bounds.s
+  GEN     include/generated/bounds.h
+  CC      arch/arm/kernel/asm-offsets.s
+  HOSTCC  scripts/pnmtologo
+  MKELF   scripts/mod/elfconfig.h
+  HOSTCC  scripts/mod/file2alias.o
+  GEN     include/generated/asm-offsets.h
+  CALL    /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/scripts/checksyscalls.sh
+  HOSTCC  scripts/conmakehash
+  HOSTCC  scripts/mod/modpost.o
+  HOSTCC  scripts/mod/sumversion.o
+  HOSTLD  scripts/mod/modpost
+  CC      init/main.o
+  HOSTCC  usr/gen_init_cpio
+  CC      arch/arm/kernel/elf.o
+  CC      arch/arm/vfp/vfpmodule.o
+  AS      arch/arm/kernel/entry-armv.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/usr/gen_init_cpio.c: In function 'cpio_mkfile_line':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/usr/gen_init_cpio.c:397:24: warning: '__builtin_strncpy' output may be truncated copying 4096 bytes from a string of length 4096 [-Wstringop-truncation]
+  397 |                        strncpy(new_location, expanded, PATH_MAX);
+      |                        ^
+  AS      arch/arm/kernel/entry-common.o
+  AS      arch/arm/vfp/entry.o
+  CC      arch/arm/kernel/irq.o
+  GEN     usr/initramfs_data.cpio
+  AS      arch/arm/vfp/vfphw.o
+  AS      usr/initramfs_data.o
+  CHK     include/generated/compile.h
+  CC      arch/arm/vfp/vfpsingle.o
+  LD      usr/built-in.o
+  UPD     include/generated/compile.h
+  CC      init/do_mounts.o
+  CC      arch/arm/mm/dma-mapping.o
+  CC      arch/arm/kernel/opcodes.o
+  CC      arch/arm/kernel/process.o
+  CC      arch/arm/vfp/vfpdouble.o
+  CC      init/do_mounts_initrd.o
+  CC      arch/arm/mm/extable.o
+  CC      arch/arm/mm/fault.o
+  CC      arch/arm/kernel/ptrace.o
+  CC      init/initramfs.o
+  LD      arch/arm/vfp/vfp.o
+  LD      arch/arm/vfp/built-in.o
+  CC      arch/arm/mm/init.o
+  CC      arch/arm/common/gic.o
+  CC      arch/arm/kernel/return_address.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/kernel/return_address.c:62:2: warning: #warning "TODO: return_address should use unwind tables" [-Wcpp]
+  CC      arch/arm/kernel/sched_clock.o
+  CC      init/calibrate.o
+  LD      arch/arm/common/built-in.o
+  CC      arch/arm/mm/iomap.o
+  LD      arch/arm/net/built-in.o
+  CC      arch/arm/kernel/setup.o
+  CC      arch/arm/mm/fault-armv.o
+  CC      init/version.o
+  CC      arch/arm/kernel/signal.o
+  LD      init/mounts.o
+  LD      init/built-in.o
+  CC      arch/arm/mm/flush.o
+  CC      arch/arm/kernel/stacktrace.o
+  CC      arch/arm/mm/idmap.o
+  CC      arch/arm/mach-mmp/common.o
+  CC      arch/arm/plat-pxa/dma.o
+  CC      arch/arm/kernel/sys_arm.o
+  CC      arch/arm/mach-mmp/mmp_device.o
+  CC      arch/arm/mm/ioremap.o
+  CC      arch/arm/kernel/time.o
+  CC      arch/arm/mach-mmp/devices.o
+  CC      arch/arm/plat-pxa/usb.o
+  CC      arch/arm/kernel/traps.o
+  CC      arch/arm/mm/mmap.o
+  CC      arch/arm/plat-pxa/mfp.o
+  CC      arch/arm/mach-mmp/pmu.o
+  CC      arch/arm/mm/pgd.o
+  CC      arch/arm/kernel/cpuidle.o
+  CC      arch/arm/plat-pxa/clock.o
+  CC      arch/arm/mach-mmp/reset.o
+  CC      arch/arm/kernel/armksyms.o
+  CC      arch/arm/mm/mmu.o
+  CC      arch/arm/kernel/module.o
+  CC      arch/arm/mach-mmp/onboard/board-golden-display.o
+  CC      arch/arm/plat-pxa/dvfs.o
+  AS      arch/arm/kernel/sleep.o
+In file included from /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/board-golden-display.c:25:0:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:507:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:511:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:535:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:540:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+In file included from /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/board-golden-display.c:25:0:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:595:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:662:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:665:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:673:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/board-golden-display.c:64:2: warning: large integer implicitly truncated to unsigned type [-Woverflow]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/board-golden-display.c: In function 'dsi_init':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/board-golden-display.c:431:39: warning: unused variable 'lcd_pd' [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/board-golden-display.c: At top level:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:37:28: warning: 'hx8369b_video_read_mtp_cmds' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:395:11: warning: 'elvss_cond_set' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:400:11: warning: 'acl_on' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:490:11: warning: 'elvss_con' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:500:28: warning: 's6e63m0_l2_mtp_key_enable_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:506:28: warning: 's6e63m0_acl_on_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:510:28: warning: 's6e63m0_acl_off_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:514:28: warning: 's6e63m0_panel_cond_set_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:518:28: warning: 's6e63m0_disp_cond_set_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:523:28: warning: 's6e63m0_etc_cond_set_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:534:28: warning: 's6e63m0_elvss_on_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:538:28: warning: 's6e63m0_elvss_set' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:543:28: warning: 's6e63m0_init_table' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:560:28: warning: 's6e63m0_contention_error_table' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:563:28: warning: 's6e63m0_static_Gamma300' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:567:28: warning: 's6e63m0_display_on_table' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:572:28: warning: 's6e63m0_display_off_table' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:594:28: warning: 's6e63m0_acl_on_set_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:599:28: warning: 's6e63m0_acl_set_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:603:11: warning: 'acl_set_default' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:623:11: warning: 'gamma_set_default' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:650:28: warning: 's6e63m0_gamma_set_cmds' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:654:28: warning: 's6e63m0_gamma_update' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:659:28: warning: 's6e63m0_brightness_set_acl_on' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:668:28: warning: 's6e63m0_brightness_set_acl_off' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:676:12: warning: 'gamma_table_sm2' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/board-golden-display.c:262:13: warning: 'calculate_lcd_sclk' defined but not used [-Wunused-function]
+  CC      arch/arm/kernel/suspend.o
+  CC      arch/arm/plat-pxa/panic.o
+  CC      arch/arm/mm/vmregion.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/plat-pxa/panic.c: In function 'pxa_panic_notifier':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/plat-pxa/panic.c:154:15: warning: unused variable 'page' [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/plat-pxa/panic.c: At top level:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/plat-pxa/panic.c:25:14: warning: 'indicator' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/plat-pxa/panic.c:111:30: warning: 'die_dump_reg_notifier' defined but not used [-Wunused-variable]
+  CC      arch/arm/mach-mmp/onboard/lcd_s6e63m0.o
+  CC      arch/arm/kernel/smp.o
+  CC      arch/arm/plat-pxa/ssp.o
+  CC      arch/arm/mm/proc-syms.o
+In file included from /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c:31:0:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:507:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:511:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:535:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:540:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+In file included from /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c:31:0:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:595:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:662:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:665:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:673:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+In file included from /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c:32:0:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_smart.h:12:0: warning: "SMART_DIMMING" redefined [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:24:0: note: this is the location of the previous definition
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c:59:1: warning: useless storage class specifier in empty declaration [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c:81:2: warning: initialization from incompatible pointer type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c:81:2: warning: (near initialization for 's6e63m0_esd_det.recover') [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c: In function 'get_mtpData':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c:223:3: warning: 'return' with a value, in function returning void [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c: At top level:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c:229:13: warning: function declaration isn't a prototype [-Wstrict-prototypes]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c: In function 's6e63m0_smart_dimming':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c:482:5: warning: format '%s' expects argument of type 'char *', but argument 2 has type 'int' [-Wformat]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c:482:5: warning: format '%x' expects a matching 'unsigned int' argument [-Wformat]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c: In function 's6e63m0_update_brightness':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c:509:29: warning: assignment from incompatible pointer type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0.c: At top level:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:395:11: warning: 'elvss_cond_set' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:400:11: warning: 'acl_on' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:490:11: warning: 'elvss_con' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:506:28: warning: 's6e63m0_acl_on_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:510:28: warning: 's6e63m0_acl_off_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:534:28: warning: 's6e63m0_elvss_on_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:538:28: warning: 's6e63m0_elvss_set' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:543:28: warning: 's6e63m0_init_table' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:563:28: warning: 's6e63m0_static_Gamma300' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:623:11: warning: 'gamma_set_default' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:650:28: warning: 's6e63m0_gamma_set_cmds' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:654:28: warning: 's6e63m0_gamma_update' defined but not used [-Wunused-variable]
+  CC      arch/arm/mm/alignment.o
+  CC      arch/arm/plat-pxa/debugfs.o
+  CC      arch/arm/kernel/smp_tlb.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mm/alignment.c: In function 'do_alignment':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mm/alignment.c:327:15: warning: 'offset.un' may be used uninitialized in this function [-Wmaybe-uninitialized]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mm/alignment.c:749:21: note: 'offset.un' was declared here
+  CC      arch/arm/mach-mmp/onboard/lcd_s6e63m0_smart.o
+  CC      arch/arm/plat-pxa/dump_regs.o
+  CC      arch/arm/kernel/smp_scu.o
+  CC      arch/arm/mm/highmem.o
+In file included from /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_smart_2p2_gamma.h:4:0,
+                 from /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_smart.c:3:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:24:0: warning: "SMART_DIMMING" redefined [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_smart.h:12:0: note: this is the location of the previous definition
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:507:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:511:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:535:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:540:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+In file included from /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_smart_2p2_gamma.h:4:0,
+                 from /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_smart.c:3:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:595:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:662:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:665:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:673:2: warning: initialization discards 'const' qualifier from pointer target type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:37:28: warning: 'hx8369b_video_read_mtp_cmds' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:395:11: warning: 'elvss_cond_set' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:400:11: warning: 'acl_on' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:490:11: warning: 'elvss_con' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:500:28: warning: 's6e63m0_l2_mtp_key_enable_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:506:28: warning: 's6e63m0_acl_on_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:510:28: warning: 's6e63m0_acl_off_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:514:28: warning: 's6e63m0_panel_cond_set_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:518:28: warning: 's6e63m0_disp_cond_set_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:523:28: warning: 's6e63m0_etc_cond_set_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:534:28: warning: 's6e63m0_elvss_on_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:538:28: warning: 's6e63m0_elvss_set' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:543:28: warning: 's6e63m0_init_table' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:560:28: warning: 's6e63m0_contention_error_table' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:563:28: warning: 's6e63m0_static_Gamma300' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:567:28: warning: 's6e63m0_display_on_table' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:572:28: warning: 's6e63m0_display_off_table' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:594:28: warning: 's6e63m0_acl_on_set_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:599:28: warning: 's6e63m0_acl_set_seq' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:603:11: warning: 'acl_set_default' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:623:11: warning: 'gamma_set_default' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:650:28: warning: 's6e63m0_gamma_set_cmds' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:654:28: warning: 's6e63m0_gamma_update' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:659:28: warning: 's6e63m0_brightness_set_acl_on' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:668:28: warning: 's6e63m0_brightness_set_acl_off' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/lcd_s6e63m0_param.h:676:12: warning: 'gamma_table_sm2' defined but not used [-Wunused-variable]
+  CC      arch/arm/kernel/smp_twd.o
+  LD      arch/arm/plat-pxa/built-in.o
+  AS      arch/arm/mm/abort-ev7.o
+  AS      arch/arm/mm/pabort-v7.o
+  CC      arch/arm/kernel/machine_kexec.o
+  AS      arch/arm/mm/cache-v7.o
+  CC      arch/arm/mach-mmp/onboard/esd_detect.o
+  CC      arch/arm/mach-mmp/pxa988.o
+  CC      arch/arm/mm/copypage-v6.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/esd_detect.c: In function 'esd_dwork_func':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/esd_detect.c:15:3: warning: initialization from incompatible pointer type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/esd_detect.c:15:3: warning: (near initialization for 'info') [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/esd_detect.c: In function 'esd_det_disable':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/esd_detect.c:85:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/esd_detect.c: In function 'esd_det_enable':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/esd_detect.c:109:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/esd_detect.c: In function 'esd_det_init':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/esd_detect.c:134:2: warning: passing argument 1 of 'snprintf' from incompatible pointer type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/include/linux/kernel.h:323:5: note: expected 'char *' but argument is of type 'char **'
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/esd_detect.c:135:2: warning: passing argument 2 of 'gpio_request' from incompatible pointer type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/include/asm-generic/gpio.h:153:12: note: expected 'char const *' but argument is of type 'char **'
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/esd_detect.c:137:3: warning: 'return' with no value, in function returning non-void [-Wreturn-type]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/esd_detect.c:149:6: warning: passing argument 4 of 'request_irq' from incompatible pointer type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/include/linux/interrupt.h:132:1: note: expected 'char const *' but argument is of type 'char **'
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/onboard/esd_detect.c:162:3: warning: passing argument 1 of '__alloc_workqueue_key' from incompatible pointer type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/include/linux/workqueue.h:304:1: note: expected 'char const *' but argument is of type 'char **'
+  LD      arch/arm/mach-mmp/onboard/built-in.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/pxa988.c: In function 'pxa_init_gic_regdump':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/pxa988.c:329:23: warning: assignment makes integer from pointer without a cast [enabled by default]
+  CC      kernel/fork.o
+  CC      arch/arm/mm/context.o
+  AS      arch/arm/kernel/relocate_kernel.o
+  CC      arch/arm/kernel/atags.o
+  AS      arch/arm/mm/tlb-v7.o
+  CC      arch/arm/kernel/thumbee.o
+  CC      arch/arm/mach-mmp/clock-pxa988.o
+  AS      arch/arm/mm/proc-v7.o
+  CC      arch/arm/kernel/unwind.o
+  CC      arch/arm/mm/cache-l2x0.o
+  CC      arch/arm/kernel/pmu.o
+  LD      arch/arm/mm/built-in.o
+  CC      mm/filemap.o
+  CC      arch/arm/kernel/topology.o
+  CC      arch/arm/kernel/io.o
+  CC      kernel/exec_domain.o
+  AS      arch/arm/kernel/head.o
+  CC      arch/arm/kernel/init_task.o
+  CC      kernel/panic.o
+  LDS     arch/arm/kernel/vmlinux.lds
+  LD      arch/arm/kernel/built-in.o
+  CC      arch/arm/mach-mmp/wakeupgen.o
+  CC      kernel/printk.o
+  CC      fs/open.o
+  CC      mm/mempool.o
+  CC      mm/oom_kill.o
+  CC      fs/read_write.o
+  CC      arch/arm/mach-mmp/sram.o
+  CC      kernel/cpu.o
+  CC      arch/arm/mach-mmp/time.o
+  CC      arch/arm/mach-mmp/acpuclock-pxa988.o
+  CC      kernel/exit.o
+  CC      fs/file_table.o
+  CC      mm/fadvise.o
+  CC      mm/maccess.o
+  CC      fs/super.o
+  CC      mm/page_alloc.o
+  CC      kernel/itimer.o
+  CC      fs/char_dev.o
+  TIMEC   kernel/timeconst.h
+Can't use 'defined(@array)' (Maybe you should just omit the defined()?) at /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/kernel/timeconst.pl line 373.
+make[2]: *** [/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/kernel/Makefile:130: kernel/timeconst.h] Error 255
+make[1]: *** [/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/Makefile:952: kernel] Error 2
+make[1]: *** Waiting for unfinished jobs....
+  CC      fs/stat.o
+  CC      arch/arm/mach-mmp/dvfs-pxa988.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/mm/page_alloc.c: In function '__rmqueue':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/mm/page_alloc.c:970:12: warning: 'sel_area' may be used uninitialized in this function [-Wmaybe-uninitialized]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/mm/page_alloc.c:942:27: note: 'sel_area' was declared here
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/mm/page_alloc.c:971:13: warning: 'sel_order' may be used uninitialized in this function [-Wmaybe-uninitialized]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/mm/page_alloc.c:941:26: note: 'sel_order' was declared here
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/mm/page_alloc.c:970:12: warning: 'sel_area' may be used uninitialized in this function [-Wmaybe-uninitialized]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/mm/page_alloc.c:942:27: note: 'sel_area' was declared here
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/mm/page_alloc.c:971:13: warning: 'sel_order' may be used uninitialized in this function [-Wmaybe-uninitialized]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/mm/page_alloc.c:941:26: note: 'sel_order' was declared here
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/dvfs-pxa988.c: In function 'pxa988_init_level_volt':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/dvfs-pxa988.c:1713:5: warning: unused variable 'data' [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/dvfs-pxa988.c: In function 'voltage_read':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/dvfs-pxa988.c:1924:2: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/dvfs-pxa988.c: At top level:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/dvfs-pxa988.c:275:12: warning: 'vm_millivolts_986ax_1v4_svc' defined but not used [-Wunused-variable]
+  CC      fs/exec.o
+  CC      mm/page-writeback.o
+  CC      arch/arm/mach-mmp/gpio-edge.o
+  AS      arch/arm/mach-mmp/helpfunc_v7.o
+  CC      arch/arm/mach-mmp/pxa988_lowpower.o
+  CC      fs/pipe.o
+  CC      arch/arm/mach-mmp/reset-pxa988.o
+  CC      mm/readahead.o
+  CC      arch/arm/mach-mmp/platsmp.o
+  CC      fs/namei.o
+  CC      mm/swap.o
+  CC      mm/truncate.o
+  AS      arch/arm/mach-mmp/pxa988_headsmp.o
+  AS      arch/arm/mach-mmp/sleep-pxa988.o
+  CC      arch/arm/mach-mmp/cpuidle-pxa988.o
+  CC      mm/vmscan.o
+  CC      arch/arm/mach-mmp/pm-pxa988.o
+  CC      fs/fcntl.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/mm/vmscan.c: In function 'debug_shrinker_show':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/mm/vmscan.c:222:8: warning: unused variable 'name' [-Wunused-variable]
+  CC      arch/arm/mach-mmp/board-golden.o
+  CC      mm/shmem.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c:2516:2: warning: initialization from incompatible pointer type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c:2516:2: warning: (near initialization for 'gp2a_dev_data.power') [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c: In function 'emeidkb_8787_set_power':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c:3496:16: warning: unused variable 'data' [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c: In function 'gps_power_on':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c:4347:2: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c: In function 'reboot_notifier_func':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c:4753:16: warning: unused variable 'pmic_register' [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c: In function 'emeidkb_init':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c:5197:2: warning: passing argument 2 of 'i2c_register_board_info' from incompatible pointer type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/include/linux/i2c.h:335:1: note: expected 'struct i2c_board_info const *' but argument is of type 'struct i2c_board_info (*)[1]'
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c:5204:2: warning: passing argument 2 of 'i2c_register_board_info' from incompatible pointer type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/include/linux/i2c.h:335:1: note: expected 'struct i2c_board_info const *' but argument is of type 'struct i2c_board_info (*)[1]'
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c: At top level:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c:2029:41: warning: 'sec_pm80x_bat' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c:2409:34: warning: 'i2c_mpu6500_gpio' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c:3406:8: warning: 'bl_lock' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c:4038:32: warning: 'dkb_platform_devices' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden.c:4280:12: warning: 'waruba_enable_RF' defined but not used [-Wunused-function]
+  CC      fs/ioctl.o
+  CC      arch/arm/mach-mmp/board-golden-battery.o
+  CC      fs/readdir.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-battery.c: In function 'sec_charger_cb':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-battery.c:250:2: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-battery.c: At top level:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/include/linux/battery/sec_charger.h:139:32: warning: 'sec_charger_attrs' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-battery.c:63:33: warning: 'golden_temp_table' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-battery.c:182:29: warning: 'charger_supply' defined but not used [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-battery.c:916:12: warning: 'sec_bat_adc_ap_read' defined but not used [-Wunused-function]
+  CC      arch/arm/mach-mmp/sec-common.o
+  CC      fs/select.o
+  CC      arch/arm/mach-mmp/board-golden-input.o
+  CC      mm/prio_tree.o
+  CC      fs/fifo.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:147:20: warning: function declaration isn't a prototype [-Wstrict-prototypes]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c: In function 'mxts_register_callback':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:173:28: warning: assignment from incompatible pointer type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c: In function 'golden_input_tsp_init':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:270:3: warning: 'return' with a value, in function returning void [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:279:3: warning: 'return' with a value, in function returning void [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:287:2: warning: 'return' with a value, in function returning void [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c: In function 'tc360_power_onoff':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:375:4: warning: 'return' with a value, in function returning void [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c: In function 'tc360_int_set_pull':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:428:6: warning: unused variable 'ret' [-Wunused-variable]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c: At top level:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:476:20: warning: function declaration isn't a prototype [-Wstrict-prototypes]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c: In function 'golden_input_tk_init':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:485:4: warning: 'return' with a value, in function returning void [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:495:3: warning: 'return' with a value, in function returning void [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:504:3: warning: 'return' with a value, in function returning void [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:516:2: warning: 'return' with a value, in function returning void [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c: At top level:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:539:1: warning: function declaration isn't a prototype [-Wstrict-prototypes]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c: In function 'mxts_usb_switch_nofify':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:157:2: warning: 'charger_enable' may be used uninitialized in this function [-Wuninitialized]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:149:7: note: 'charger_enable' was declared here
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c: In function 'mxts_register_callback':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:157:2: warning: 'charger_enable' may be used uninitialized in this function [-Wuninitialized]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/board-golden-input.c:149:7: note: 'charger_enable' was declared here
+  CC      mm/util.o
+  CC      arch/arm/mach-mmp/samsung_camera_golden.o
+  CC      arch/arm/mach-mmp/gpu_mem.o
+  CC      fs/dcache.o
+  CC      mm/mmzone.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/samsung_camera_golden.c: In function 'sr030pc30_power':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/samsung_camera_golden.c:412:7: warning: "CONFIG_FLED_RT5033" is not defined [-Wundef]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/samsung_camera_golden.c:420:7: warning: "CONFIG_FLED_RT5033" is not defined [-Wundef]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/samsung_camera_golden.c: In function 'init_samsung_cam':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/samsung_camera_golden.c:824:3: warning: 'return' with a value, in function returning void [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/samsung_camera_golden.c:824:17: warning: ignoring return value of 'PTR_ERR', declared with attribute warn_unused_result [-Wunused-result]
+  CC      fs/inode.o
+  CC      mm/vmstat.o
+  CC      arch/arm/mach-mmp/pxa988_hotplug.o
+  CC      arch/arm/mach-mmp/stand-hotplug.o
+  CC      mm/backing-dev.o
+  CC      fs/attr.o
+  CC      arch/arm/mach-mmp/coresight-v7.o
+  CC      fs/bad_inode.o
+  CC      arch/arm/mach-mmp/boost.o
+  CC      mm/page_isolation.o
+  CC      fs/file.o
+  CC      arch/arm/mach-mmp/sec_debug.o
+  CC      fs/filesystems.o
+  CC      mm/mm_init.o
+  CC      mm/mmu_context.o
+  CC      arch/arm/mach-mmp/sec_log.o
+  CC      fs/namespace.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/sec_log.c: In function 'sec_log_setup':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/experimental/arch/arm/mach-mmp/sec_log.c:60:3: warning: format '%d' expects argument of type 'int', but argument 3 has type 'long unsigned int' [-Wformat]
+  CC      mm/percpu.o
+  CC      mm/compaction.o
+  LD      arch/arm/mach-mmp/built-in.o
+  CC      fs/seq_file.o
+  CC      mm/fremap.o
+  CC      mm/highmem.o
+  CC      fs/xattr.o
+  CC      mm/madvise.o
+  CC      mm/memory.o
+  CC      fs/libfs.o
+  CC      fs/fs-writeback.o
+  CC      mm/mincore.o
+  CC      fs/pnode.o
+  CC      fs/drop_caches.o
+  CC      mm/mlock.o
+  CC      mm/mmap.o
+  CC      fs/splice.o
+  CC      fs/sync.o
+  CC      mm/mprotect.o
+  CC      mm/mremap.o
+  CC      fs/utimes.o
+  CC      fs/stack.o
+  CC      mm/msync.o
+  CC      fs/fs_struct.o
+  CC      mm/rmap.o
+  CC      mm/vmalloc.o
+  CC      mm/pagewalk.o
+  CC      fs/statfs.o
+  CC      fs/buffer.o
+  CC      mm/pgtable-generic.o
+  CC      fs/bio.o
+  CC      fs/block_dev.o
+  CC      mm/process_vm_access.o
+  CC      mm/init-mm.o
+  CC      mm/bootmem.o
+  CC      mm/memblock.o
+  CC      mm/bounce.o
+  CC      fs/direct-io.o
+  CC      mm/page_io.o
+  CC      fs/mpage.o
+  CC      mm/swap_state.o
+  CC      fs/ioprio.o
+  CC      mm/swapfile.o
+  CC      fs/proc_namespace.o
+  CC      mm/thrash.o
+  CC      mm/dmapool.o
+  CC      fs/cramfs/inode.o
+  CC      fs/debugfs/inode.o
+  CC      fs/devpts/inode.o
+  CC      fs/cramfs/uncompress.o
+  LD      fs/devpts/devpts.o
+  LD      fs/devpts/built-in.o
+  CC      mm/slub.o
+  CC      fs/debugfs/file.o
+  LD      fs/cramfs/cramfs.o
+  LD      fs/cramfs/built-in.o
+  CC      mm/migrate.o
+  CC      fs/ecryptfs/dentry.o
+  LD      fs/debugfs/debugfs.o
+  LD      fs/debugfs/built-in.o
+  CC      mm/kmemleak.o
+  CC      fs/ecryptfs/file.o
+  LD      fs/exofs/built-in.o
+  CC      fs/ecryptfs/inode.o
+  CC      fs/ext4/balloc.o
+  CC      fs/fat/cache.o
+  CC      fs/ecryptfs/main.o
+  CC      fs/fat/dir.o
+  CC      fs/ext4/bitmap.o
+  CC      fs/ext4/dir.o
+  CC      fs/ecryptfs/super.o
+  CC      fs/ecryptfs/mmap.o
+  CC      fs/ext4/file.o
+  CC      fs/fat/fatent.o
+  LD      mm/built-in.o
+  CC      fs/ecryptfs/read_write.o
+  CC      fs/fuse/dev.o
+  CC      fs/ext4/fsync.o
+  CC      fs/ecryptfs/crypto.o
+  CC      fs/fat/file.o
+  CC      fs/ext4/ialloc.o
+  CC      fs/fat/inode.o
+  CC      fs/ecryptfs/keystore.o
+  CC      fs/fuse/dir.o
+  CC      fs/ext4/inode.o
+  CC      fs/fat/misc.o
+  CC      fs/fat/namei_msdos.o
+  CC      fs/fuse/file.o
+  CC      fs/ecryptfs/messaging.o
+  CC      fs/fat/namei_vfat.o
+  CC      fs/ecryptfs/miscdev.o
+  LD      fs/fat/fat.o
+  LD      fs/fat/vfat.o
+  LD      fs/fat/msdos.o
+  LD      fs/fat/built-in.o
+  CC      fs/jbd2/transaction.o
+  CC      fs/ecryptfs/kthread.o
+  CC      fs/fuse/inode.o
+  CC      fs/ecryptfs/debug.o
+  LD      fs/ecryptfs/ecryptfs.o
+  LD      fs/ecryptfs/built-in.o
+  CC      fs/ext4/page-io.o
+  CC      fs/fuse/control.o
+  CC      fs/lockd/clntlock.o
+  CC      fs/jbd2/commit.o
+  CC      fs/ext4/ioctl.o
+  LD      fs/fuse/fuse.o
+  LD      fs/fuse/built-in.o
+  CC      fs/ext4/namei.o
+  CC      fs/lockd/clntproc.o
+  CC      fs/jbd2/recovery.o
+  CC      fs/ext4/super.o
+  CC      fs/jbd2/checkpoint.o
+  CC      fs/lockd/clntxdr.o
+  CC      fs/jbd2/revoke.o
+  CC      fs/nfs/client.o
+  CC      fs/lockd/host.o
+  CC      fs/jbd2/journal.o
+  CC      fs/lockd/svc.o
+  CC      fs/nfs/dir.o
+  CC      fs/lockd/svclock.o
+  LD      fs/jbd2/jbd2.o
+  LD      fs/jbd2/built-in.o
+  CC      fs/nfs_common/nfsacl.o
+  CC      fs/lockd/svcshare.o
+  CC      fs/nfs/file.o
+  LD      fs/nfs_common/nfs_acl.o
+  LD      fs/nfs_common/built-in.o
+  CC      fs/lockd/svcproc.o
+  CC      fs/ext4/symlink.o
+  CC      fs/nfs/getroot.o
+  CC      fs/nls/nls_base.o
+  CC      fs/lockd/svcsubs.o
+  CC      fs/nls/nls_cp437.o
+  CC      fs/nfs/inode.o
+  CC      fs/nls/nls_cp936.o
+  CC      fs/ext4/hash.o
+  CC      fs/lockd/mon.o
+  CC      fs/nls/nls_iso8859-1.o
+  CC      fs/ext4/resize.o
+  CC      fs/nls/nls_utf8.o
+  LD      fs/nls/built-in.o
+  CC      fs/notify/fsnotify.o
+  CC      fs/lockd/xdr.o
+  CC      fs/nfs/super.o
+  CC      fs/notify/notification.o
+  CC      fs/lockd/grace.o
+  CC      fs/notify/group.o
+  CC      fs/lockd/clnt4xdr.o
+  CC      fs/ext4/extents.o
+  CC      fs/notify/inode_mark.o
+  CC      fs/notify/mark.o
+  CC      fs/lockd/xdr4.o
+  CC      fs/nfs/nfs2xdr.o
+  CC      fs/notify/vfsmount_mark.o
+  CC      fs/lockd/svc4proc.o
+  LD      fs/notify/dnotify/built-in.o
+  LD      fs/notify/fanotify/built-in.o
+  CC      fs/notify/inotify/inotify_fsnotify.o
+  CC      fs/nfs/direct.o
+  CC      fs/notify/inotify/inotify_user.o
+  LD      fs/lockd/lockd.o
+  LD      fs/lockd/built-in.o
+  CC      fs/proc/mmu.o
+  LD      fs/notify/inotify/built-in.o
+  LD      fs/notify/built-in.o
+  CC      fs/ext4/ext4_jbd2.o
+  CC      fs/proc/task_mmu.o
+  CC      fs/nfs/pagelist.o
+  LD      fs/quota/built-in.o
+  CC      fs/proc/inode.o
+  CC      fs/ext4/migrate.o
+  CC      fs/nfs/proc.o
+  CC      fs/proc/root.o
+  CC      fs/ramfs/inode.o
+  CC      fs/ext4/mballoc.o
+  CC      fs/proc/base.o
+  CC      fs/ramfs/file-mmu.o
+  LD      fs/ramfs/ramfs.o
+  LD      fs/ramfs/built-in.o
+  CC      fs/nfs/read.o
+  CC      fs/ext4/block_validity.o
+  CC      fs/proc/generic.o
+  CC      fs/nfs/symlink.o
+  CC      fs/sdcardfs/dentry.o
+  CC      fs/proc/array.o
+  CC      fs/nfs/unlink.o
+  CC      fs/sdcardfs/file.o
+  CC      fs/proc/proc_tty.o
+  CC      fs/sdcardfs/inode.o
+  CC      fs/nfs/write.o
+  CC      fs/proc/cmdline.o
+  CC      fs/proc/consoles.o
+  CC      fs/sdcardfs/main.o
+  CC      fs/proc/cpuinfo.o
+  CC      fs/proc/devices.o
+  CC      fs/ext4/move_extent.o
+  CC      fs/proc/interrupts.o
+  CC      fs/sdcardfs/super.o
+  CC      fs/proc/loadavg.o
+  CC      fs/sdcardfs/lookup.o
+  CC      fs/proc/meminfo.o
+  CC      fs/nfs/namespace.o
+  CC      fs/ext4/mmp.o
+  CC      fs/proc/stat.o
+  CC      fs/sdcardfs/mmap.o
+  LD      fs/sdcardfs/sdcardfs.o
+  LD      fs/sdcardfs/built-in.o
+  CC      fs/proc/uptime.o
+  CC      fs/nfs/mount_clnt.o
+  CC      fs/ext4/indirect.o
+  CC      fs/ext4/xattr.o
+  CC      fs/proc/version.o
+  CC      fs/proc/softirqs.o
+  CC      fs/nfs/dns_resolve.o
+  CC      fs/proc/namespaces.o
+  CC      fs/ext4/xattr_user.o
+  CC      fs/sysfs/inode.o
+  CC      fs/nfs/cache_lib.o
+  CC      fs/proc/proc_sysctl.o
+  CC      fs/ext4/xattr_trusted.o
+  CC      fs/sysfs/file.o
+  CC      fs/nfs/nfsroot.o
+  LD      fs/ext4/ext4.o
+  LD      fs/ext4/built-in.o
+  CC      fs/eventpoll.o
+  CC      fs/nfs/nfs3proc.o
+  CC      fs/sysfs/dir.o
+  CC      fs/proc/proc_net.o
+  CC      fs/proc/kmsg.o
+  CC      fs/sysfs/symlink.o
+  CC      fs/nfs/nfs3xdr.o
+  CC      fs/proc/page.o
+  CC      fs/anon_inodes.o
+  CC      fs/sysfs/mount.o
+  LD      fs/proc/proc.o
+  CC      fs/nfs/nfs3acl.o
+  LD      fs/proc/built-in.o
+  CC      fs/sysfs/bin.o
+  CC      fs/nfs/nfs4proc.o
+  CC      fs/sysfs/group.o
+  CC      fs/signalfd.o
+  CC      fs/nfs/nfs4xdr.o
+  LD      fs/sysfs/built-in.o
+  CC      fs/nfs/nfs4state.o
+  CC      fs/nfs/nfs4renewd.o
+  CC      fs/timerfd.o
+  CC      fs/eventfd.o
+  CC      fs/nfs/delegation.o
+  CC      fs/nfs/idmap.o
+  CC      fs/nfs/callback.o
+  CC      fs/aio.o
+  CC      fs/locks.o
+  CC      fs/binfmt_script.o
+  CC      fs/nfs/callback_xdr.o
+  CC      fs/binfmt_elf.o
+  CC      fs/nfs/callback_proc.o
+  CC      fs/mbcache.o
+  CC      fs/nfs/nfs4namespace.o
+  CC      fs/nfs/sysctl.o
+  CC      fs/posix_acl.o
+  CC      fs/xattr_acl.o
+  CC      fs/generic_acl.o
+  CC      fs/dcookies.o
+  LD      fs/nfs/nfs.o
+  LD      fs/nfs/built-in.o
+  LD      fs/built-in.o
+make: *** [Makefile:130: sub-make] Error 2
+
+real	0m20.202s
+user	1m6.635s
+sys	0m9.451s

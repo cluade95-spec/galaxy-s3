@@ -1,0 +1,14 @@
+[B] symbols stock 41847 ours 41847; distinct names stock 41395 ours 41395 common 41395
+[B] only in stock []
+[B] only in ours  []
+[B] comparable single-instance symbols 41060: equal size 41052 (99.981%), different 8
+[B] size differences (name, stock, ours):
+    ('rawsock_nfc_proto', 1121960, 1126336)
+    ('__stop___modver', 1696, 4056)
+    ('_fw_atmel_mxt224s_fw_name', 89324, 90716)
+    ('print_fmt_rpm_internal', 216, 264)
+    ('linux_proc_banner', 94, 106)
+    ('vermagic', 44, 40)
+    ('kallsyms_operations', 104, 108)
+    ('linux_banner', 149, 153)
+[B] unique-name symbols at identical address: 22791 of 41061 (55.51%)

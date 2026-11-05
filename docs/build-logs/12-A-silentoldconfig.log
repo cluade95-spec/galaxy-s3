@@ -1,0 +1,4 @@
+  GEN     /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/out-A/Makefile
+scripts/kconfig/conf --silentoldconfig Kconfig
+warning: (ZRAM) selects ZSMALLOC which has unmet direct dependencies (STAGING && X86)
+warning: (ZRAM) selects ZSMALLOC which has unmet direct dependencies (STAGING && X86)

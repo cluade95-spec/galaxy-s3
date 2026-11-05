@@ -1,0 +1,31 @@
+  HOSTCC  scripts/basic/fixdep
+  GEN     /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/out-C/Makefile
+  HOSTCC  scripts/kconfig/conf.o
+  SHIPPED scripts/kconfig/zconf.tab.c
+  SHIPPED scripts/kconfig/zconf.lex.c
+  SHIPPED scripts/kconfig/zconf.hash.c
+  HOSTCC  scripts/kconfig/zconf.tab.o
+In file included from scripts/kconfig/zconf.tab.c:2502:
+In function 'dep_stack_insert',
+    inlined from 'sym_check_print_recursive' at /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/scripts/kconfig/symbol.c:1027:3,
+    inlined from 'sym_check_deps' at /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/scripts/kconfig/symbol.c:1198:3:
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/scripts/kconfig/symbol.c:1003:19: warning: storing the address of local variable 'cv_stack' in 'check_top' [-Wdangling-pointer=]
+ 1003 |         check_top = stack;
+      |         ~~~~~~~~~~^~~~~~~
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/scripts/kconfig/symbol.c: In function 'sym_check_deps':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/scripts/kconfig/symbol.c:1024:26: note: 'cv_stack' declared here
+ 1024 |         struct dep_stack cv_stack;
+      |                          ^~~~~~~~
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/scripts/kconfig/symbol.c:994:4: note: 'check_top' declared here
+  994 | } *check_top;
+      |    ^~~~~~~~~
+  HOSTLD  scripts/kconfig/conf
+warning: (ZRAM) selects ZSMALLOC which has unmet direct dependencies (STAGING && X86)
+warning: (ZRAM) selects ZSMALLOC which has unmet direct dependencies (STAGING && X86)
+#
+# configuration written to .config
+#
+  GEN     /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/out-C/Makefile
+scripts/kconfig/conf --silentoldconfig Kconfig
+warning: (ZRAM) selects ZSMALLOC which has unmet direct dependencies (STAGING && X86)
+warning: (ZRAM) selects ZSMALLOC which has unmet direct dependencies (STAGING && X86)

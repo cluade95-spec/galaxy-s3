@@ -1,0 +1,31 @@
+# Build host record (collected 2026-11-05, read-only commands)
+## OS / hardware
+Linux 6.18.44-fc-v236 #1 SMP PREEMPT_DYNAMIC @0 x86_64
+PRETTY_NAME="Ubuntu 24.04.5 LTS"
+cpus: 4
+Mem:            15Gi       706Mi       3.7Gi        15Mi        11Gi        15Gi
+/dev/vda        252G   21G   19G  54% /
+## host tools (used only for host-side build helpers, NOT for the kernel itself)
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+GNU Make 4.3
+perl v5.38.2
+Python 3.13.18
+bison (GNU Bison) 3.8.2
+GNU ld (GNU Binutils for Ubuntu) 2.42
+flex: not installed, not needed
+lzop: not installed, not needed
+cpio: not installed, not needed
+arm cross compilers installed on host: 0 (none used)
+## target toolchain (the only compiler used for kernel code)
+repo: https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6
+branch: jb-mr1-release
+commit: d73a051b1fd1d98f5c2463354fb67898f0090bdb
+date: 2012-04-24
+subject: Upgrade to host 64bit arm-eabi toolchain.
+arm-eabi-gcc (GCC) 4.6.x-google 20120106 (prerelease)
+GNU ld (GNU Binutils) 2.21
+GNU assembler (GNU Binutils) 2.21
+sha256 arm-eabi-gcc: 07c0e03ffc1ac152f3faa9cc196c1d02a514f4e8b9588adedd427dbd02bc3e7c
+sha256 arm-eabi-ld: 955544b2cfa46158fd73f8a821aba336bde22ea594eea0ede6b7f54fbcadcdb7
+sha256 arm-eabi-as: 7ae4179c24839c169b8a5724bb7f6e0284e78c4901f1747d5ec03f00189cee46
+sha256 arm-eabi-objcopy: e85e400889e7e6687817f7b118d768d447d4f320dcd3edd0baf99aa86ab4c329

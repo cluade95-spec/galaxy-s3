@@ -1,0 +1,6 @@
+[C] symbols stock 41847 ours 41847; distinct names stock 41395 ours 41395 common 41395
+[C] only in stock []
+[C] only in ours  []
+[C] comparable single-instance symbols 41060: equal size 41060 (100.000%), different 0
+[C] size differences (name, stock, ours):
+[C] unique-name symbols at identical address: 41061 of 41061 (100.00%)

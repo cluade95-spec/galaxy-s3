@@ -1,0 +1,204 @@
+  GEN     /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kbuild/out-C/Makefile
+  CHK     include/linux/version.h
+  CHK     include/generated/utsrelease.h
+  Using /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild as source for kernel
+  CC      scripts/mod/empty.o
+  MKELF   scripts/mod/elfconfig.h
+  HOSTCC  scripts/mod/file2alias.o
+  HOSTCC  scripts/mod/modpost.o
+  HOSTCC  scripts/mod/sumversion.o
+make[2]: 'include/generated/mach-types.h' is up to date.
+  CC      kernel/bounds.s
+  GEN     include/generated/bounds.h
+  CC      arch/arm/kernel/asm-offsets.s
+  GEN     include/generated/asm-offsets.h
+  CALL    /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/scripts/checksyscalls.sh
+  HOSTLD  scripts/mod/modpost
+  CC [M]  drivers/char/maxscend/mxdspi_pxa.o
+  LD [M]  drivers/char/maxscend/cmmb_mxd.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gc_hal_kernel_device.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gc_hal_kernel_driver.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/ccinetdev/ccinet.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/marvell/marvell-telephony/drivers/ccinetdev/ccinet.c: In function 'ccinet_stop':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/marvell/marvell-telephony/drivers/ccinetdev/ccinet.c:124:2: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/marvell/marvell-telephony/drivers/ccinetdev/ccinet.c: In function 'ccinet_ioctl':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/marvell/marvell-telephony/drivers/ccinetdev/ccinet.c:263:4: warning: too many arguments for format [-Wformat-extra-args]
+  CC [M]  drivers/media/dvb/siano/smscoreapi.o
+  LD [M]  drivers/marvell/marvell-telephony/drivers/ccinetdev/ccinetdev.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/cidatastub/ccidatastub.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/cidatatty/cidatatty.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gc_hal_kernel_linux.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/cidatastub/data_channel_kernel.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/marvell/marvell-telephony/drivers/cidatastub/data_channel_kernel.c:29:12: warning: 'psd_package_lose_counter' defined but not used [-Wunused-variable]
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gc_hal_kernel_math.o
+  CC [M]  drivers/media/dvb/siano/sms-cards.o
+  LD [M]  drivers/marvell/marvell-telephony/drivers/cidatatty/cidatattydev.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gc_hal_kernel_os.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/cidatastub/psd_data_channel.o
+  CC [M]  drivers/marvell/physrw/physrw.o
+  CC [M]  drivers/media/dvb/siano/smsendian.o
+  LD [M]  drivers/marvell/marvell-telephony/drivers/cidatastub/cci_datastub.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/citty/build/../src/citty.o
+  CC [M]  drivers/media/dvb/siano/smsir.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/marvell/marvell-telephony/drivers/citty/build/../src/citty.c:826:2: warning: initialization from incompatible pointer type [enabled by default]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/marvell/marvell-telephony/drivers/citty/build/../src/citty.c:826:2: warning: (near initialization for 'citty_proc_ops.read') [enabled by default]
+  CC [M]  drivers/media/dvb/siano/smschar.o
+  CC [M]  drivers/media/dvb/siano/smsspidrv.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/media/dvb/siano/smsspidrv.c: In function 'smsspi_register':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/media/dvb/siano/smsspidrv.c:503:2: warning: assignment from incompatible pointer type [enabled by default]
+  LD [M]  drivers/marvell/marvell-telephony/drivers/citty/build/citty.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/cp_load/pxa_cp_load.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gc_hal_kernel_sysfs.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/marvell/marvell-telephony/drivers/cp_load/pxa_cp_load.c: In function 'cp_vma_open':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/marvell/marvell-telephony/drivers/cp_load/pxa_cp_load.c:267:3: warning: format '%lx' expects argument of type 'long unsigned int', but argument 4 has type 'pgprot_t' [-Wformat]
+  CC [M]  drivers/marvell/marvell-telephony/drivers/cp_load/watchdog.o
+  CC [M]  drivers/media/dvb/siano/smsspicommon.o
+  CC [M]  drivers/media/dvb/siano/smsspi_pxa.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/cp_load/pxa988_cp.o
+  CC [M]  drivers/marvell/sd8787/mbtc_src/bt/bt_main.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/marvell/marvell-telephony/drivers/cp_load/pxa988_cp.c: In function 'cp_releasecp':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/marvell/marvell-telephony/drivers/cp_load/pxa988_cp.c:58:2: warning: format '%X' expects argument of type 'unsigned int', but argument 4 has type 'void *' [-Wformat]
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/marvell/marvell-telephony/drivers/cp_load/pxa988_cp.c:75:2: warning: format '%x' expects argument of type 'unsigned int', but argument 2 has type 'void *' [-Wformat]
+  LD [M]  drivers/marvell/marvell-telephony/drivers/cp_load/cploaddev.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/diag/diag_drv.o
+  LD [M]  drivers/media/dvb/siano/smsmdtv.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/diag/diag_channel_kernel.o
+  CC [M]  drivers/marvell/security/wtpsp/drv/src/pxa-geu.o
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/marvell/security/wtpsp/drv/src/pxa-geu.c: In function 'GEU_read_key_hash':
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/kernelbuild/drivers/marvell/security/wtpsp/drv/src/pxa-geu.c:654:15: warning: unused variable 'scratch' [-Wunused-variable]
+  CC [M]  drivers/marvell/marvell-telephony/drivers/diag/diag_usb.o
+  LD [M]  drivers/marvell/marvell-telephony/drivers/diag/diag.o
+  LD [M]  drivers/marvell/marvell-telephony/drivers/diag/gs_diag.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/errorhandler/build/../src/seh_linux.o
+  LD [M]  drivers/marvell/security/wtpsp/drv/src/geu.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/errorhandler/build/../src/watchdog.o
+  CC [M]  drivers/marvell/sd8787/mbtc_src/bt/bt_sdiommc.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_shim.o
+  LD [M]  drivers/marvell/marvell-telephony/drivers/errorhandler/build/seh.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/hwmap/hwmap.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gc_hal_kernel_sysfs_test.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/shmem/msocket/portqueue.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_init.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gc_hal_kernel_debugfs.o
+  CC [M]  drivers/marvell/sd8787/mbtc_src/bt/bt_proc.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_txrx.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/shmem/msocket/shm.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_cmdevt.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gpufreq/gpufreq.o
+  CC [M]  drivers/marvell/sd8787/mbtc_src/bt/mbt_char.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/shmem/msocket/msocket.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gpufreq/gpufreq-mmp3.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gpufreq/gpufreq-nevo.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gpufreq/gpufreq-emei.o
+  CC [M]  drivers/marvell/sd8787/mbtc_src/bt/bt_init.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/shmem/msocket/acipcd.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_misc.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gpufreq/gpufreq-helen.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gpufreq/gpufreq_ondemand.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/shmem/msocket/data_path.o
+  LD [M]  drivers/marvell/sd8787/mbtc_src/mbt8xxx.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gpufreq/gpufreq_conservative.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/usim_event/usim_event.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gpufreq/gpufreq_userspace.o
+  CC [M]  drivers/marvell/marvell-telephony/drivers/shmem/msocket/direct_rb.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_cfp.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gpufreq/gpufreq_performance.o
+  LD [M]  drivers/marvell/marvell-telephony/drivers/usim_event/usimeventk.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/os/linux/kernel/gpufreq/gpufreq_powersave.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/kernel/gc_hal_kernel.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_module.o
+  LD [M]  drivers/marvell/marvell-telephony/drivers/shmem/msocket/msocketk.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_wmm.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/kernel/gc_hal_kernel_command.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_sdio.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_11n_aggr.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/kernel/gc_hal_kernel_db.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/kernel/gc_hal_kernel_debug.o
+  CC [M]  drivers/scsi/scsi_wait_scan.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_11n_rxreorder.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_11n.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/kernel/gc_hal_kernel_event.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_11d.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/kernel/gc_hal_kernel_heap.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_11h.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/kernel/gc_hal_kernel_mmu.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/kernel/gc_hal_kernel_video_memory.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_meas.o
+  CC [M]  drivers/marvell/graphics/galcore_src/hal/kernel/gc_hal_kernel_power.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_scan.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_sta_ioctl.o
+  CC [M]  drivers/marvell/graphics/galcore_src/arch/unified_reg/hal/kernel/gc_hal_kernel_context.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_sta_rx.o
+  CC [M]  drivers/marvell/graphics/galcore_src/arch/unified_reg/hal/kernel/gc_hal_kernel_hardware.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_sta_tx.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_sta_event.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_sta_cmd.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_sta_cmdresp.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_join.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_uap_ioctl.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_uap_cmdevent.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlan/mlan_uap_txrx.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_main.o
+  LD [M]  drivers/marvell/graphics/galcore_src/galcore.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_ioctl.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_shim.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_eth_ioctl.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_priv.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_wext.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_uap.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_uap_priv.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_uap_wext.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_cfg80211.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_sta_cfg80211.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_uap_cfg80211.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_proc.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_debug.o
+  CC [M]  drivers/marvell/sd8787/wlan_src/mlinux/moal_sdio_mmc.o
+  LD [M]  drivers/marvell/sd8787/wlan_src/mlan.o
+  LD [M]  drivers/marvell/sd8787/wlan_src/sd8xxx.o
+  Building modules, stage 2.
+  MODPOST 20 modules
+  CC      drivers/char/maxscend/cmmb_mxd.mod.o
+  CC      drivers/marvell/graphics/galcore_src/galcore.mod.o
+  CC      drivers/marvell/marvell-telephony/drivers/ccinetdev/ccinetdev.mod.o
+  CC      drivers/marvell/marvell-telephony/drivers/cidatastub/cci_datastub.mod.o
+  CC      drivers/marvell/marvell-telephony/drivers/cidatatty/cidatattydev.mod.o
+  CC      drivers/marvell/marvell-telephony/drivers/citty/build/citty.mod.o
+  CC      drivers/marvell/marvell-telephony/drivers/cp_load/cploaddev.mod.o
+  CC      drivers/marvell/marvell-telephony/drivers/diag/diag.mod.o
+  CC      drivers/marvell/marvell-telephony/drivers/diag/gs_diag.mod.o
+  CC      drivers/marvell/marvell-telephony/drivers/errorhandler/build/seh.mod.o
+  CC      drivers/marvell/marvell-telephony/drivers/hwmap/hwmap.mod.o
+  CC      drivers/marvell/marvell-telephony/drivers/shmem/msocket/msocketk.mod.o
+  CC      drivers/marvell/marvell-telephony/drivers/usim_event/usimeventk.mod.o
+  CC      drivers/marvell/physrw/physrw.mod.o
+  CC      drivers/marvell/sd8787/mbtc_src/mbt8xxx.mod.o
+  CC      drivers/marvell/sd8787/wlan_src/mlan.mod.o
+  CC      drivers/marvell/sd8787/wlan_src/sd8xxx.mod.o
+  CC      drivers/marvell/security/wtpsp/drv/src/geu.mod.o
+  CC      drivers/media/dvb/siano/smsmdtv.mod.o
+  CC      drivers/scsi/scsi_wait_scan.mod.o
+  LD [M]  drivers/char/maxscend/cmmb_mxd.ko
+  LD [M]  drivers/marvell/graphics/galcore_src/galcore.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/ccinetdev/ccinetdev.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/cidatastub/cci_datastub.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/cidatatty/cidatattydev.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/citty/build/citty.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/cp_load/cploaddev.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/diag/diag.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/diag/gs_diag.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/errorhandler/build/seh.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/shmem/msocket/msocketk.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/hwmap/hwmap.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/usim_event/usimeventk.ko
+  LD [M]  drivers/marvell/physrw/physrw.ko
+  LD [M]  drivers/marvell/sd8787/mbtc_src/mbt8xxx.ko
+  LD [M]  drivers/marvell/sd8787/wlan_src/mlan.ko
+  LD [M]  drivers/marvell/sd8787/wlan_src/sd8xxx.ko
+  LD [M]  drivers/marvell/security/wtpsp/drv/src/geu.ko
+  LD [M]  drivers/media/dvb/siano/smsmdtv.ko
+  LD [M]  drivers/scsi/scsi_wait_scan.ko
+
+real	0m9.664s
+user	0m30.672s
+sys	0m4.160s
