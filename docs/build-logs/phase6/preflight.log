@@ -1,0 +1,10 @@
+host: Linux 6.18.44-fc-v236, 4 CPUs, 15 GiB RAM
+FAIL  disk                               17 GiB free, need at least 100 GiB for source plus output (planning figure)
+FAIL  JDK 8 (Android 7 needs OpenJDK 8)  found: javac 21.0.12.1
+FAIL  python2 (build/releasetools are py2) not installed
+FAIL  repo tool                          not installed (downloadable; not installed system-wide without approval)
+PASS  pinned revisions exist upstream    4 of 4
+FAIL  vendor tree from verified firmware no extracted files and no extraction-report.txt (no verified official firmware)
+FAIL  out-of-band kernel (zImage + modules) GOLDENVESS3G_KERNEL_DIR unset or incomplete (build with tools/kernel-build/build-golden-kernel.sh)
+FAIL  kernel has SELinux                 Phase 2 kernel has CONFIG_SECURITY off; Android 7 init needs SELinux (and policy v30 vs kernel v26 is open)
+FAIL  BoardConfig values defined         undefined (TODO, no verified source): BOARD_KERNEL_BASE BOARD_KERNEL_PAGESIZE BOARD_BOOTIMAGE_PARTITION_SIZE BOARD_SYSTEMIMAGE_PARTITION_SIZE BOARD_USERDATAIMAGE_PARTITION_SIZE BOARD_FLASH_BLOCK_SIZE

@@ -67,3 +67,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # ---- NFC ---------------------------------------------------------------------------------------
 # DERIVED: no NFC hardware (no NFC HAL, firmware or permission file in the GT-I8200 dump). No NFC packages, and NOT the
 # ro.stollmann.nfc.* property that appears in the community ramdisk (copied from a Marvell reference board).
+
+# Kernel modules from the out-of-band kernel build (see BoardConfig.mk, kernel section). Not committed: the directory is
+# outside the repository and supplied by the builder. Module vermagic must match the kernel image they ship with.
+ifneq ($(strip $(GOLDENVESS3G_KERNEL_DIR)),)
+PRODUCT_COPY_FILES += $(foreach m,$(wildcard $(GOLDENVESS3G_KERNEL_DIR)/modules/*.ko),$(m):system/lib/modules/$(notdir $(m)))
+endif

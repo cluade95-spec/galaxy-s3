@@ -1,0 +1,4 @@
+OK    kernel/samsung/goldenvess3g  44afe4cf6023bf39c18bad72185003a40915fad2  tree=0eebf6f928a5cc5f58c4c93a0ca67d16a620e0cd  date=2016-03-05  https://github.com/Koloses/kernel_i8200
+OK    prebuilts/gcc/linux-x86/arm/arm-eabi-4.6  d73a051b1fd1d98f5c2463354fb67898f0090bdb  tree=bb9221b9d7bc55a0201d889dc8111977d81565f4  date=2012-04-24  https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6
+OK    hardware/marvell/wlan  d00e9517e636e19a566f42b59b83d28135362aec  tree=d01318662395988021f41288d02a89a8f5cd73fc  date=2021-03-18  https://github.com/LineageOS/android_hardware_marvell_wlan
+OK    hardware/marvell/bt  f4b89114f54f9937f494beb71929cf6f32af4939  tree=66e96162e1f7714ff59bdcf90ad12afe6aeccdd7  date=2025-09-22  https://github.com/LineageOS/android_hardware_marvell_bt

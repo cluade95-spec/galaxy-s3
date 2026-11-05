@@ -1,0 +1,4 @@
+== arm-eabi 4.6 (smoke test only; Android 7 builds with clang)
+ok vectorimpl
+ok refbase
+ok getcallingpid

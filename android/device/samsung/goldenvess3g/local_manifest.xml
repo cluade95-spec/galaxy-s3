@@ -6,10 +6,11 @@
   <remote name="aosp" fetch="https://android.googlesource.com/" />
   <remote name="los" fetch="https://github.com/LineageOS/" />
 
-  <!-- Provisional kernel base: import commit, NOT the repository's later community-patched head.
+  <!-- Kernel source is kept at ...-src (not at kernel/samsung/goldenvess3g) on purpose: see BoardConfig.mk, kernel section.
+       Provisional kernel base: import commit, NOT the repository's later community-patched head.
        tree 0eebf6f928a5cc5f58c4c93a0ca67d16a620e0cd. Compiled code verified equivalent to a genuine GT-I8200
        I8200XXUAOC1 kernel (Phase 2); not yet compared with Samsung's official package. -->
-  <project name="kernel_i8200" path="kernel/samsung/goldenvess3g" remote="koloses"
+  <project name="kernel_i8200" path="kernel/samsung/goldenvess3g-src" remote="koloses"
            revision="44afe4cf6023bf39c18bad72185003a40915fad2" />
 
   <!-- The only toolchain verified to build the kernel: AOSP Android 4.2 arm-eabi-4.6 (GCC 4.6.x-google 20120106). -->

@@ -1,0 +1,18 @@
+NOTE: probe includes build-guards.mk directly. In a separate probe on this host (GNU make 4.3), $(call my-dir) returned an empty string with the cm-14.1 build system (cause not isolated; it may be the probe or the newer make). Not relied on.
+### A: no kernel dir, nothing verified (expected: guard stops the build)
+PROBE2 prebuilt_kernel=[] ktoolchain=[/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/miniTree/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6/bin]
+PROBE2 module_copies=
+PROBE2 kernel_src_exists=[] auto=[device/samsung/goldenvess3g]
+device/samsung/goldenvess3g/build-guards.mk:12: *** goldenvess3g: refusing to build. These BoardConfig values have no verified source yet:BOARD_KERNEL_BASE BOARD_KERNEL_PAGESIZE BOARD_KERNEL_CMDLINE BOARD_BOOTIMAGE_PARTITION_SIZE BOARD_RECOVERYIMAGE_PARTITION_SIZE BOARD_SYSTEMIMAGE_PARTITION_SIZE BOARD_USERDATAIMAGE_PARTITION_SI
+
+### B: kernel dir set, still no verified values (expected: guard stops on boot/partition values)
+PROBE2 prebuilt_kernel=[/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/fakekern/zImage] ktoolchain=[/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/miniTree/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6/bin]
+PROBE2 module_copies=/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/fakekern/modules/galcore.ko:system/lib/modules/galcore.ko /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/fakekern/modules/mlan.ko:system/lib/modules/mlan.ko
+PROBE2 kernel_src_exists=[] auto=[device/samsung/goldenvess3g]
+device/samsung/goldenvess3g/build-guards.mk:12: *** goldenvess3g: refusing to build. These BoardConfig values have no verified source yet:BOARD_KERNEL_BASE BOARD_KERNEL_PAGESIZE BOARD_KERNEL_CMDLINE BOARD_BOOTIMAGE_PARTITION_SIZE BOARD_RECOVERYIMAGE_PARTITION_SIZE BOARD_SYSTEMIMAGE_PARTITION_SIZE BOARD_USERDATAIMAGE_PARTITION_SI
+### C (SYNTHETIC dummy values, only to exercise the guard order): kernel dir without .config
+device/samsung/goldenvess3g/build-guards.mk:31: *** goldenvess3g: refusing to build. /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/fakekern/.config is missing or lacks CONFIG_SECURITY_SELINUX=y. See kernel/android7.config.f
+### D: .config without SELinux
+device/samsung/goldenvess3g/build-guards.mk:31: *** goldenvess3g: refusing to build. /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/fakekern/.config is missing or lacks CONFIG_SECURITY_SELINUX=y. See kernel/android7.config.f
+### E: .config with SELinux (all guards pass)
+exit=0

@@ -17,9 +17,23 @@ CONFIG_NETFILTER_XT_TARGET_IDLETIMER=m     # unverified
 # recorded patch outside the original source.
 
 # --- Security ------------------------------------------------------------------------------
-# TODO(selinux): stock kernel has CONFIG_SECURITY off. Decide between building SELinux in (permissive first) and running
-# without it as the SM-T110 port does. Candidate options if SELinux is built in:
-#   CONFIG_SECURITY=y  CONFIG_SECURITY_SELINUX=y  CONFIG_AUDIT=y  CONFIG_EXT4_FS_SECURITY=y  CONFIG_TMPFS_XATTR=y(already on)
+# SELinux is a HARD REQUIREMENT for Android 7.1.2's init, not an optional decision (Phase 6, SOURCE + config):
+#  * The plain defconfig has CONFIG_SECURITY off. Android 7's init (system/core/init/init.cpp, selinux_initialize) calls
+#    selinux_android_load_policy() and aborts through security_failure() if it fails, which it must without SELinux.
+#  * Options needed in the kernel: CONFIG_SECURITY=y CONFIG_SECURITY_NETWORK=y CONFIG_AUDIT=y CONFIG_SECURITY_SELINUX=y
+#    (Kconfig: SECURITY_SELINUX depends on SECURITY_NETWORK && AUDIT && NET && INET) and CONFIG_EXT4_FS_SECURITY=y so file
+#    labels can be stored. security/selinux exists in the pinned source.
+#  * BLOCKER: this kernel's SELinux supports policy versions up to 26 (security/selinux/include/security.h,
+#    POLICYDB_VERSION_ROLETRANS). Android 7.1.2's sepolicy is compiled at version 30 by default (system/sepolicy
+#    Android.mk, POLICYVERS ?= 30) and the platform policy uses `allowxperm` / `neverallowxperm` rules (ioctl extended
+#    permissions, introduced with policy version 30). A kernel at version 26 cannot load that policy. Raising the
+#    kernel's accepted maximum by configuration is not enough because the xperm code is absent. Options (none applied):
+#      (a) back-port ioctl extended permissions into the kernel (a kernel source change: needs its own approval and review);
+#      (b) alter the platform policy to drop the xperm rules and build at version 26 (weakens policy; unverified that it
+#          compiles; not run);
+#      (c) run without SELinux, as the SM-T110 port does with an init patch plus selinux=0 on the command line. That
+#          DISABLES a core Android security feature. It is only acceptable as an explicit, documented owner decision
+#          for a bring-up build, never as a silent default. Not applied.
 # SEC_RESTRICT_*: leave OFF (plain defconfig).  [DECISION pending]
 
 # --- Already satisfied in pxa986_golden_rev02_defconfig (VERIFIED in the generated .config) ----

@@ -1,8 +1,13 @@
-# SELinux policy - TODO (BLOCKED on a kernel decision)
+# sepolicy: intentionally empty (TODO)
 
-The stock kernel is built without SELinux (`CONFIG_SECURITY` off, VERIFIED). Android 7's init expects a policy.
-The community trees' `sepolicy/` directories (I8200N lineage, written for CM 11/12) were not carried over: they target a
-different Android version and a different model.
+Phase 6 facts that any policy work must start from (SOURCE: LineageOS cm-14.1 `system/sepolicy` @ 83840c7, `system/core/init`;
+kernel config and source at the pinned commit):
 
-Next steps: (1) decide kernel SELinux (permissive first or off, see ../kernel/README.md); (2) write device policy only for
-services that actually run, starting from none; (3) never ship permissive without saying so.
+1. **Text relocations.** With `TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true` (set), `domain.te` relaxes its `execmod`
+   neverallow rules for `system_file` and for non-app domains. Device policy would then have to grant `execmod` on
+   `system_file` to the domains that load `libGAL.so`, `libMILV` and so on. A separate file type for libGAL is not an option:
+   the neverallow still covers every new `file_type`. This is a genuine weakening and is NOT written yet.
+2. **Kernel and policy version.** The kernel's SELinux accepts policy versions up to 26 and has no ioctl extended-permission
+   (`xperm`) code, but Android 7.1.2's policy is built at version 30 and uses `allowxperm`. See
+   `../kernel/android7.config.fragment`. Until that is resolved, no policy for this device can be loaded.
+3. Nothing here may be copied from the SM-T110 port: that port runs with SELinux disabled.

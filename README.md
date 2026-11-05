@@ -16,7 +16,8 @@ Not to be confused with GT-I8200N / GT-I8200L (`goldenve3g`) or GT-I8190 (`golde
 | Phase 3: device-tree feasibility (research) | **Done:** [docs/phase-3-device-tree-feasibility.md](docs/phase-3-device-tree-feasibility.md). Decision: enough evidence to start a staged, experimental device tree; **not** enough to promise a usable phone. |
 | Phase 4: device-tree skeleton (computer only) | **Done:** [docs/phase-4-device-tree-skeleton.md](docs/phase-4-device-tree-skeleton.md), [docs/phase-4-cellular-investigation.md](docs/phase-4-cellular-investigation.md). Skeleton in `android/`. Not buildable yet, never built, nothing run on a phone. |
 | Phase 5: vendor compatibility and cellular feasibility (computer only) | **Done:** [docs/phase-5-vendor-compatibility.md](docs/phase-5-vendor-compatibility.md), [docs/phase-5-cellular-feasibility.md](docs/phase-5-cellular-feasibility.md). Static analysis and source reading only. Nothing built into a ROM, nothing run on a phone. |
-| Phase 6+: first experimental ROM build, recovery, hardware bring-up | Not started. Nothing has been tested on hardware. |
+| Phase 6: first experimental build preparation and attempt | **Attempted, did not start:** [docs/phase-6-first-build-attempt.md](docs/phase-6-first-build-attempt.md). Stopped at the first gate (disk space), with further fundamental blockers found. Nothing built into a ROM, nothing run on a phone. |
+| Phase 7+: SELinux resolution, official firmware, supported build host, recovery, hardware bring-up | Not started. Nothing has been tested on hardware. |
 
 ### Phase 0 key results
 - **Best GT-I8200 kernel source found:** `Koloses/kernel_i8200` import commit `44afe4c` ("I8200XXUAOC1 kernel source"). Strong evidence it is Samsung's original package, built on a Samsung machine in Jan 2016. Not yet matched against Samsung's official download.
@@ -69,6 +70,15 @@ Not to be confused with GT-I8200N / GT-I8200L (`goldenve3g`) or GT-I8190 (`golde
 - **New Wi-Fi finding:** Android 7 can load only one driver module through the HAL, but the Marvell driver is two modules (`mlan.ko`, `sd8xxx.ko`), so init must load the first. Bluetooth: the kernel driver's `/dev/mbtchar0` matches LineageOS's Marvell Bluetooth vendor library.
 - **Cellular:** the vendor RIL has handlers for the basic GSM set (SIM, calls, SMS, registration, signal, data; 88 ids, list in `docs/data/ril-request-coverage.tsv`). Request ids 124 to 137 (the ones Android 7 adds) are outside its table and are **not** safe to forward and **not** safe to answer with success. An interposer prototype answers them with errors; a host test with a fake vendor library passes. Whether calls, SMS, data, SIM detection or registration work is unknown and cannot be tested without hardware and the modem firmware.
 - **Camera** is the hardest vendor item (an unresolved `IMemoryHeap` destructor problem); it is deferred.
+
+### Phase 6 key results
+- **The build did not start.** The driver `tools/build/build-lineage.sh` stops at its preflight gates; first failure: 18 GiB free disk (a shallow sample of three projects is already 3.4 GiB of a 479-project tree). Also missing here: OpenJDK 8, python2, `repo`.
+- **Inputs missing for any build:** official firmware (so zero vendor files), verified boot image values and partition sizes, and a kernel built with SELinux. `build-guards.mk` now makes the build refuse to run without them instead of falling back to tool defaults.
+- **SELinux is a fundamental blocker (corrects Phase 4 wording).** The kernel has no SELinux, and Android 7's init cannot start without it. The kernel's SELinux only understands policy version 26 and has no ioctl extended-permission code, while Android 7.1.2's policy is version 30 and uses it. Options (kernel back-port, policy changes, or running without SELinux) are listed in the Phase 6 document; none is applied. The SM-T110 reference port runs with SELinux disabled.
+- **libGAL:** an opt-in, single-path linker exception is written as a proposal (`patches/bionic-libGAL-textrel.patch`, applies cleanly to cm-14.1 bionic, not applied) pending your decision and the SELinux outcome.
+- **Fixes made:** kernel provided out of band (the Koloses tree cannot be built through Lineage's kernel.mk without modifying the kernel source), pinned toolchain wired, build guards, manifest and interposer corrections. Pinned revisions verified (4 of 4).
+- **What compiled:** only smoke tests (shim sources with the pinned old GCC, interposer syntax with clang, the real cm-14.1 product/board configuration resolving for `lineage_goldenvess3g`). No ROM, no boot, no hardware claim.
+- **Not safe for controlled testing yet.** Phase 7: decide SELinux, obtain official firmware and the partition table, find a supported build host.
 
 ### Open blockers
 - `opensource.samsung.com` and Samsung firmware servers are blocked by this environment's network policy (re-tested 2026-11-05). That blocks the official kernel package and stock firmware checksums. Allow them in Environment settings → Network access, or supply the files and hashes yourself (see the Phase 2 document).

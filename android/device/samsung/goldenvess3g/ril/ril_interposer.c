@@ -14,7 +14,6 @@
  * at VENDOR_RIL_PATH. Re-check VENDOR_LAST_REQUEST_ID against the OFFICIAL firmware's library first.
  */
 #include <dlfcn.h>
-#include <stdio.h>
 #include <string.h>
 #include <telephony/ril.h>
 
@@ -30,6 +29,7 @@
 #include <android/log.h>
 #define LOGW(...) __android_log_print(ANDROID_LOG_WARN, "RILShim", __VA_ARGS__)
 #else
+#include <stdio.h>
 #define LOGW(...) do { fprintf(stderr, "RILShim: "); fprintf(stderr, __VA_ARGS__); fputc('\n', stderr); } while (0)
 #endif
 

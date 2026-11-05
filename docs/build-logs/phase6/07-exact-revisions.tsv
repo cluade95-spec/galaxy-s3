@@ -1,0 +1,28 @@
+# Exact revisions and tools used in Phase 6 (analysis clones are shallow, branch cm-14.1 unless noted)
+project_repo_head_at_start	7ac0cc6e4de7e0bcb3d058178ae56b36126aff81
+lineage_manifest (LineageOS/android cm-14.1)	3053abb15b4427431b42505a13e7465e92fc2920	479 projects; aosp remote revision refs/tags/android-7.1.2_r36
+android_build	241283b2165aec47b4d211ad80d505526d3759e0
+android_vendor_cm	3747219d52e0203805c1a9c48bcc28ad1acfa5db
+android_bionic	ed81e37ed7faf9102a1aac604e889f95110e49dd
+android_system_core	ae76011a903092b2dee058fee21f3237f244526c
+android_system_sepolicy	83840c7f863cd30bd0df3c6db3701e39eee2a097
+android_hardware_ril	d8fb8ff10d860f683eb0794a4e75983dba37d03f
+android_frameworks_opt_telephony	3cbef75458658314a154df8a6a46b7844d5a876d
+android_frameworks_av	99885127c34ad960efbb6c585c27938f384e6d75
+android_frameworks_native	a2efd4f088d7e9fb870b56a08b0f831e0b05321a
+android_hardware_libhardware	ef9fc792dec6a5bd4ec5f891d7b13ee6c5470949
+android_hardware_libhardware_legacy	a79094a6111c79404332e1e98b5678a8246b3578
+android_system_media	2c59244f7187b17fe2722c033d5159bde023e1c8
+android_external_expat	432107a3631bf87cfb1b0a4274ef8980a4d73495
+android_external_sqlite	3bd9b22376c9d7aabfa62bae957cba0987cbfc25
+android_external_boringssl	c9d9e0bd7fa17033cfb7cd6e5855b54b861746fa
+android_external_wpa_supplicant_8	9bc0bf87afd4663c3c2eec97dc43642fd2abed51
+android_hardware_marvell_wlan	d00e9517e636e19a566f42b59b83d28135362aec
+android_hardware_marvell_bt	f4b89114f54f9937f494beb71929cf6f32af4939
+pinned (local_manifest.xml, verified by tools/build/verify-pins.sh):
+kernel/samsung/goldenvess3g	44afe4cf6023bf39c18bad72185003a40915fad2	tree=0eebf6f928a5cc5f58c4c93a0ca67d16a620e0cd
+prebuilts/gcc/linux-x86/arm/arm-eabi-4.6	d73a051b1fd1d98f5c2463354fb67898f0090bdb	tree=bb9221b9d7bc55a0201d889dc8111977d81565f4
+hardware/marvell/wlan	d00e9517e636e19a566f42b59b83d28135362aec	tree=d01318662395988021f41288d02a89a8f5cd73fc
+hardware/marvell/bt	f4b89114f54f9937f494beb71929cf6f32af4939	tree=66e96162e1f7714ff59bdcf90ad12afe6aeccdd7
+tools: GNU Make 4.3; Ubuntu clang version 18.1.3 (1ubuntu1); java openjdk version "21.0.12.1" 2026-08-18; python3 3.13.18; arm-eabi-gcc (Phase 2 pinned) 4.6.x-google 20120106; host Linux 6.18.44-fc-v236
+note: p3/n7 clones are branch tips fetched on 2026-11-05; bionic tip at that time ed81e37ed7faf9102a1aac604e889f95110e49dd

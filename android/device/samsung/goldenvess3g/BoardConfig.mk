@@ -38,16 +38,29 @@ TARGET_OTA_ASSERT_DEVICE := goldenvess3g
 # ---------------------------------------------------------------------------------------------
 # Kernel   (VERIFIED in docs/phase-2-kernel-build.md)
 # ---------------------------------------------------------------------------------------------
-# Pinned in local_manifest.xml: Koloses/kernel_i8200 @ 44afe4cf6023bf39c18bad72185003a40915fad2, tree 0eebf6f9...
+# The pinned source (Koloses/kernel_i8200 @ 44afe4cf6023bf39c18bad72185003a40915fad2, tree 0eebf6f9...) is fetched by
+# local_manifest.xml into kernel/samsung/goldenvess3g-src, NOT into the path below, on purpose (Phase 6 finding):
+#   * The Koloses tree still contains 899 committed build leftovers. Kbuild refuses an out-of-tree build (O=) while they
+#     exist, and Lineage's kernel.mk always builds out of tree. Cleaning them would modify the kernel source, which this
+#     project does not do.
+#   * Lineage's kernel.mk only accepts TARGET_PREBUILT_KERNEL when the TARGET_KERNEL_SOURCE directory does not exist.
+# So TARGET_KERNEL_SOURCE names a path that must stay absent, and the kernel is built out of band (copy + mrproper in a
+# scratch copy, as in Phase 2) with tools/kernel-build/build-golden-kernel.sh. build-guards.mk stops the build unless
+# GOLDENVESS3G_KERNEL_DIR is set. Which kernel variant/config to use is OPEN (see kernel/README.md); nothing is chosen here.
 TARGET_KERNEL_SOURCE := kernel/samsung/goldenvess3g
-# Builds with the original toolchain; arch/arm/configs/pxa986_golden_rev02_defconfig matches Samsung's own leftover config.
+ifneq ($(strip $(GOLDENVESS3G_KERNEL_DIR)),)
+TARGET_PREBUILT_KERNEL := $(GOLDENVESS3G_KERNEL_DIR)/zImage
+endif
+# Kept for the record and for the Phase 2 build: arch/arm/configs/pxa986_golden_rev02_defconfig matches Samsung's own
+# leftover config (VERIFIED).
 TARGET_KERNEL_CONFIG := pxa986_golden_rev02_defconfig
 TARGET_KERNEL_ARCH := arm
 BOARD_KERNEL_IMAGE_NAME := zImage
-# VERIFIED: the kernel builds with AOSP arm-eabi-4.6 (GCC 4.6.x-google 20120106), pinned in local_manifest.xml.
-# TODO(toolchain wiring): Lineage 14.1 defaults to arm-linux-androidkernel-; wire KERNEL_TOOLCHAIN / prefix to the pinned
-#   arm-eabi-4.6 (see kernel/README.md). Newer compilers have NOT been tested on this kernel.
+# VERIFIED: the kernel builds with AOSP arm-eabi-4.6 (GCC 4.6.x-google 20120106), pinned in local_manifest.xml. If the
+# kernel is ever built through Lineage's kernel.mk, kernel.mk uses the bare prefix unless KERNEL_TOOLCHAIN is set (SOURCE,
+# vendor/cm/build/tasks/kernel.mk), so both are set here. Newer compilers have NOT been tested on this kernel.
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-4.6/bin
 # TODO(kernel options for Android 7): UID-range routing patch, netfilter mark/connmark modules, SELinux decision,
 #   removal of Samsung SEC_RESTRICT_* options. Listed in kernel/android7.config.fragment. The kernel source is NOT
 #   modified by this skeleton; changes will be carried as separate, recorded patches.

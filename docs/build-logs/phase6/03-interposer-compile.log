@@ -1,0 +1,3 @@
+== interposer: clang-18 -fsyntax-only, target armv7a-linux-androideabi vs cm-14.1 bionic/core/ril headers.
+== smoke test only (not Android 7's prebuilt clang). A scratch pre-include blanks bionic's __warnattr, which clang 18 rejects in N's stdio.h; that is a header/compiler mismatch, not a defect in the source.
+exit=0

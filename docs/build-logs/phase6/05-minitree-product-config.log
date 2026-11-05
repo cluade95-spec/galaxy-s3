@@ -1,0 +1,41 @@
+/bin/bash: line 19: python2: command not found
+build/core/config.mk:635: *** Error: could not find jdk tools.jar at /usr/lib/jvm/java-21-openjdk-amd64/bin/../lib/tools.jar, please check if your JDK was installed correctly.  Stop.
+== SCRATCH-ONLY probe: fake JDK dir so config.mk gets past the JDK check; parses product/board files only
+============================================
+PLATFORM_VERSION_CODENAME=REL
+PLATFORM_VERSION=7.1.2
+LINEAGE_VERSION=14.1-20261105-UNOFFICIAL-
+TARGET_PRODUCT=lineage_goldenvess3g
+TARGET_BUILD_VARIANT=userdebug
+TARGET_BUILD_TYPE=release
+TARGET_BUILD_APPS=
+TARGET_ARCH=arm
+TARGET_ARCH_VARIANT=armv7-a-neon
+TARGET_CPU_VARIANT=generic
+TARGET_2ND_ARCH=
+TARGET_2ND_ARCH_VARIANT=
+TARGET_2ND_CPU_VARIANT=
+HOST_ARCH=x86_64
+HOST_2ND_ARCH=x86
+HOST_OS=linux
+HOST_OS_EXTRA=Linux-6.18.44-fc-v236-x86_64-with-glibc2.39
+HOST_CROSS_OS=windows
+HOST_CROSS_ARCH=x86
+HOST_CROSS_2ND_ARCH=x86_64
+HOST_BUILD_TYPE=release
+BUILD_ID=NJH47F
+OUT_DIR=/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/miniTree/out
+============================================
+PROBE PRODUCT_NAME=lineage_goldenvess3g DEVICE=goldenvess3g BOARD_PLATFORM=mrvl
+PROBE ARCH=arm ARCH_VARIANT=armv7-a-neon KERNEL_CONFIG=pxa986_golden_rev02_defconfig
+PROBE PRODUCT_NAME=lineage_goldenvess3g DEVICE=goldenvess3g BOARD_PLATFORM=mrvl
+PROBE ARCH=arm ARCH_VARIANT=armv7-a-neon KERNEL_CONFIG=pxa986_golden_rev02_defconfig
+PROBE copy_files_total=63
+PROBE_LOCAL device/samsung/goldenvess3g/rootdir/etc/fstab.pxa988
+PROBE_LOCAL device/samsung/goldenvess3g/rootdir/etc/init.pxa988.rc
+PROBE_LOCAL device/samsung/goldenvess3g/rootdir/etc/init.pxa988.tel.rc
+PROBE_LOCAL device/samsung/goldenvess3g/rootdir/etc/ueventd.pxa988.rc
+PROBE_LOCAL device/samsung/goldenvess3g/configs/audio_policy.conf
+PROBE ota_assert=goldenvess3g needs_textrel=true wifi=true supp=VER_0_8_X bt=true
+PROBE vendor_mk_included=
+PROBE bootsize=[] syssize=[] kbase=[] cmdline=[]
