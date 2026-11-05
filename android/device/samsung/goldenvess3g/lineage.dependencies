@@ -1,0 +1,12 @@
+[
+  {
+    "repository": "android_hardware_marvell_wlan",
+    "target_path": "hardware/marvell/wlan",
+    "branch": "cm-14.1"
+  },
+  {
+    "repository": "android_hardware_marvell_bt",
+    "target_path": "hardware/marvell/bt",
+    "branch": "cm-14.1"
+  }
+]

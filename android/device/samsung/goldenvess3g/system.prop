@@ -1,0 +1,3 @@
+# GT-I8200 (goldenvess3g) system properties - only evidenced values.
+# Debug-build defaults found in community trees (ro.secure=0, ro.debuggable=1) are NOT carried over.
+# TODO(properties): add more only with evidence (stock build.prop is not yet available).

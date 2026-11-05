@@ -1,0 +1,5 @@
+# Proprietary files are never committed. extract-files.sh writes them here.
+/proprietary/
+/goldenvess3g-vendor.mk
+/BoardConfigVendor.mk
+/extraction-report.txt

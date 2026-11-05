@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- GT-I8200 (goldenvess3g): extra repositories for a LineageOS 14.1 tree, pinned to the revisions verified in
+     docs/phase-2-kernel-build.md and docs/phase-3-device-tree-feasibility.md. -->
+<manifest>
+  <remote name="koloses" fetch="https://github.com/Koloses/" />
+  <remote name="aosp" fetch="https://android.googlesource.com/" />
+  <remote name="los" fetch="https://github.com/LineageOS/" />
+
+  <!-- Provisional kernel base: import commit, NOT the repository's later community-patched head.
+       tree 0eebf6f928a5cc5f58c4c93a0ca67d16a620e0cd. Compiled code verified equivalent to a genuine GT-I8200
+       I8200XXUAOC1 kernel (Phase 2); not yet compared with Samsung's official package. -->
+  <project name="kernel_i8200" path="kernel/samsung/goldenvess3g" remote="koloses"
+           revision="44afe4cf6023bf39c18bad72185003a40915fad2" />
+
+  <!-- The only toolchain verified to build the kernel: AOSP Android 4.2 arm-eabi-4.6 (GCC 4.6.x-google 20120106). -->
+  <project name="platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6" path="prebuilts/gcc/linux-x86/arm/arm-eabi-4.6"
+           remote="aosp" revision="d73a051b1fd1d98f5c2463354fb67898f0090bdb" />
+
+  <!-- Marvell Wi-Fi / Bluetooth glue for the 88W8787 combo (cm-14.1 branches exist). -->
+  <project name="android_hardware_marvell_wlan" path="hardware/marvell/wlan" remote="los"
+           revision="d00e9517e636e19a566f42b59b83d28135362aec" />
+  <project name="android_hardware_marvell_bt" path="hardware/marvell/bt" remote="los"
+           revision="f4b89114f54f9937f494beb71929cf6f32af4939" />
+
+  <!-- TODO(device and vendor repos): this directory is meant to be copied to device/samsung/goldenvess3g and
+       vendor/samsung/goldenvess3g; no hosted repository exists yet. -->
+</manifest>

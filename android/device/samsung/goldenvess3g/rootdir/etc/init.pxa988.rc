@@ -1,0 +1,53 @@
+# GT-I8200 (goldenvess3g) device init - SKELETON, Android 7 syntax, UNTESTED.
+# Derived from the community-extracted stock init.pxa988.rc (601 lines, CLAIMED origin). Only a reviewed subset is
+# ported; each block says where it came from. Telephony is in init.pxa988.tel.rc (BLOCKED).
+# Not ported on purpose: Android 4.2 storage setup (replaced by Android 7 defaults), debug and log services, Samsung
+# crash dump hooks, preload mount, mfg/test services, the st21nfca NFC property (copied from a reference board).
+
+import /init.pxa988.tel.rc
+
+on init
+    # CLAIMED stock value.
+    setprop ro.board.platform mrvl
+
+on post-fs
+    # GPU kernel module. Parameters are the stock ones (CLAIMED, from the community ramdisk): register base 0xc0400000,
+    # size 0x1000, IRQ 40, 24 MiB contiguous memory. TODO(modules path): Android 7 needs the module copied to
+    # /system/lib/modules (or /lib/modules in the ramdisk) by the build; the path is not wired yet.
+    insmod /lib/modules/galcore.ko registerMemBase=0xc0400000 registerMemSize=0x1000 irqLine=40 contiguousSize=0x1800000 pmemSize=0x0
+    # CLAIMED stock: security engine module used by the stock DRM stack. TODO(geu): keep only if a consumer remains.
+    insmod /lib/modules/geu.ko
+
+on post-fs-data
+    # Wi-Fi interface names (CLAIMED stock values).
+    setprop wifi.interface wlan0
+    setprop wifidirect.interface p2p0
+
+on boot
+    # Stock value for hardware-accelerated rendering level (GLES 2.0).
+    setprop ro.opengles.version 131072
+
+    # Panel backlight node (CLAIMED stock).
+    chown system system /sys/class/backlight/panel/brightness
+    chmod 0660 /sys/class/backlight/panel/brightness
+    # Touch keys backlight (CLAIMED stock).
+    chown system system /sys/class/sec/sec_touchkey/brightness
+    chmod 0664 /sys/class/sec/sec_touchkey/brightness
+    # Rear flash control (CLAIMED stock; matches the stock camera.flash-autofocus feature).
+    chown system radio /sys/class/camera/rear/rear_flash
+    chmod 0664 /sys/class/camera/rear/rear_flash
+    # Motion sensor node (CLAIMED stock). TODO(sensors): the sensord daemon is MISSING from the dump.
+    chown system radio /dev/mpu6500
+    chmod 0664 /dev/mpu6500
+    # Wi-Fi/Bluetooth power switches (CLAIMED stock).
+    chown system system /sys/class/rfkill/rfkill0/state
+    chown system system /sys/class/rfkill/rfkill1/state
+    # Bluetooth address file (CLAIMED stock path).
+    mkdir /efs/bluetooth 0775 radio system
+    setprop ro.bt.bdaddr_path /efs/bluetooth/bt_addr
+
+# TODO(audio properties): stock sets persist.audio.apmaster=1, persist.audio.gsspmaster=1, persist.audio.codecmaster=0,
+#   persist.bt.pcmmaster=0 and chmods /proc/driver/{pcm_mfp,ssp_master,gssp_master}. Not enabled: they belong to the
+#   Marvell audio HAL, which is not yet integrated (needs a hardware test).
+# TODO(sensors): sensord service, sensor nodes and /system/etc/sensor_config.xml wiring.
+# TODO(power/cpufreq): stock cpufreq/GPU frequency governors; not ported.

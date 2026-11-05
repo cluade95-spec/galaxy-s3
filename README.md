@@ -14,7 +14,8 @@ Not to be confused with GT-I8200N / GT-I8200L (`goldenve3g`) or GT-I8190 (`golde
 | Phase 2 preparation: authenticate kernel source and firmware | **Done as far as possible from here:** [docs/phase-2-preparation.md](docs/phase-2-preparation.md). No kernel work has started. |
 | Phase 2: experimental kernel build (computer only) | **Done:** [docs/phase-2-kernel-build.md](docs/phase-2-kernel-build.md). Kernel and 20 modules built with the original toolchain. No kernel source changes. Nothing run on a phone. |
 | Phase 3: device-tree feasibility (research) | **Done:** [docs/phase-3-device-tree-feasibility.md](docs/phase-3-device-tree-feasibility.md). Decision: enough evidence to start a staged, experimental device tree; **not** enough to promise a usable phone. |
-| Phases 4–5: recovery/ROM build, hardware bring-up | Not started. Nothing has been tested on hardware. |
+| Phase 4: device-tree skeleton (computer only) | **Done:** [docs/phase-4-device-tree-skeleton.md](docs/phase-4-device-tree-skeleton.md), [docs/phase-4-cellular-investigation.md](docs/phase-4-cellular-investigation.md). Skeleton in `android/`. Not buildable yet, never built, nothing run on a phone. |
+| Phase 5+: recovery/ROM build, hardware bring-up | Not started. Nothing has been tested on hardware. |
 
 ### Phase 0 key results
 - **Best GT-I8200 kernel source found:** `Koloses/kernel_i8200` import commit `44afe4c` ("I8200XXUAOC1 kernel source"). Strong evidence it is Samsung's original package, built on a Samsung machine in Jan 2016. Not yet matched against Samsung's official download.
@@ -52,6 +53,13 @@ Not to be confused with GT-I8200N / GT-I8200L (`goldenve3g`) or GT-I8190 (`golde
 - **Good news:** audio HAL reports version 2.0 (Android 7's minimum) and the legacy audio-policy path still exists; Marvell RIL reports version 7 (Android 7 accepts 6 to 12); binder protocol 7 matches; LineageOS `hardware/marvell/wlan` and `/bt` exist for cm-14.1; GPS design matches the SM-T110 port.
 - **Biggest blockers:** cellular stack (no precedent), missing official firmware/partition table, camera ABI gaps. GT-I8200 likely has no NFC.
 - Correction: the `baffinlite` tree I earlier called a related Marvell design uses a Broadcom RIL.
+
+### Phase 4 key results
+- **Skeleton created** in `android/` (product/board makefiles, manifest pinning the Koloses kernel and toolchain, rootdir files, shim sources, guarded vendor-extraction tooling). It stops deliberately at TODOs: no boot offsets, partition sizes or hardware compatibility were invented.
+- Koloses `device_i8200` audited file by file; tablet and reference-board leftovers (ST NFC, mdnie, `sd8777`, reference camera/touch files) dropped. The rooted community dump is not a source for the vendor tree; extraction only accepts verified official firmware.
+- Component status: kernel provisional-ready; Wi-Fi, Bluetooth, audio, sensors, GPS, power incomplete; **camera, telephony, boot image and vendor tree blocked**; NFC unsupported.
+- Vendor remediation plan R1-R8 (non-PIE, text relocations, missing libraries, libstlport, camera HAL, graphics shims, media, `sensord`).
+- **Cellular:** the RIL's version 7 passes Android 7's 6-12 gate, but its request table ends at id 123 while Android 7 sends ids 124-132 at startup, so an interposer is likely needed. No Marvell-on-Android-5+ precedent exists. Plausible but unproven; the biggest project risk.
 
 ### Open blockers
 - `opensource.samsung.com` and Samsung firmware servers are blocked by this environment's network policy (re-tested 2026-11-05). That blocks the official kernel package and stock firmware checksums. Allow them in Environment settings → Network access, or supply the files and hashes yourself (see the Phase 2 document).

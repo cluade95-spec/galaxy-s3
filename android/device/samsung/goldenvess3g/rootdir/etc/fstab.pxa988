@@ -1,0 +1,21 @@
+# GT-I8200 (goldenvess3g) fstab - SKELETON.
+# Source: community-extracted stock ramdisk fstab (Koloses/device_i8200 rootdir/fstab.pxa988). CLAIMED origin, not yet
+# compared with the official ramdisk. Device nodes use by-name links under the eMMC controller, never mmcblk0pN numbers,
+# because partition numbers differ between trees. NO partition sizes appear anywhere; none are known.
+# Android 7 fs_mgr: a "wait,check" entry cannot come before the filesystem that holds the checker binary (/system).
+#
+# <src>                                              <mnt_point>  <type>  <mnt_flags and options>                                                         <fs_mgr_flags>
+/dev/block/platform/sdhci-pxav3.2/by-name/SYSTEM     /system      ext4    ro,noatime                                                                      wait
+/dev/block/platform/sdhci-pxav3.2/by-name/EFS        /efs         ext4    noatime,nosuid,nodev,journal_async_commit,errors=panic                          wait,check
+/dev/block/platform/sdhci-pxav3.2/by-name/CACHE      /cache       ext4    noatime,nosuid,nodev,journal_async_commit,errors=panic                          wait,check
+# NVM holds the Marvell telephony calibration/state (CLAIMED).  Never wipe or reformat it.
+/dev/block/platform/sdhci-pxav3.2/by-name/NVM        /NVM         ext4    nosuid,nodev,nodelalloc,noauto_da_alloc                                         wait,check
+# TODO(encryption): the stock entry used encryptable=footer. Keep it only after a decision on device encryption.
+/dev/block/platform/sdhci-pxav3.2/by-name/USER       /data        ext4    noatime,nosuid,nodev,discard,noauto_da_alloc,journal_async_commit,errors=panic  wait,check,encryptable=footer
+# Raw partitions, used only by recovery tools.  Do not write to MODEM or EFS.
+/dev/block/platform/sdhci-pxav3.2/by-name/KERNEL     /boot        emmc    defaults                                                                        defaults
+/dev/block/platform/sdhci-pxav3.2/by-name/RECOVERY   /recovery    emmc    defaults                                                                        defaults
+/dev/block/platform/sdhci-pxav3.2/by-name/MODEM      /modem       emmc    defaults                                                                        defaults
+# External SD card (CLAIMED stock path).
+/devices/platform/sdhci-pxav3.0/mmc_host/mmc1        auto         auto    defaults                                                                        voldmanaged=sdcard1:auto
+# TODO(preload): stock init mounted a /preload partition (CLAIMED: partition 13 in the community ramdisk). Not included.

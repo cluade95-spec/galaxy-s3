@@ -1,0 +1,9 @@
+# GT-I8200 (goldenvess3g) telephony init - STUB, BLOCKED. Nothing here starts any service.
+# See docs/phase-4-cellular-investigation.md. The stock files start roughly these (CLAIMED, from the community ramdisk):
+#   services: nvm, diag, atcmdsrv, eeh, vcm, simal, marvelltel (/system/bin/tel_launch.sh), mainlog, radiolog, dumpall
+#   mount:    /NVM from by-name/NVM (e2fsck first), directories under /data/misc/simal and /data/misc/phone
+#   modules inserted by tel_launch.sh: cploaddev, seh, citty, msocketk, cci_datastub, ccinetdev, gs_modem, diag, gs_diag,
+#             cidatattydev  (gs_modem.ko was NOT among the 20 modules built in Phase 2: unresolved)
+#   property: rild.libpath /system/lib/libmarvell-ril.so
+# None of this is enabled. Enabling it needs: official firmware files, a RIL interposer (request ids 124-137), the
+# libstlport/libMILV dependency set, Android 7 SELinux policy, and a hardware test that has not been approved.

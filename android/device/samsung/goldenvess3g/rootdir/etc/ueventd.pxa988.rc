@@ -1,0 +1,35 @@
+# GT-I8200 (goldenvess3g) ueventd rules - SKELETON.
+# Ported from the community-extracted stock ueventd.pxa988.rc (CLAIMED origin). Kept: nodes tied to hardware that is
+# part of this phone (GPU, framebuffer, camera, audio, sensors, GPS UART, Wi-Fi/BT, touch). Dropped: raw partition
+# numbers (they differ between trees), tablet leftovers, and reference-board nodes (mdtv, radio0 FM, bmm/cnm video IP).
+# TODO(groups): Android 7 expects "graphics" for the framebuffer and gralloc nodes; stock used media. Review after the
+#   first hardware test; do not loosen permissions blindly.
+
+/dev/snd/*                  0660   system     audio
+/dev/ttyS2                  0600   system     system
+/dev/video0                 0660   media      camera
+/dev/media0                 0660   root       camera
+/dev/video*                 0660   root       camera
+/dev/v4l-subdev*            0660   root       camera
+/dev/graphics/fb0           0660   system     graphics
+/dev/graphics/galcore       0666   system     graphics
+/dev/ion                    0666   system     graphics
+/dev/pmem                   0666   media      system
+/dev/pmem_adsp              0660   system     camera
+/dev/pmem_wc                0660   system     camera
+/dev/geu                    0660   media      system
+/dev/rfkill                 0660   system     wifi
+/dev/mbtchar*               0660   system     bluetooth
+/dev/mpu                    0660   system     system
+/dev/mpuirq                 0660   system     system
+/dev/accelirq               0660   system     system
+/dev/timerirq               0660   system     system
+/dev/input/event*           0660   root       input
+/dev/alarm-poweroff         0444   system     system
+
+# GPU frequency control node (stock rule).
+/sys/devices/platform/galcore/gpu/gpu0/gpufreq userspace/customize_rate 0644 system root
+
+# Telephony nodes belong in init.pxa988.tel.rc / here only once the telephony decision is made (BLOCKED).
+# TODO(telephony nodes): /dev/msocket, /dev/cctdev*, /dev/ttymodem*, /dev/citty*, /dev/seh, /dev/cpmem, ... are in the
+#   stock file; not enabled here.

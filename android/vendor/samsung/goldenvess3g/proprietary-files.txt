@@ -1,0 +1,286 @@
+# GT-I8200 (goldenvess3g) vendor file manifest - PROPOSED, UNVERIFIED.
+#
+# This is a list of file NAMES only. It was derived from (a) the Koloses/device_i8200 proprietary list, (b) the audit of the
+# rooted community /system dump in docs/phase-3-device-tree-feasibility.md and docs/phase-4-device-tree-skeleton.md, and
+# (c) the transitive library dependencies of the listed files. The community dump is NOT a source of files.
+# Files may only be extracted from VERIFIED OFFICIAL GT-I8200 firmware with extract-files.sh, which refuses anything else.
+#
+# Line format:   <path under system>   # flags
+# Statuses:      (plain line) INCLUDE   |   "#DEFER"  = not extracted yet, reason given   |   "#EXCLUDE" = never extract, reason given
+# Flags:         NON-PIE (Android 7 linker rejects it), TEXTREL (needs TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS),
+#                NEEDS-LIBSTLPORT, SYMBOLS-AT-RISK(n) (n symbols not found in Android 7 sources / only in stock 4.2 libraries),
+#                NOT-IN-KOLOSES-LIST (required by a listed file but missing from the community list),
+#                OMITTED-FROM-COMMUNITY-LISTS (present in the dump but in neither community list), EABI4.
+# A flag is a risk marker from static analysis, not a statement that the file works or fails.
+#
+# KNOWN GAPS (nothing to list, nothing to guess):
+#   - sensord: started by the stock init, NOT present in the dump (see plan R8).
+#   - Modem firmware: lives in the MODEM partition, not in /system. Never touched by this project.
+#   - listed by Koloses but absent from the dump: bin/cp, bin/smd, xbin/iwconfig, xbin/zipalign
+
+# ===== GPU_DISPLAY =====
+system/lib/egl/libEGL_MRVL.so
+system/lib/egl/libGLESv1_CM_MRVL.so
+system/lib/egl/libGLESv2_MRVL.so
+system/lib/hw/gralloc.mrvl.so
+system/lib/hw/hwcomposer.mrvl.so  # OMITTED-FROM-COMMUNITY-LISTS
+system/lib/libGAL.so  # TEXTREL
+system/lib/libGLESv2SC.so
+system/lib/libHWComposerGC.so
+system/lib/libgcu.so
+system/lib/libgpucsc.so  # TEXTREL
+system/lib/libgputex.so
+system/lib/libionhelper.so
+system/lib/libphycontmem.so
+
+# ===== WIFI_BT_FM =====
+system/bin/MarvellWirelessDaemon
+system/bin/load_prod_8787.sh
+system/bin/macloader
+system/bin/mlanutl
+#EXCLUDE system/bin/p2p_supplicant  -- needs OpenSSL functions BoringSSL lacks; use Android 7 wpa_supplicant  [SYMBOLS-AT-RISK(9)]
+system/bin/rfkill
+system/bin/unload_8787.sh
+system/etc/bluetooth/bt_secure_manager_app_pub_key
+system/etc/bluetooth/iop_bt.db
+system/etc/bluetooth/iop_device_list.conf
+system/etc/firmware/mrvl/WlanCalData_ext.conf
+system/etc/firmware/mrvl/bt_cal_data.conf
+system/etc/firmware/mrvl/bt_init_cfg.conf
+system/etc/firmware/mrvl/cal_data.conf
+system/etc/firmware/mrvl/reg_alpha2
+system/etc/firmware/mrvl/sd8787_uapsta.bin
+system/etc/firmware/mrvl/w8787_wlan_SDIO_bt_SDIO.bin
+system/lib/libMarvellWireless.so  # NOT-IN-KOLOSES-LIST
+system/lib/libfmhal.so  # SYMBOLS-AT-RISK(3)
+
+# ===== AUDIO =====
+system/bin/amixer
+system/bin/aplay
+system/bin/close_aud_path_fm.sh
+system/bin/close_aud_path_hifi_headset.sh
+system/bin/open_aud_path_fm_headset.sh
+system/bin/open_aud_path_fm_speaker.sh
+system/bin/open_aud_path_hifi_headset.sh
+system/etc/Volume.db
+system/etc/asound.conf
+system/etc/audio_basic_element.xml
+system/etc/audio_coeff_config.xml
+system/etc/audio_gain_config.xml
+system/etc/audio_path_config.xml
+system/etc/audio_swvol_calibration_def.xml
+system/etc/audio_swvol_config.xml
+system/etc/audio_swvol_element.xml
+system/lib/hw/audio.primary.mrvl.so  # SYMBOLS-AT-RISK(2)
+#EXCLUDE system/lib/hw/audio.r_submix.default.so  -- Android 7 builds its own r_submix  [SYMBOLS-AT-RISK(16)]
+system/lib/hw/audio_path.adda.mrvl.so
+system/lib/hw/audio_path.fm.mrvl.so
+system/lib/hw/audio_path.hifi.mrvl.so
+system/lib/hw/audio_path.vc.mrvl.so
+system/lib/hw/audio_path.voip.mrvl.so
+system/lib/hw/audio_path.vt.mrvl.so
+#DEFER system/lib/libOrgan.so  -- needs Samsung AudioCalibrationParser classes (defined elsewhere)  [SYMBOLS-AT-RISK(22)]
+system/lib/lib_SA_GoogleFX_ver119h.so
+system/lib/lib_SamsungRec_V03011b.so
+system/lib/lib_Samsung_Resampler.so  # TEXTREL
+system/lib/lib_Samsung_SB_AM_for_ICS_v03008.so
+#DEFER system/lib/lib_SoundAlive_V01013q.so  -- Samsung audio effect; deferred  [TEXTREL NOT-IN-KOLOSES-LIST]
+system/lib/libacm.so
+system/lib/libacoustic.so
+system/lib/libasound.so
+system/lib/libaudiodebugtool.so
+system/lib/libaudiosa.so
+system/lib/libsamsungRecord.so
+system/lib/libsamsungSoundbooster.so
+#DEFER system/lib/libsoundalive.so  -- Samsung audio effect; deferred  [SYMBOLS-AT-RISK(13)]
+system/lib/libspeexresampler.so  # NOT-IN-KOLOSES-LIST
+system/lib/soundfx/libmrvlpreprocessing.so  # SYMBOLS-AT-RISK(16)
+system/usr/lib/alsa-lib/libasound_module_ctl_codec.so
+system/usr/lib/alsa-lib/libasound_module_ctl_phone.so
+system/usr/lib/alsa-lib/libasound_module_pcm_phone.so
+system/usr/share/alsa/alsa.conf
+system/usr/share/alsa/cards/aliases.conf
+system/usr/share/alsa/pcm/centor_lfe.conf
+system/usr/share/alsa/pcm/default.conf
+system/usr/share/alsa/pcm/dmix.conf
+system/usr/share/alsa/pcm/dpl.conf
+system/usr/share/alsa/pcm/dsnoop.conf
+system/usr/share/alsa/pcm/front.conf
+system/usr/share/alsa/pcm/iec958.conf
+system/usr/share/alsa/pcm/modem.conf
+system/usr/share/alsa/pcm/rear.conf
+system/usr/share/alsa/pcm/side.conf
+system/usr/share/alsa/pcm/surround40.conf
+system/usr/share/alsa/pcm/surround41.conf
+system/usr/share/alsa/pcm/surround50.conf
+system/usr/share/alsa/pcm/surround51.conf
+system/usr/share/alsa/pcm/surround71.conf
+
+# ===== CAMERA =====
+system/etc/back_camera_scene.cfg
+system/etc/camera_profiles.xml
+system/etc/common_scene_tuning.data
+system/etc/lsi3h5_still_tuning.data
+system/etc/lsi3h5_video_tuning.data
+#EXCLUDE system/etc/ov5647_still_tuning.data  -- reference-board file, not this phone
+#EXCLUDE system/etc/ov5647_video_tuning.data  -- reference-board file, not this phone
+#EXCLUDE system/etc/ov8825_still_tuning.data  -- reference-board file, not this phone
+#EXCLUDE system/etc/ov8825_video_tuning.data  -- reference-board file, not this phone
+#EXCLUDE system/etc/permissions/android.hardware.camera.front.xml  -- supplied from frameworks/native by device.mk
+system/lib/hw/camera.mrvl.so  # NEEDS-LIBSTLPORT SYMBOLS-AT-RISK(22)
+system/lib/libcameraengine.so
+
+# ===== SENSORS =====
+#EXCLUDE system/etc/permissions/android.hardware.sensor.accelerometer.xml  -- supplied from frameworks/native by device.mk
+#EXCLUDE system/etc/permissions/android.hardware.sensor.compass.xml  -- supplied from frameworks/native by device.mk
+system/etc/sensor_config.xml
+system/lib/hw/sensors.mrvl.so
+
+# ===== GPS =====
+system/etc/gps.conf
+system/etc/mrvl_agps_default.conf
+system/etc/mrvl_gps_platform.conf
+#EXCLUDE system/etc/permissions/android.hardware.location.gps.xml  -- supplied from frameworks/native by device.mk
+system/lib/hw/gps.default.so  # TEXTREL
+system/lib/libagps_hal.so  # TEXTREL
+
+# ===== POWER_LIGHTS =====
+system/bin/powerdaemon
+system/etc/powerdaemon.xml
+system/lib/hw/power.mrvl.so  # OMITTED-FROM-COMMUNITY-LISTS
+system/lib/libPowerSetting.so
+system/lib/libcpufreq.so
+system/lib/libcpufreqinterface.so
+system/vendor/lib/hw/lights.mrvl.so
+
+# ===== TELEPHONY_PLATFORM_MARVELL =====
+system/bin/eeh  # SYMBOLS-AT-RISK(4)
+system/bin/vcm
+system/bin/FileMonitorService
+system/bin/abcc  # NEEDS-LIBSTLPORT SYMBOLS-AT-RISK(3)
+system/bin/atcmdsrv  # SYMBOLS-AT-RISK(10)
+system/bin/connfwexe
+system/bin/cploader  # SYMBOLS-AT-RISK(4)
+system/bin/ddexe
+#EXCLUDE system/bin/diag_thp_test  -- test tool
+#EXCLUDE system/bin/diag_usb_test  -- test tool
+system/bin/dttexe
+system/bin/dvfm_control.sh
+system/bin/emmc_fsck
+system/bin/exit_composite.sh
+system/bin/hw.sh
+system/bin/hwacc
+system/bin/npsmobex
+system/bin/ppd_cmd
+system/bin/run_composite.sh
+system/bin/serial_cfun0
+system/bin/serial_client
+#EXCLUDE system/bin/serial_client_test  -- test tool
+system/bin/setup_fs
+system/bin/simal
+system/bin/smdexe
+system/bin/tel_launch.sh
+system/bin/tel_launch_no_gui.sh
+system/bin/telmon
+system/etc/MSLConfig.txt
+system/etc/ams_list.xml
+system/etc/dbus.conf
+system/etc/plmn_se13.bin
+system/etc/rom.bin
+system/etc/spn-conf.xml
+system/lib/libAndroidEvent.so
+system/lib/libFileMonitorService.so  # SYMBOLS-AT-RISK(16)
+system/lib/libMILV.so  # TEXTREL NOT-IN-KOLOSES-LIST
+system/lib/libceu.so  # SYMBOLS-AT-RISK(10)
+system/lib/libmarvell-ril.so  # NEEDS-LIBSTLPORT SYMBOLS-AT-RISK(6)
+system/lib/libmtelif.so
+system/lib/libomission_avoidance.so  # NOT-IN-KOLOSES-LIST
+system/lib/libparseTim.so  # TEXTREL
+system/lib/libsecnativefeature.so  # NEEDS-LIBSTLPORT SYMBOLS-AT-RISK(2)
+system/lib/libsecril-client.so
+system/lib/libserialport.so
+system/lib/libsimal.so
+system/lib/libsocketsvr.so
+system/lib/libwtpsp.so  # TEXTREL
+system/lib/libwtpsp_ss.so  # TEXTREL
+
+# ===== MEDIA =====
+system/bin/appCoda7542Dec
+system/bin/appCoda7542Enc
+#EXCLUDE system/etc/media_profiles.xml_for5640  -- reference-board file, not this phone
+#DEFER system/lib/libMrvlOmx.so  -- hardware codec path; Android 7 stagefright ABI; deferred (software codecs first)  [SYMBOLS-AT-RISK(11)]
+system/lib/libbcc.so  # NEEDS-LIBSTLPORT SYMBOLS-AT-RISK(8) NOT-IN-KOLOSES-LIST
+system/lib/libbcinfo.so  # NEEDS-LIBSTLPORT NOT-IN-KOLOSES-LIST
+system/lib/libcoda7542.so
+system/lib/libcoda7542hal.so
+system/lib/libcodecaacdec.so  # TEXTREL
+system/lib/libcodecaacenc.so  # TEXTREL
+system/lib/libcodecamrnbdec.so  # TEXTREL
+system/lib/libcodecamrnbenc.so  # TEXTREL
+system/lib/libcodecamrwbdec.so  # TEXTREL
+system/lib/libcodecamrwbenc.so  # TEXTREL
+system/lib/libcodeccoda7542dec.so
+system/lib/libcodeccoda7542enc.so
+#DEFER system/lib/libcodecddpdec.so  -- Dolby decoder; deferred with libMrvlOmx  [NOT-IN-KOLOSES-LIST]
+system/lib/libcodech263dec.so
+system/lib/libcodech263enc.so
+system/lib/libcodech264dec.so  # TEXTREL
+system/lib/libcodech264enc.so
+system/lib/libcodecjpegdec.so
+system/lib/libcodecjpegenc.so  # TEXTREL
+system/lib/libcodecmp3dec.so  # TEXTREL
+system/lib/libcodecmpeg2dec.so
+system/lib/libcodecmpeg4dec.so  # TEXTREL
+system/lib/libcodecmpeg4enc.so  # TEXTREL
+system/lib/libcodecpngdec.so  # TEXTREL
+system/lib/libcodecwmadec.so  # TEXTREL
+system/lib/libcodecwmvdec.so
+#EXCLUDE system/lib/libexif.so  -- Android 7 provides libexif (verify)  [NOT-IN-KOLOSES-LIST]
+system/lib/libexif_jni.so  # SYMBOLS-AT-RISK(14)
+system/lib/libippimgp.so
+system/lib/libippsp.so  # TEXTREL
+system/lib/libippvp.so
+#EXCLUDE system/lib/libjnigraphics.so  -- Android 7 provides libjnigraphics  [NOT-IN-KOLOSES-LIST]
+system/lib/libquramagifencoder.so
+system/lib/libquramimagecodec.so
+#DEFER system/lib/libstagefright_mrvl_extractor.so  -- 18 symbols missing in Android 7 libstagefright (R7)  [SYMBOLS-AT-RISK(18)]
+#DEFER system/lib/libstagefrighthw.so  -- hardware codec path; deferred
+system/lib/libsthmb.so  # TEXTREL
+system/lib/libvcdecoder_jni.so
+
+# ===== DRM_SECURITY =====
+#DEFER system/lib/drm/libdrmwvmplugin.so  -- Widevine plug-in  [NEEDS-LIBSTLPORT SYMBOLS-AT-RISK(16)]
+system/lib/libSamsungPkcs11Wrapper.so  # TEXTREL
+#DEFER system/lib/libWVStreamControlAPI_L3.so  -- Widevine L3: needs libstlport, BoringSSL check  [NEEDS-LIBSTLPORT SYMBOLS-AT-RISK(3)]
+#DEFER system/lib/libdrmdecrypt.so  -- DRM; defer
+system/lib/libsmte.so
+#DEFER system/lib/libwvdrm_L3.so  -- Widevine  [NEEDS-LIBSTLPORT]
+#DEFER system/lib/libwvm.so  -- Widevine  [NEEDS-LIBSTLPORT SYMBOLS-AT-RISK(8)]
+
+# ===== INPUT_PERMISSIONS =====
+#EXCLUDE system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml  -- supplied from frameworks/native by device.mk
+#EXCLUDE system/etc/permissions/android.hardware.usb.accessory.xml  -- supplied from frameworks/native by device.mk
+#EXCLUDE system/etc/permissions/android.hardware.usb.host.xml  -- supplied from frameworks/native by device.mk
+#EXCLUDE system/usr/idc/elan-ts.idc  -- reference-board file, not this phone
+#EXCLUDE system/usr/idc/ft5306-ts.idc  -- reference-board file, not this phone
+system/usr/keychars/pxa27x-keypad.kcm
+system/usr/keylayout/Vendor_04e8_Product_7021.kl
+system/usr/keylayout/pxa27x-keypad.kl
+
+# ===== PLATFORM_SUPPORT =====
+#EXCLUDE system/bin/system_server  -- Android 4.2 platform binary
+#EXCLUDE system/lib/libremotedesktop_client.so  -- same
+#EXCLUDE system/lib/libremotedesktopservice.so  -- Samsung remote-desktop feature (pulled in only by the excluded libsystem_server)
+system/lib/libstlport.so  # NOT-IN-KOLOSES-LIST
+system/lib/libsysfs_attribute.so
+#EXCLUDE system/lib/libsystem_server.so  -- Android 4.2 platform library (Samsung-modified); Android 7 has its own  [SYMBOLS-AT-RISK(2)]
+system/lib/libusbsetting.so  # SYMBOLS-AT-RISK(1)
+#EXCLUDE system/lib/libxml2.so  -- Android 7 provides libxml2  [SYMBOLS-AT-RISK(7)]
+
+# ===== OTHER =====
+#DEFER system/bin/STUpdateTool_V4_4R  -- non-PIE executable (R1); touch/sensor firmware update tool  [NON-PIE]
+#EXCLUDE system/bin/msocket_testport  -- test tool
+#EXCLUDE system/bin/vt_test  -- test tool
+system/etc/pxa_testcfg.ini
+system/lib/libmiscgen.so
+system/lib/libphysicsmsc.so
