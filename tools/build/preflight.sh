@@ -1,8 +1,8 @@
 #!/bin/bash
 # Read-only preflight for a first LineageOS 14.1 build of goldenvess3g. Prints PASS/FAIL per gate; exit 1 if any gate fails.
-# Usage: preflight.sh [min_free_gb]   (default 100: a deliberately low planning figure; the measured sample in
-#        docs/phase-6-first-build-attempt.md shows even a shallow source tree is larger than this machine's free space)
-MINGB="${1:-100}"; HERE="$(cd "$(dirname "$0")/../.." && pwd)"; DEV="$HERE/android/device/samsung/goldenvess3g"
+# Usage: preflight.sh [min_free_gb]   (default 200: the Phase 7 estimate of the minimum safe free space, see
+#        docs/phase-7-build-environment-and-firmware.md section 2)
+MINGB="${1:-200}"; HERE="$(cd "$(dirname "$0")/../.." && pwd)"; DEV="$HERE/android/device/samsung/goldenvess3g"
 VEN="$HERE/android/vendor/samsung/goldenvess3g"; fail=0
 gate(){ if [ "$2" = ok ]; then printf 'PASS  %-34s %s\n' "$1" "$3"; else printf 'FAIL  %-34s %s\n' "$1" "$3"; fail=1; fi; }
 echo "host: $(uname -sr), $(nproc) CPUs, $(free -g | awk '/Mem:/{print $2}') GiB RAM"

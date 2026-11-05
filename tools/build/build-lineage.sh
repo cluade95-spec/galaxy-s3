@@ -11,7 +11,7 @@ TREE="${1:?usage: $0 TREE LOGDIR}"; LOGS="${2:?usage: $0 TREE LOGDIR}"; mkdir -p
 HERE="$(cd "$(dirname "$0")/../.." && pwd)"; DEV="$HERE/android/device/samsung/goldenvess3g"; VEN="$HERE/android/vendor/samsung/goldenvess3g"
 exec > >(tee -a "$LOGS/build-driver.log") 2>&1
 echo "== start $(date -u +%FT%TZ)  repo-head=$(git -C "$HERE" rev-parse HEAD)"
-echo "== gate 0: preflight"; "$HERE/tools/build/preflight.sh" "${MIN_FREE_GB:-100}" | tee "$LOGS/preflight.log" || { echo "STOP: preflight failed; nothing was synced or built."; exit 2; }
+echo "== gate 0: preflight"; "$HERE/tools/build/preflight.sh" "${MIN_FREE_GB:-200}" | tee "$LOGS/preflight.log" || { echo "STOP: preflight failed; nothing was synced or built."; exit 2; }
 echo "== gate 1: sync (LineageOS cm-14.1 manifest)"
 mkdir -p "$TREE" && cd "$TREE" || exit 3
 repo init -u https://github.com/LineageOS/android.git -b cm-14.1 --depth=1 || { echo "STOP: repo init failed"; exit 3; }

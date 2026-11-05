@@ -1,0 +1,27 @@
+ include/linux/lsm_audit.h           |   7 +
+ include/linux/security.h            |  42 +++-
+ security/Kconfig                    |   9 +
+ security/capability.c               |  28 ++-
+ security/commoncap.c                |   7 +-
+ security/lsm_audit.c                |  15 ++
+ security/security.c                 |  24 +-
+ security/selinux/avc.c              | 430 ++++++++++++++++++++++++++++++++++--
+ security/selinux/hooks.c            | 234 ++++++++++++++++----
+ security/selinux/include/avc.h      |   5 +
+ security/selinux/include/classmap.h |   5 +-
+ security/selinux/include/objsec.h   |   5 +-
+ security/selinux/include/security.h |  36 ++-
+ security/selinux/netnode.c          |   3 +-
+ security/selinux/ss/avtab.c         | 104 +++++++--
+ security/selinux/ss/avtab.h         |  34 ++-
+ security/selinux/ss/conditional.c   |  30 ++-
+ security/selinux/ss/conditional.h   |   6 +-
+ security/selinux/ss/constraint.h    |   1 +
+ security/selinux/ss/context.h       |  20 ++
+ security/selinux/ss/mls.c           |  24 ++
+ security/selinux/ss/policydb.c      | 145 +++++++++++-
+ security/selinux/ss/policydb.h      |  25 +++
+ security/selinux/ss/services.c      | 258 +++++++++++++++++++---
+ security/selinux/ss/services.h      |   6 +
+ security/selinux/xfrm.c             |   2 +-
+ 26 files changed, 1366 insertions(+), 139 deletions(-)

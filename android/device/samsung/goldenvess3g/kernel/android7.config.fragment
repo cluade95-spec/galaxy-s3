@@ -34,6 +34,9 @@ CONFIG_NETFILTER_XT_TARGET_IDLETIMER=m     # unverified
 #      (c) run without SELinux, as the SM-T110 port does with an init patch plus selinux=0 on the command line. That
 #          DISABLES a core Android security feature. It is only acceptable as an explicit, documented owner decision
 #          for a bring-up build, never as a silent default. Not applied.
+#  Phase 7 update: option (a) is the recommended one. Google's android-3.4 SELinux/LSM code applied to a separate copy of
+#  this kernel compiles (not run). Policy compiles at version 30 and fails at 26 to 29 only because of the 5 allowxperm rules;
+#  deleting them would widen access, so (b) is rejected. See docs/phase-7-selinux-compatibility.md.
 # SEC_RESTRICT_*: leave OFF (plain defconfig).  [DECISION pending]
 
 # --- Already satisfied in pxa986_golden_rev02_defconfig (VERIFIED in the generated .config) ----

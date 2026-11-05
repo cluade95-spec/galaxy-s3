@@ -1,0 +1,34 @@
+  HOSTCC  scripts/basic/fixdep
+  GEN     SCRATCH/exp2/out/Makefile
+  HOSTCC  scripts/kconfig/conf.o
+  SHIPPED scripts/kconfig/zconf.tab.c
+  SHIPPED scripts/kconfig/zconf.lex.c
+  SHIPPED scripts/kconfig/zconf.hash.c
+  HOSTCC  scripts/kconfig/zconf.tab.o
+In file included from scripts/kconfig/zconf.tab.c:2502:
+In function 'dep_stack_insert',
+    inlined from 'sym_check_print_recursive' at SCRATCH/exp2/kexp/scripts/kconfig/symbol.c:1027:3,
+    inlined from 'sym_check_deps' at SCRATCH/exp2/kexp/scripts/kconfig/symbol.c:1198:3:
+SCRATCH/exp2/kexp/scripts/kconfig/symbol.c:1003:19: warning: storing the address of local variable 'cv_stack' in 'check_top' [-Wdangling-pointer=]
+ 1003 |         check_top = stack;
+      |         ~~~~~~~~~~^~~~~~~
+SCRATCH/exp2/kexp/scripts/kconfig/symbol.c: In function 'sym_check_deps':
+SCRATCH/exp2/kexp/scripts/kconfig/symbol.c:1024:26: note: 'cv_stack' declared here
+ 1024 |         struct dep_stack cv_stack;
+      |                          ^~~~~~~~
+SCRATCH/exp2/kexp/scripts/kconfig/symbol.c:994:4: note: 'check_top' declared here
+  994 | } *check_top;
+      |    ^~~~~~~~~
+  HOSTLD  scripts/kconfig/conf
+warning: (ZRAM) selects ZSMALLOC which has unmet direct dependencies (STAGING && X86)
+warning: (ZRAM) selects ZSMALLOC which has unmet direct dependencies (STAGING && X86)
+#
+# configuration written to .config
+#
+warning: (ZRAM) selects ZSMALLOC which has unmet direct dependencies (STAGING && X86)
+warning: (ZRAM) selects ZSMALLOC which has unmet direct dependencies (STAGING && X86)
+  LD      arch/arm/boot/compressed/vmlinux
+  OBJCOPY arch/arm/boot/zImage
+  Kernel: arch/arm/boot/zImage is ready
+3c4cab88b6320ae745e29f9448b77e7fcf0bff04b9919f85b993234823a43934  SCRATCH/exp2/out/arch/arm/boot/zImage
+c02db574 T avc_has_extended_perms

@@ -102,6 +102,9 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.pxa988
 # Android 7 loader requirements for the stock closed libraries (VERIFIED in docs/phase-3, phase-4)
 # ---------------------------------------------------------------------------------------------
 # 81 stock libraries have text relocations, including libGAL.so (GPU), gps.default.so and the modem loader libraries.
+# PENDING OWNER DECISION (Phase 7): this flag is what lets the policy compile any `execmod` rule for system libraries.
+#   Every text-relocation library, including the ones platform daemons load, depends on it. It relaxes two neverallow
+#   rules in system/sepolicy domain.te. See docs/phase-7-selinux-compatibility.md section 7. Not a silent default.
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 # TODO(libGAL exception): apps (SystemUI) load libGAL.so; the SM-T110 port patches bionic for it. Re-apply and re-verify
 #   for this device (docs/phase-4, vendor remediation plan R2).

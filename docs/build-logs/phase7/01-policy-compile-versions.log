@@ -1,0 +1,35 @@
+policy inputs: 144 files (29 from vendor/cm)
+policy.conf: 21473 lines; allowxperm rules: 5; neverallowxperm: 5
+=== checkpolicy -M -c 30
+exit=0 errors=0
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  loading policy configuration from /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/sepol30/policy.conf
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  policy configuration loaded
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  writing binary representation (version 30) to /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/sepol30/sepolicy.30
+=== checkpolicy -M -c 29
+exit=1 errors=1
+libsepol.avtab_write_item: policy version 29 does not support ioctl extendedpermissions rules and one was specified
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  error writing /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/sepol30/sepolicy.29
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  loading policy configuration from /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/sepol30/policy.conf
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  policy configuration loaded
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  writing binary representation (version 29) to /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/sepol30/sepolicy.29
+=== checkpolicy -M -c 28
+exit=1 errors=1
+libsepol.avtab_write_item: policy version 28 does not support ioctl extendedpermissions rules and one was specified
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  error writing /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/sepol30/sepolicy.28
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  loading policy configuration from /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/sepol30/policy.conf
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  policy configuration loaded
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  writing binary representation (version 28) to /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/sepol30/sepolicy.28
+=== checkpolicy -M -c 27
+exit=1 errors=1
+libsepol.avtab_write_item: policy version 27 does not support ioctl extendedpermissions rules and one was specified
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  error writing /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/sepol30/sepolicy.27
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  loading policy configuration from /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/sepol30/policy.conf
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  policy configuration loaded
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  writing binary representation (version 27) to /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/sepol30/sepolicy.27
+=== checkpolicy -M -c 26
+exit=1 errors=1
+libsepol.avtab_write_item: policy version 26 does not support ioctl extendedpermissions rules and one was specified
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  error writing /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/sepol30/sepolicy.26
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  loading policy configuration from /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/sepol30/policy.conf
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  policy configuration loaded
+/tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/p3/n7/external_selinux/checkpolicy/checkpolicy:  writing binary representation (version 26) to /tmp/claude-0/-home-user-galaxy-s3/a6e22907-6d8d-55f1-ad86-b10cb7fdb453/scratchpad/sepol30/sepolicy.26

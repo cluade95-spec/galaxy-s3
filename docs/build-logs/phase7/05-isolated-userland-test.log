@@ -1,0 +1,13 @@
+# Isolated Ubuntu 16.04 userland test (scratch directory, chroot, NO host package changes). Sandbox-specific notes at the end.
+ubuntu-base-16.04.6-base-amd64.tar.gz sha256 9c160b522568c0c3f2c396cfe7c966f1a63aa1a5e9f6f966a74fdf3571ad49a0 (matches SHA256SUMS from the same host; a real setup should also check the GPG signature)
+NAME="Ubuntu"
+VERSION="16.04.6 LTS (Xenial Xerus)"
+Python 2.7.11+
+GNU Make 4.1
+openjdk version "1.8.0_03-Ubuntu"
+OpenJDK Runtime Environment (build 1.8.0_03-Ubuntu-8u77-b03-3ubuntu3-b03)
+OpenJDK 64-Bit Server VM (build 25.03-b03, mixed mode)
+javac 1.8.0_03-Ubuntu
+installed packages (release pocket): python2.7 2.7.11, openjdk-8-jdk-headless 8u77 (reports 1.8.0_03-Ubuntu), make 4.1; rootfs size 385M
+Android 7 main.mk Java check greps for '1.8' in both java and javac -version: satisfied.
+NOTES: (1) updates/security pocket debs (python2.7 2.7.12, openjdk 8u191) could not be fetched here because security.ubuntu.com is blocked by this sandbox's egress policy; archive.ubuntu.com 'updates' pool paths returned 404/405 for them. On a normal machine apt would fetch them. (2) apt through this sandbox proxy returned 405 for some index files; debs were fetched with curl from the release pool and installed offline. (3) java's package scripts need /proc mounted inside the chroot.
