@@ -15,7 +15,8 @@ Not to be confused with GT-I8200N / GT-I8200L (`goldenve3g`) or GT-I8190 (`golde
 | Phase 2: experimental kernel build (computer only) | **Done:** [docs/phase-2-kernel-build.md](docs/phase-2-kernel-build.md). Kernel and 20 modules built with the original toolchain. No kernel source changes. Nothing run on a phone. |
 | Phase 3: device-tree feasibility (research) | **Done:** [docs/phase-3-device-tree-feasibility.md](docs/phase-3-device-tree-feasibility.md). Decision: enough evidence to start a staged, experimental device tree; **not** enough to promise a usable phone. |
 | Phase 4: device-tree skeleton (computer only) | **Done:** [docs/phase-4-device-tree-skeleton.md](docs/phase-4-device-tree-skeleton.md), [docs/phase-4-cellular-investigation.md](docs/phase-4-cellular-investigation.md). Skeleton in `android/`. Not buildable yet, never built, nothing run on a phone. |
-| Phase 5+: recovery/ROM build, hardware bring-up | Not started. Nothing has been tested on hardware. |
+| Phase 5: vendor compatibility and cellular feasibility (computer only) | **Done:** [docs/phase-5-vendor-compatibility.md](docs/phase-5-vendor-compatibility.md), [docs/phase-5-cellular-feasibility.md](docs/phase-5-cellular-feasibility.md). Static analysis and source reading only. Nothing built into a ROM, nothing run on a phone. |
+| Phase 6+: first experimental ROM build, recovery, hardware bring-up | Not started. Nothing has been tested on hardware. |
 
 ### Phase 0 key results
 - **Best GT-I8200 kernel source found:** `Koloses/kernel_i8200` import commit `44afe4c` ("I8200XXUAOC1 kernel source"). Strong evidence it is Samsung's original package, built on a Samsung machine in Jan 2016. Not yet matched against Samsung's official download.
@@ -60,6 +61,14 @@ Not to be confused with GT-I8200N / GT-I8200L (`goldenve3g`) or GT-I8190 (`golde
 - Component status: kernel provisional-ready; Wi-Fi, Bluetooth, audio, sensors, GPS, power incomplete; **camera, telephony, boot image and vendor tree blocked**; NFC unsupported.
 - Vendor remediation plan R1-R8 (non-PIE, text relocations, missing libraries, libstlport, camera HAL, graphics shims, media, `sensord`).
 - **Cellular:** the RIL's version 7 passes Android 7's 6-12 gate, but its request table ends at id 123 while Android 7 sends ids 124-132 at startup, so an interposer is likely needed. No Marvell-on-Android-5+ precedent exists. Plausible but unproven; the biggest project risk.
+
+### Phase 5 key results
+- **Recommendation: advance to a first experimental ROM *build* attempt, scoped to Wi-Fi, Bluetooth, GPS, graphics, audio playback and sensors. Camera and cellular are out of that first build. No flashing** until official firmware, the real partition table and a reversible, owner-approved procedure exist.
+- **Text relocations:** 81 libraries in the community dump, 26 relevant to the manifest. Only `libGAL.so` (4,001 relocations in code) needs a linker exception for apps; the rest are loaded by platform processes and are covered by the board flag. With the flag, Android 7's SELinux policy allows device rules for `execmod`; that policy is not written yet.
+- **Solved or narrowed:** echo-reference symbols are provided by Android 7's `libaudioutils`; sqlite and expat functions exist in Android 7 sources; `STUpdateTool` is an NFC flasher (excluded); `rtccd2` is a zram helper (replace with an fstab `zramsize=` entry); the sensors HAL does not link to `sensord` but dlopens `libacdapi_clb.so` (now in the manifest); `gs_modem` is a USB gadget name, not a missing telephony module.
+- **New Wi-Fi finding:** Android 7 can load only one driver module through the HAL, but the Marvell driver is two modules (`mlan.ko`, `sd8xxx.ko`), so init must load the first. Bluetooth: the kernel driver's `/dev/mbtchar0` matches LineageOS's Marvell Bluetooth vendor library.
+- **Cellular:** the vendor RIL has handlers for the basic GSM set (SIM, calls, SMS, registration, signal, data; 88 ids, list in `docs/data/ril-request-coverage.tsv`). Request ids 124 to 137 (the ones Android 7 adds) are outside its table and are **not** safe to forward and **not** safe to answer with success. An interposer prototype answers them with errors; a host test with a fake vendor library passes. Whether calls, SMS, data, SIM detection or registration work is unknown and cannot be tested without hardware and the modem firmware.
+- **Camera** is the hardest vendor item (an unresolved `IMemoryHeap` destructor problem); it is deferred.
 
 ### Open blockers
 - `opensource.samsung.com` and Samsung firmware servers are blocked by this environment's network policy (re-tested 2026-11-05). That blocks the official kernel package and stock firmware checksums. Allow them in Environment settings → Network access, or supply the files and hashes yourself (see the Phase 2 document).

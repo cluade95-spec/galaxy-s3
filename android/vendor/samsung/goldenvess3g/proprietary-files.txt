@@ -135,6 +135,7 @@ system/lib/libcameraengine.so
 #EXCLUDE system/etc/permissions/android.hardware.sensor.compass.xml  -- supplied from frameworks/native by device.mk
 system/etc/sensor_config.xml
 system/lib/hw/sensors.mrvl.so
+system/lib/libacdapi_clb.so  # TEXTREL NOT-IN-KOLOSES-LIST  (loaded with dlopen by sensors.mrvl.so for compass calibration; a NEEDED-based dependency check cannot see it; Phase 5)
 
 # ===== GPS =====
 system/etc/gps.conf
@@ -278,9 +279,10 @@ system/lib/libusbsetting.so  # SYMBOLS-AT-RISK(1)
 #EXCLUDE system/lib/libxml2.so  -- Android 7 provides libxml2  [SYMBOLS-AT-RISK(7)]
 
 # ===== OTHER =====
-#DEFER system/bin/STUpdateTool_V4_4R  -- non-PIE executable (R1); touch/sensor firmware update tool  [NON-PIE]
+#EXCLUDE system/bin/STUpdateTool_V4_4R  -- ST21NFCA NFC firmware flasher (its strings name /dev/st21nfca); this phone has no ST NFC chip (Phase 5 correction: Phase 4 called it a touch/sensor tool)  [NON-PIE]
 #EXCLUDE system/bin/msocket_testport  -- test tool
 #EXCLUDE system/bin/vt_test  -- test tool
 system/etc/pxa_testcfg.ini
 system/lib/libmiscgen.so
 system/lib/libphysicsmsc.so
+#EXCLUDE system/bin/rtccd2  -- zram compressed-swap helper (non-PIE, Phase 5); not in the community lists. Replace with an fstab zramsize= entry (kernel has CONFIG_ZRAM=y); see docs/phase-5-vendor-compatibility.md  [NON-PIE]
