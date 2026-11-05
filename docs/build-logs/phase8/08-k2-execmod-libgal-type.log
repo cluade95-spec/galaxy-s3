@@ -1,0 +1,193 @@
+Uncompressing Linux... done, booting the kernel.
+<6>Booting Linux on physical CPU 0
+<6>Initializing cgroup subsys cpuset
+<5>Linux version 3.4.5+ (experimental@goldenvess3g-qemu) (gcc version 4.6.x-google 20120106 (prerelease) (GCC) ) #2 Thu Nov 5 21:05:10 UTC 2026
+CPU: ARMv7 Processor [410fc090] revision 0 (ARMv7), cr=10c53c7d
+CPU: PIPT / VIPT nonaliasing data cache, VIPT nonaliasing instruction cache
+Machine: ARM-Versatile Express
+<6>cma: CMA: reserved 16 MiB at 6f000000
+Memory policy: ECC disabled, Data cache writeback
+<7>On node 0 totalpages: 65536
+<7>free_area_init_node: node 0, pgdat 8045eacc, node_mem_map 80480000
+<7>  Normal zone: 512 pages used for memmap
+<7>  Normal zone: 0 pages reserved
+<7>  Normal zone: 65024 pages, LIFO batch:15
+<6>sched_clock: 32 bits at 24MHz, resolution 41ns, wraps every 178956ms
+<7>pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768<c>
+<7>pcpu-alloc: <c>[0] <c>0 <c>
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 65024
+<5>Kernel command line: console=ttyAMA0 rdinit=/init loglevel=7 gvmode=execmod
+<6>PID hash table entries: 1024 (order: 0, 4096 bytes)
+<6>Dentry cache hash table entries: 32768 (order: 5, 131072 bytes)
+<6>Inode-cache hash table entries: 16384 (order: 4, 65536 bytes)
+<6>Memory: 256MB = 256MB total
+<5>Memory: 238600k/238600k available, 23544k reserved, 0K highmem
+<5>Virtual kernel memory layout:
+    vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+    fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
+    vmalloc : 0x90800000 - 0xff000000   (1768 MB)
+    lowmem  : 0x80000000 - 0x90000000   ( 256 MB)
+      .text : 0x80008000 - 0x803fcd48   (4052 kB)
+      .init : 0x803fd000 - 0x8042f000   ( 200 kB)
+      .data : 0x80430000 - 0x8045f3a0   ( 189 kB)
+       .bss : 0x8045f3c4 - 0x8047f318   ( 128 kB)
+<6>SLUB: Genslabs=11, HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+<6>NR_IRQS:256
+<6>Console: colour dummy device 80x30
+<6>Calibrating delay loop... <c>1603.99 BogoMIPS (lpj=8019968)
+<6>pid_max: default: 32768 minimum: 301
+<6>Security Framework initialized
+<6>SELinux:  Initializing.
+<7>SELinux:  Starting in permissive mode
+<6>Mount-cache hash table entries: 512
+<6>CPU: Testing write buffer coherency: ok
+<6>hw perfevents: enabled with ARMv7 Cortex-A9 PMU driver, 7 counters available
+<6>Setting up static identity map for 0x60325478 - 0x603254d0
+<6>devtmpfs: initialized
+<6>NET: Registered protocol family 16
+<6>DMA: preallocated 256 KiB pool for atomic coherent allocations
+<6>L310 cache controller enabled
+<6>l2x0: 8 ways, CACHE_ID 0x410000c8, AUX_CTRL 0x02420000, Cache size: 131072 B
+<6>hw-breakpoint: debug architecture 0x4 unsupported.
+<6>Serial: AMBA PL011 UART driver
+<6>mb:uart0: ttyAMA0 at MMIO 0x10009000 (irq = 37) is a PL011 rev1
+Booting Linux on physical CPU 0
+Initializing cgroup subsys cpuset
+Linux version 3.4.5+ (experimental@goldenvess3g-qemu) (gcc version 4.6.x-google 20120106 (prerelease) (GCC) ) #2 Thu Nov 5 21:05:10 UTC 2026
+CPU: ARMv7 Processor [410fc090] revision 0 (ARMv7), cr=10c53c7d
+CPU: PIPT / VIPT nonaliasing data cache, VIPT nonaliasing instruction cache
+Machine: ARM-Versatile Express
+cma: CMA: reserved 16 MiB at 6f000000
+Memory policy: ECC disabled, Data cache writeback
+sched_clock: 32 bits at 24MHz, resolution 41ns, wraps every 178956ms
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 65024
+Kernel command line: console=ttyAMA0 rdinit=/init loglevel=7 gvmode=execmod
+PID hash table entries: 1024 (order: 0, 4096 bytes)
+Dentry cache hash table entries: 32768 (order: 5, 131072 bytes)
+Inode-cache hash table entries: 16384 (order: 4, 65536 bytes)
+Memory: 256MB = 256MB total
+Memory: 238600k/238600k available, 23544k reserved, 0K highmem
+Virtual kernel memory layout:
+    vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+    fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
+    vmalloc : 0x90800000 - 0xff000000   (1768 MB)
+    lowmem  : 0x80000000 - 0x90000000   ( 256 MB)
+      .text : 0x80008000 - 0x803fcd48   (4052 kB)
+      .init : 0x803fd000 - 0x8042f000   ( 200 kB)
+      .data : 0x80430000 - 0x8045f3a0   ( 189 kB)
+       .bss : 0x8045f3c4 - 0x8047f318   ( 128 kB)
+SLUB: Genslabs=11, HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+NR_IRQS:256
+Console: colour dummy device 80x30
+Calibrating delay loop... 1603.99 BogoMIPS (lpj=8019968)
+pid_max: default: 32768 minimum: 301
+Security Framework initialized
+SELinux:  Initializing.
+Mount-cache hash table entries: 512
+CPU: Testing write buffer coherency: ok
+hw perfevents: enabled with ARMv7 Cortex-A9 PMU driver, 7 counters available
+Setting up static identity map for 0x60325478 - 0x603254d0
+devtmpfs: initialized
+NET: Registered protocol family 16
+DMA: preallocated 256 KiB pool for atomic coherent allocations
+L310 cache controller enabled
+l2x0: 8 ways, CACHE_ID 0x410000c8, AUX_CTRL 0x02420000, Cache size: 131072 B
+hw-breakpoint: debug architecture 0x4 unsupported.
+Serial: AMBA PL011 UART driver
+mb:uart0: ttyAMA0 at MMIO 0x10009000 (irq = 37) is a PL011 rev1
+console [ttyAMA0] enabled
+mb:uart1: ttyAMA1 at MMIO 0x1000a000 (irq = 38) is a PL011 rev1
+mb:uart2: ttyAMA2 at MMIO 0x1000b000 (irq = 39) is a PL011 rev1
+mb:uart3: ttyAMA3 at MMIO 0x1000c000 (irq = 40) is a PL011 rev1
+bio: create slab <bio-0> at 0
+SCSI subsystem initialized
+usbcore: registered new interface driver usbfs
+usbcore: registered new interface driver hub
+usbcore: registered new device driver usb
+Advanced Linux Sound Architecture Driver Version 1.0.25.
+Switching to clocksource v2m-timer1
+NET: Registered protocol family 2
+IP route cache hash table entries: 2048 (order: 1, 8192 bytes)
+TCP established hash table entries: 8192 (order: 4, 65536 bytes)
+TCP bind hash table entries: 8192 (order: 3, 32768 bytes)
+TCP: Hash tables configured (established 8192 bind 8192)
+TCP: reno registered
+UDP hash table entries: 256 (order: 0, 4096 bytes)
+UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)
+NET: Registered protocol family 1
+RPC: Registered named UNIX socket transport module.
+RPC: Registered udp transport module.
+RPC: Registered tcp transport module.
+RPC: Registered tcp NFSv4.1 backchannel transport module.
+Unpacking initramfs...
+Freeing initrd memory: 220K
+audit: initializing netlink socket (disabled)
+type=2000 audit(0.330:1): initialized
+Registering sdcardfs 0.1
+jffs2: version 2.2. (NAND) © 2001-2006 Red Hat, Inc.
+msgmni has been set to 498
+io scheduler noop registered (default)
+clcd-pl11x ct:clcd: PL111 rev2 at 0x10020000
+clcd-pl11x ct:clcd: CT-CA9X4 hardware, XVGA display
+v2m_cfg_write: writing 03c8eee0 to 00110001
+v2m_cfg_write: writing 00000000 to 00710000
+v2m_cfg_write: writing 00000002 to 00b10000
+Console: switching to colour frame buffer device 128x48
+smsc911x: Driver version 2008-10-21
+smsc911x: Device not READY in 100ms aborting
+isp1760 isp1760: NXP ISP1760 USB Host Controller
+isp1760 isp1760: new USB bus registered, assigned bus number 1
+isp1760 isp1760: Scratch test failed.
+isp1760 isp1760: can't setup
+isp1760 isp1760: USB bus 1 deregistered
+isp1760: Failed to register the HCD device
+Initializing USB Mass Storage driver...
+usbcore: registered new interface driver usb-storage
+USB Mass Storage support registered.
+mousedev: PS/2 mouse device common for all mice
+rtc-pl031 mb:rtc: rtc core: registered pl031 as rtc0
+mmci-pl18x mb:mmci: mmc0: PL181 manf 41 rev0 at 0x10005000 irq 41,42 (pio)
+usbcore: registered new interface driver usbhid
+usbhid: USB HID core driver
+aaci-pl041 mb:aaci: ARM AC'97 Interface PL041 rev0 at 0x10004000, irq 43
+aaci-pl041 mb:aaci: FIFO 512 entries
+oprofile: using arm/armv7-ca9
+TCP: cubic registered
+NET: Registered protocol family 17
+VFP support v0.3: implementor 41 architecture 3 part 30 variant 9 rev 0
+input: AT Raw Set 2 keyboard as /devices/mb:kmi0/serio0/input/input0
+rtc-pl031 mb:rtc: setting system clock to 2026-11-05 21:19:26 UTC (1793913566)
+ALSA device list:
+  #0: ARM AC'97 Interface PL041 rev0 at 0x10004000, irq 43
+ Freeing init memory: 200K
+
+=== GV-SELINUX-TEST start ===
+kernel: Linux version 3.4.5+ (experimental@goldenvess3g-qemu) (gcc version 4.6.x-google 20120106 (prerelease) (GCC) ) #2 Thu Nov 5 21:05:10 UTC 2026 
+mount selinuxfs: 0
+policyvers (kernel maximum, before load): 30
+type=1404 audit(1793913566.530:2): enforcing=1 old_enforcing=0 auid=4294967295 ses=4294967295
+policy file bytes: 183014
+type=1403 audit(1793913566.560:3): policy loaded auid=4294967295 ses=4294967295
+type=1400 audit(1793913566.560:4): avc:  denied  { write } for  pid=1 comm="init" path="/dev/console" dev="rootfs" ino=103 scontext=u:r:kernel:s0 tcontext=u:object_r:rootfs:s0 tclass=chr_file permissive=1
+load_policy write returned: 183014  (LOADED)
+enforce (after load): 1
+policyvers (after load): 30
+RESULT policy-loaded
+type=1400 audit(1793913566.570:5): avc:  denied  { write } for  pid=1 comm="init" name="/" dev="rootfs" ino=1 scontext=u:r:kernel:s0 tcontext=u:object_r:rootfs:s0 tclass=dir permissive=1
+type=1400 audit(1793913566.570:6): avc:  denied  { add_name } for  pid=1 comm="init" name="tmp" scontext=u:r:kernel:s0 tcontext=u:object_r:rootfs:s0 tclass=dir permissive=1
+type=1400 audit(1793913566.570:7): avc:  denied  { create } for  pid=1 comm="init" name="tmp" scontext=u:r:kernel:s0 tcontext=u:object_r:rootfs:s0 tclass=dir permissive=1
+mount tmpfs /tmp: type=1400 audit(1793913566.570:8): avc:  denied  { mounton } for  pid=1 comm="init" path="/tmp" dev="rootfs" ino=202 scontext=u:r:kernel:s0 tcontext=u:object_r:rootfs:s0 tclass=dir permissive=1
+type=1400 audit(1793913566.570:9): avc:  denied  { sys_admin } for  pid=1 comm="init" capability=21  scontext=u:r:kernel:s0 tcontext=u:r:kernel:s0 tclass=capability permissive=1
+type=1400 audit(1793913566.570:10): avc:  denied  { mount } for  pid=1 comm="init" name="/" dev="tmpfs" ino=203 scontext=u:r:kernel:s0 tcontext=u:object_r:tmpfs:s0 tclass=filesystem permissive=1
+0
+prepared /tmp/gvlib-libgal label u:object_r:libgal_file:s0: 4096
+prepared /tmp/gvlib-other label u:object_r:gv_em_file:s0: 4096
+[PASS] execmod gv_em_ok    file labelled libgal_file, domain has execmod on libgal_file  got=0 expected=0
+[PASS] execmod gv_em_no    file labelled libgal_file, domain has NO execmod  got=13 expected=13
+[PASS] execmod gv_em_other file labelled gv_em_file; execmod only on libgal_file  got=13 expected=13
+SUMMARY pass=3 total=3
+=== GV-SELINUX-TEST end ===
+input: ImExPS/2 Generic Explorer Mouse as /devices/mb:kmi1/serio1/input/input1
+Restarting system.
+v2m_cfg_write: writing 00000000 to 00900000
+qemu exit=0

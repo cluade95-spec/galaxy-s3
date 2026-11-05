@@ -1,26 +1,29 @@
-From: goldenvess3g project (proposal, NOT APPLIED, NOT BUILT)
+From: goldenvess3g project (proposal, NOT APPLIED, NOT BUILT). Revision 2 (Phase 8).
 Subject: [PROPOSAL] linker: opt-in text-relocation exception for exactly /system/lib/libGAL.so
 
-Needs explicit security review before use (see docs/phase-6-first-build-attempt.md, section on libGAL).
-It is inert unless a board sets GOLDENVESS3G_LIBGAL_TEXTREL := true. It names one path on the read-only
-system partition; every other library keeps the Android 7 rule.
+Needs explicit security review before use (see docs/phase-8-selinux-runtime-validation.md, section 6).
+It is inert unless a board sets GOLDENVESS3G_LIBGAL_TEXTREL := true. It names one path on the read-only system partition;
+every other library keeps the Android 7 rule.
+Revision 2: the exception now also covers the case where the board does NOT set TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS
+(revision 1 only changed the branch used when that broad flag is set). That is what allows the broad flag to stay off
+when a dedicated SELinux file type is used instead of execmod on all of system_file.
 
 --- a/linker/Android.mk
 +++ b/linker/Android.mk
-@@ -54,6 +54,10 @@ ifeq ($(TARGET_IS_64_BIT),true)
- LOCAL_CPPFLAGS += -DTARGET_IS_64_BIT
- endif
+@@ -52,6 +52,10 @@
  
-+ifeq ($(GOLDENVESS3G_LIBGAL_TEXTREL),true)
-+LOCAL_CPPFLAGS += -DGOLDENVESS3G_LIBGAL_TEXTREL=1
+ ifeq ($(TARGET_IS_64_BIT),true)
+ LOCAL_CPPFLAGS += -DTARGET_IS_64_BIT
 +endif
 +
- ifeq ($(TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS),true)
- LOCAL_CPPFLAGS += -DTARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS
++ifeq ($(GOLDENVESS3G_LIBGAL_TEXTREL),true)
++LOCAL_CPPFLAGS += -DGOLDENVESS3G_LIBGAL_TEXTREL=1
  endif
+ 
+ ifeq ($(TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS),true)
 --- a/linker/linker.cpp
 +++ b/linker/linker.cpp
-@@ -4065,6 +4065,10 @@ bool soinfo::link_image(const soinfo_list_t& global_group, const soinfo_list_t&
+@@ -4065,9 +4065,18 @@
  #if !defined(__i386__) // ffmpeg says that they require text relocations on x86
  #if defined(TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS)
      if (get_application_target_sdk_version() != __ANDROID_API__
@@ -30,4 +33,13 @@ system partition; every other library keeps the Android 7 rule.
 +#endif
          && get_application_target_sdk_version() > 22) {
  #else
-     if (get_application_target_sdk_version() > 22) {
+-    if (get_application_target_sdk_version() > 22) {
++    if (
++#ifdef GOLDENVESS3G_LIBGAL_TEXTREL
++        // Same exception when the board does NOT set the broad platform flag (then platform processes are covered too).
++        strcmp(get_realpath(), "/system/lib/libGAL.so") != 0 &&
++#endif
++        get_application_target_sdk_version() > 22) {
+ #endif
+       PRINT("%s: has text relocations", get_realpath());
+       DL_ERR("%s: has text relocations", get_realpath());

@@ -1,0 +1,46 @@
+# Phase 8: policy-compile review of a dedicated libGAL file type. Scratch copies only; nothing applied to the project.
+##### C1 (policy=sp-stock, textrel flag=false, extra=devpol )
+=== checkpolicy -M -c 30
+exit=1 errors=1
+libsepol.report_failure: neverallow on line 467 of S/lg/sp-stock/domain.te (or line 9276 of policy.conf) violated by allow bootanim libgal_file:file { execmod };
+libsepol.report_failure: neverallow on line 467 of S/lg/sp-stock/domain.te (or line 9276 of policy.conf) violated by allow surfaceflinger libgal_file:file { execmod };
+libsepol.report_failure: neverallow on line 467 of S/lg/sp-stock/domain.te (or line 9276 of policy.conf) violated by allow mediaserver libgal_file:file { execmod };
+libsepol.report_failure: neverallow on line 441 of S/lg/sp-stock/domain.te (or line 9265 of policy.conf) violated by allow bootanim libgal_file:file { execmod };
+libsepol.report_failure: neverallow on line 441 of S/lg/sp-stock/domain.te (or line 9265 of policy.conf) violated by allow untrusted_app libgal_file:file { execmod };
+libsepol.report_failure: neverallow on line 441 of S/lg/sp-stock/domain.te (or line 9265 of policy.conf) violated by allow platform_app libgal_file:file { execmod };
+##### C2 (policy=sp-stock, textrel flag=true, extra=devpol )
+=== checkpolicy -M -c 30
+exit=1 errors=1
+libsepol.report_failure: neverallow on line 441 of S/lg/sp-stock/domain.te (or line 9267 of policy.conf) violated by allow bootanim libgal_file:file { execmod };
+libsepol.report_failure: neverallow on line 441 of S/lg/sp-stock/domain.te (or line 9267 of policy.conf) violated by allow untrusted_app libgal_file:file { execmod };
+libsepol.report_failure: neverallow on line 441 of S/lg/sp-stock/domain.te (or line 9267 of policy.conf) violated by allow platform_app libgal_file:file { execmod };
+libsepol.report_failure: neverallow on line 441 of S/lg/sp-stock/domain.te (or line 9267 of policy.conf) violated by allow system_app libgal_file:file { execmod };
+libsepol.report_failure: neverallow on line 441 of S/lg/sp-stock/domain.te (or line 9267 of policy.conf) violated by allow surfaceflinger libgal_file:file { execmod };
+libsepol.report_failure: neverallow on line 441 of S/lg/sp-stock/domain.te (or line 9267 of policy.conf) violated by allow mediaserver libgal_file:file { execmod };
+##### C3 (policy=sp-patched, textrel flag=false, extra=devpol )
+=== checkpolicy -M -c 30
+exit=0 errors=0
+##### C4 (policy=sp-patched, textrel flag=false, extra=devpol devpol-guard devpol-rogue )
+=== checkpolicy -M -c 30
+exit=1 errors=1
+libsepol.report_failure: neverallow on line 3 of S/lg/devpol-guard/libgal-guards.te (or line 21373 of policy.conf) violated by allow system_server libgal_file:file { execmod };
+libsepol.report_failure: neverallow on line 3 of S/lg/devpol-guard/libgal-guards.te (or line 21373 of policy.conf) violated by allow bluetooth libgal_file:file { execmod };
+libsepol.check_assertions: 2 neverallow failures occurred
+##### C4b (policy=sp-patched, textrel flag=false, extra=devpol devpol-guard )
+=== checkpolicy -M -c 30
+exit=0 errors=0
+##### C5 (policy=sp-patched, textrel flag=false, extra=devpol devpol-rogue )
+=== checkpolicy -M -c 30
+exit=0 errors=0
+##### C6 (policy=sp-stock, textrel flag=true, extra=devpol-broad )
+=== checkpolicy -M -c 30
+exit=0 errors=0
+##### C6b (policy=sp-stock, textrel flag=false, extra=devpol-broad )
+=== checkpolicy -M -c 30
+exit=1 errors=1
+libsepol.report_failure: neverallow on line 467 of S/lg/sp-stock/domain.te (or line 9276 of policy.conf) violated by allow mediaserver system_file:file { execmod };
+libsepol.report_failure: neverallow on line 467 of S/lg/sp-stock/domain.te (or line 9276 of policy.conf) violated by allow surfaceflinger system_file:file { execmod };
+libsepol.report_failure: neverallow on line 467 of S/lg/sp-stock/domain.te (or line 9276 of policy.conf) violated by allow bootanim system_file:file { execmod };
+libsepol.report_failure: neverallow on line 441 of S/lg/sp-stock/domain.te (or line 9265 of policy.conf) violated by allow mediaserver system_file:file { execmod };
+libsepol.report_failure: neverallow on line 441 of S/lg/sp-stock/domain.te (or line 9265 of policy.conf) violated by allow platform_app system_file:file { execmod };
+libsepol.report_failure: neverallow on line 441 of S/lg/sp-stock/domain.te (or line 9265 of policy.conf) violated by allow surfaceflinger system_file:file { execmod };

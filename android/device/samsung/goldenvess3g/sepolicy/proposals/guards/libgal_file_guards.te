@@ -1,0 +1,4 @@
+# PROPOSAL, NOT APPLIED. Compile-time assertions that keep the libgal_file exception narrow. Without them the platform
+# neverallow exemption would let ANY domain be granted execmod on the library without a compile error (tested: C5).
+neverallow { domain -surfaceflinger -bootanim -mediaserver -untrusted_app -platform_app -system_app -priv_app } libgal_file:file execmod;
+neverallow { domain -init -recovery } libgal_file:file { write append create unlink rename setattr relabelfrom relabelto };

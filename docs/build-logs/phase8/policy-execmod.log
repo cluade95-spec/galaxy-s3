@@ -1,0 +1,7 @@
+policy inputs: 147 files (29 from vendor/cm)
+policy.conf: 21543 lines; allowxperm rules: 5; neverallowxperm: 5
+=== checkpolicy -M -c 30
+exit=0 errors=0
+SCRATCH/p3/n7/external_selinux/checkpolicy/checkpolicy:  loading policy configuration from SCRATCH/matrix/work/em/policy.conf
+SCRATCH/p3/n7/external_selinux/checkpolicy/checkpolicy:  policy configuration loaded
+SCRATCH/p3/n7/external_selinux/checkpolicy/checkpolicy:  writing binary representation (version 30) to SCRATCH/matrix/work/em/sepolicy.30

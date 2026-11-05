@@ -1,0 +1,25 @@
+# PROPOSAL, NOT APPLIED. For system/sepolicy domain.te (LineageOS cm-14.1, 83840c7f). It adds ONE file type,
+# libgal_file, to the three execmod neverallow exemption lists, in both the flag-on and flag-off branches. It exists so a
+# single library can be granted execmod instead of all of system_file. Tested only by compiling a scratch copy of the
+# policy (docs/phase-8-selinux-runtime-validation.md, section 6). Needs the owner's decision and a security review.
+--- a/domain.te
++++ b/domain.te
+@@ -443,4 +443,5 @@
+     file_type
+     -system_file
++    -libgal_file
+     -system_data_file
+     -apk_data_file
+@@ -451,4 +452,5 @@
+   `neverallow * {
+     file_type
++    -libgal_file
+     -system_data_file
+     -apk_data_file
+@@ -466,5 +468,5 @@
+ # with text relocations. b/20013628 .
+ ifelse(target_needs_platform_text_relocations, `true', ,
+-  `neverallow { domain -appdomain } file_type:file execmod;'
++  `neverallow { domain -appdomain } { file_type -libgal_file }:file execmod;'
+ )
+ 

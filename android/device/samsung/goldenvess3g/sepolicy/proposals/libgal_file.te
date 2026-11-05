@@ -1,0 +1,9 @@
+# PROPOSAL, NOT APPLIED (Phase 8). Needs domain-te-libgal-type.patch against system/sepolicy and the owner's decision.
+# A dedicated type for the vendor GPU user library, so `execmod` is granted on ONE file instead of on all of system_file.
+# `exec_type`: the platform's `execute` neverallow only lets domains execute system_file or exec_type files.
+type libgal_file, file_type, exec_type;
+
+# Domains that load libGAL.so (from the dependency graph of the community dump; to be confirmed on a real boot: any
+# domain not listed here fails closed with an SELinux denial instead of silently getting a wider permission).
+allow { surfaceflinger bootanim mediaserver } libgal_file:file { r_file_perms execute execmod };
+allow { untrusted_app platform_app system_app priv_app } libgal_file:file { r_file_perms execute execmod };

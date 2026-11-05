@@ -1,0 +1,16 @@
+# TEST-ONLY (Phase 8 QEMU run): three throw-away domains that run the text-relocation-like sequence on library-like files.
+# The harness (kernel domain) creates two files in tmpfs and labels them with SELinux's fscreate attribute, the way /system
+# files carry their labels; the domains may only read and execute them (no create or write, as for real libraries).
+# Used together with the proposal files (libgal_file), never alone.
+type gv_em_file, file_type, exec_type;      # stand-in for "some other system library"
+type gv_em_ok, domain;                      # execmod on libgal_file
+type gv_em_no, domain;                      # NO execmod on libgal_file
+type gv_em_other, domain;                   # execmod on libgal_file only; tested against a gv_em_file file
+
+allow { gv_em_ok gv_em_no } libgal_file:file { r_file_perms execute };
+allow gv_em_ok libgal_file:file execmod;
+allow gv_em_other libgal_file:file execmod;
+allow gv_em_other gv_em_file:file { r_file_perms execute };
+allow { gv_em_ok gv_em_no gv_em_other } tmpfs:dir { search getattr };
+allow { libgal_file gv_em_file } tmpfs:filesystem associate;
+allow { gv_em_ok gv_em_no gv_em_other } kernel:process sigchld;

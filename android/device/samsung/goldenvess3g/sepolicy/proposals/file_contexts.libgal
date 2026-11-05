@@ -1,0 +1,2 @@
+# PROPOSAL, NOT APPLIED: label exactly one file
+/system/lib/libGAL\.so  u:object_r:libgal_file:s0

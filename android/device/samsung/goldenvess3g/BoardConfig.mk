@@ -105,7 +105,9 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.pxa988
 # PENDING OWNER DECISION (Phase 7): this flag is what lets the policy compile any `execmod` rule for system libraries.
 #   Every text-relocation library, including the ones platform daemons load, depends on it. It relaxes two neverallow
 #   rules in system/sepolicy domain.te. See docs/phase-7-selinux-compatibility.md section 7. Not a silent default.
-TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
+# Phase 8: switched OFF (commented out). Phase 8 showed a dedicated, narrowly scoped SELinux file type for libGAL.so can be
+#   granted execmod without this flag (docs/phase-8-selinux-runtime-validation.md section 6). Restore only by owner decision.
+# TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 # TODO(libGAL exception): apps (SystemUI) load libGAL.so; the SM-T110 port patches bionic for it. Re-apply and re-verify
 #   for this device (docs/phase-4, vendor remediation plan R2).
 # TODO(non-PIE): bin/rtccd2 and bin/STUpdateTool_V4_4R are not position independent and are refused by Android 7's

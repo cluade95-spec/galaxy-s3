@@ -1,0 +1,41 @@
+# TEST-ONLY scaffold for the Phase 8 QEMU run. It is appended to a COPY of the Android 7.1.2 policy (the way a device's
+# sepolicy directory is unioned in) and removes or edits NOTHING from the Android policy. It only adds:
+#   * `permissive kernel`: the harness (PID 1 and its forked children, before they switch domain) runs in the kernel
+#     domain; every other domain, including untrusted_app, priv_app and servicemanager, stays fully enforced.
+#   * a few throw-away test domains that differ from each other in exactly one permission, used as controls.
+permissive kernel;
+
+# Control: may use a UDP socket and `ioctl`, but has NO allowxperm rule. SELinux then does not filter ioctl commands.
+type gv_noxperm, domain;
+allow gv_noxperm self:udp_socket create_socket_perms;
+
+# Binder callers differing in one permission towards servicemanager (binder device access is the same for all).
+type gv_nocall, domain;
+allow gv_nocall binder_device:chr_file { open read write ioctl getattr };
+
+type gv_callonly, domain;
+allow gv_callonly binder_device:chr_file { open read write ioctl getattr };
+allow gv_callonly servicemanager:binder call;
+
+type gv_calltransfer, domain;
+allow gv_calltransfer binder_device:chr_file { open read write ioctl getattr };
+allow gv_calltransfer servicemanager:binder { call transfer };
+
+# The harness (kernel domain) reaps its children with wait4, which SELinux checks as `process sigchld` from the child's
+# domain to the parent's. Without this rule wait4 fails with EACCES and no result can be read.
+allow { untrusted_app priv_app servicemanager gv_noxperm gv_nocall gv_callonly gv_calltransfer } kernel:process sigchld;
+
+# devtmpfs labels the nodes the harness creates with the types the Android policy expects for them; the filesystem itself
+# is labelled `device`, so those types need `associate` on it (the Android build avoids this by labelling at build time).
+allow binder_device device:filesystem associate;
+allow null_device device:filesystem associate;
+
+# hook 4 scenario: a service domain that receives file descriptors from servicemanager. gv_svc_ok may use servicemanager's
+# descriptors (fd:use); gv_svc_no may not.
+type gv_svc_ok, domain;
+type gv_svc_no, domain;
+allow { gv_svc_ok gv_svc_no } binder_device:chr_file { open read write ioctl getattr };
+allow { gv_svc_ok gv_svc_no } servicemanager:binder { call transfer };
+allow servicemanager { gv_svc_ok gv_svc_no }:binder { call transfer };
+allow gv_svc_ok servicemanager:fd use;
+allow { gv_svc_ok gv_svc_no } kernel:process sigchld;

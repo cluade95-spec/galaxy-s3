@@ -1,0 +1,12 @@
+== enter test (existing root from Phase 7)
+Python 2.7.11+
+GNU Make 4.1
+openjdk version "1.8.0_03-Ubuntu"
+1
+== mounts left:
+0
+no mounts remain below SCRATCH/ub16b/xenial-root. To delete the userland, run yourself:  rm -rf 'SCRATCH/ub16b/xenial-root'
+== fetch+verify test (fresh directory)
+ubuntu-base-16.04.6-base-amd64.tar.gz: OK
+SHA-256 matches the SHA256SUMS file. ALSO verify its signature before trusting it:  gpg --verify SHA256SUMS.gpg SHA256SUMS
+(import Ubuntu's CD image signing key through a channel you trust; this script does not do that for you)

@@ -11,3 +11,9 @@ kernel config and source at the pinned commit):
    (`xperm`) code, but Android 7.1.2's policy is built at version 30 and uses `allowxperm`. See
    `../kernel/android7.config.fragment`. Until that is resolved, no policy for this device can be loaded.
 3. Nothing here may be copied from the SM-T110 port: that port runs with SELinux disabled.
+
+## Phase 8 additions
+- `proposals/` holds the libGAL file-type proposal (a type, its guards, a file-context line, and a patch to the platform's
+  `domain.te`). **None of it is applied or wired into a build.** Compile and QEMU results: `docs/phase-8-selinux-runtime-validation.md`.
+- The kernel half of the SELinux story (policy version 30, extended permissions, binder hooks) is a patch to be carried
+  outside the pinned kernel source: `tools/selinux/patches/android-3.4-selinux-backport.patch`.
