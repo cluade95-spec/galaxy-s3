@@ -3,6 +3,8 @@
 **Date:** 2026-11-05 · **Status:** Phase 0 partly complete. One blocker remains: Samsung's own servers can't be reached from the research environment.
 **Rules followed:** nothing was flashed or written to any phone. No ROM was downloaded. No Android build was started. Everything below comes from reading public source code and metadata.
 
+> **Update 2026-11-05 (Phase 2 preparation):** later evidence refines this document. A genuine Samsung GT-I8200 kernel image from March 2015 shows the stock kernel includes the NFC (PN547) driver and was built from the golden rev02 configuration; the kernel's machine name is "PXA988"; and the Koloses tree's "I8200XXUAOC1" label conflicts with its January 2016 compile date. Details and sources: [phase-2-preparation.md](phase-2-preparation.md).
+
 ## How to read this document
 
 Each finding carries one of these labels:
