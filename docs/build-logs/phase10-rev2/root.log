@@ -1,0 +1,126 @@
+=== test-enter-ownership
+## O. ownership and privilege
+[PASS] O1 enter ran the command (exit 0)
+[PASS] O2 inside the chroot: uid=12345 gid=12345, no supplementary groups (not root)
+[PASS] O3 new files and directories are owned by the normal user, not root
+[PASS] O4 ownership and mode of EXISTING files unchanged (incl. another uid's and a root-owned file)
+[PASS] O5 chroot home /home/builder belongs to the user
+[PASS] O6 passwd entry added only inside the chroot (host /etc/passwd untouched: 0 hits)
+[PASS] O7 no mounts left after normal exit
+[PASS] O8 root-owned files stay protected from the user (write refused)
+[PASS] O9 /src is mounted nosuid,nodev
+[PASS] O10 default user is taken from SUDO_UID/SUDO_GID
+[PASS] O11 CONTRAST: --root creates root-owned files (the old behaviour) and warns
+## R. refusals (each must fail closed and leave no mount)
+[PASS] R1 uid 0 without --root
+[PASS] R2 no SUDO_UID and no --uid
+[PASS] R3 non-numeric uid
+[PASS] R4 SRC is /
+[PASS] R5 SRC inside the userland directory
+[PASS] R6 SRC owned by someone else (script never chowns)
+[PASS] R7 uid already used by another chroot account
+[PASS] R8 gid already used by another chroot group
+[PASS] R9 SRC is not a directory
+[PASS] R10 /mnt/c/... (Windows drive) refused
+[PASS] R11 /mnt/d refused
+[PASS] R12 no mounts left after the refusals
+SUMMARY pass=21 fail=0
+=== test-session-safety
+## T. teardown with a live process: refuse BEFORE any unmount
+[PASS] T0 a session is live with 11 mounts below the chroot
+[PASS] T1 teardown refused with exit code 4
+[PASS] T2 NOTHING was unmounted (mount count still 11)
+[PASS] T3 message names the pid and program inside the chroot
+[PASS] T4 message explains how to end the session safely (exit the shell, stop daemons, retry)
+[PASS] T5 the session and its process are still running
+[PASS] T5b a second enter while the first is live is refused by the lock (nothing mounted twice)
+[PASS] T5c and the live session's mounts are untouched by it
+[PASS] T6 when the session command ends, enter unmounts by itself
+[PASS] T7 teardown now succeeds
+[PASS] T8 a host process sitting in a chroot directory also blocks teardown (exit 4, explained)
+[PASS] T9 teardown succeeds after it leaves
+[PASS] T10 teardown on a missing userland: harmless
+## S. signals during enter (interactive session)
+[PASS] S1 TERM: exit 143, session process stopped, ALL mounts removed, nothing left in the chroot
+[PASS] S1 HUP: exit 129, session process stopped, ALL mounts removed, nothing left in the chroot
+[PASS] S1 QUIT: exit 131, session process stopped, ALL mounts removed, nothing left in the chroot
+[PASS] S2 Ctrl-C (INT to the whole process group, like a terminal): the program inside gets it, enter unmounts and exits 130
+[PASS] S3 INT sent only to the script (not via a terminal) is ignored by an interactive session: it keeps running, mounts intact
+[PASS] S4 and a following TERM still cleans up completely
+[PASS] S5 a program that IGNORES TERM is killed after the grace period; mounts removed (9s)
+## L. programs left running after the session shell exits
+[PASS] L1 exit code 3: the session ended but a program is still running inside
+[PASS] L2 mounts were KEPT (no partial unmount while the program runs): 11
+[PASS] L3 the leftover program is reported by pid and name
+[PASS] L4 teardown refuses while it runs, unmounting nothing
+[PASS] L5 a new enter refuses while mounts/processes remain
+[PASS] L6 after the program is stopped, teardown unmounts everything
+[PASS] L7 --kill-leftovers: the leftover is stopped, mounts removed, exit 0
+[PASS] L8 the command's own exit status (7) is passed through; mounts removed
+## M. failure while mounting
+[PASS] M1 mount call #2 fails: script stops (rc=32) and every mount made so far is removed
+[PASS] M1 mount call #5 fails: script stops (rc=32) and every mount made so far is removed
+[PASS] M1 mount call #11 fails: script stops (rc=32) and every mount made so far is removed
+## Y. symlink attacks against the userland tree
+[PASS] Y1 dev/ replaced by a symlink: enter refuses
+[PASS] Y2 the decoy directory was not touched, nothing mounted
+[PASS] Y3 etc/passwd is a symlink: enter refuses (ensure_builder_user)
+[PASS] Y4 the file it pointed to was not appended to
+[PASS] Y5 home/builder is a symlink: enter refuses
+[PASS] Y6 the decoy keeps its owner (the script did not chown through the link)
+[PASS] Y7 xenial-root itself a symlink: refused
+[PASS] Y8 install replaced the symlink at /etc/resolv.conf with a regular file and did not write through it
+[PASS] Y8 install replaced the symlink at /etc/apt/sources.list with a regular file and did not write through it
+[PASS] Y8 install replaced the symlink at /usr/sbin/policy-rc.d with a regular file and did not write through it
+[PASS] Y9 no mounts left after the install attempts
+## W. odd paths, noexec
+[PASS] W1 spaces in ROOT_PARENT and SRC work (mounts escaped correctly)
+[PASS] W2 no mounts left below the path with spaces
+[PASS] W3 a tab in the path is refused
+[PASS] W4 a backslash in the path is refused
+[PASS] W5 a noexec filesystem for the userland is refused
+## D. install: interruption must not continue, and must unmount
+[PASS] D1 TERM during apt: exit 143 (not 1), apt stopped, the NEXT install steps did not run, all mounts removed (0s)
+[PASS] D1 HUP during apt: exit 129 (not 1), apt stopped, the NEXT install steps did not run, all mounts removed (0s)
+[PASS] D1 QUIT during apt: exit 131 (not 1), apt stopped, the NEXT install steps did not run, all mounts removed (1s)
+[PASS] D1 INT during apt: exit 130 (not 1), apt stopped, the NEXT install steps did not run, all mounts removed (0s)
+[PASS] D2 apt failing (exit 100): install stops with a clear message and unmounts
+## C. contrast with the ORIGINAL script (read-only use)
+Terminated
+[PASS] C1 ORIGINAL: with a relative ROOT_PARENT its teardown said 'no mounts remain' while 3 mounts were live and printed an rm -rf
+SUMMARY pass=53 fail=0
+=== test-extract-real
+## E. extract
+[PASS] E1 extract of the real tarball succeeded
+[PASS] E2 NO device nodes were created on disk (the tarball has 79; all skipped)
+[PASS] E3 dev/ exists and is empty
+[PASS] E4 root dir owned by root, tmp is 1777
+[PASS] E5 it is Ubuntu 16.04 (PRETTY_NAME="Ubuntu 16.04.6 LTS")
+[PASS] E6 check_root_tree accepts the real extracted tree (all directories it requires are real directories)
+[PASS] E7 a second extract refuses to overwrite
+## E. tampered and interrupted extraction
+[PASS] E8 a tarball altered after fetch is refused at extract (re-verification)
+[PASS] E9 and nothing was extracted
+[PASS] E10 TERM during extraction: exit 143, partial tree removed, extractor stopped
+[PASS] E10 INT during extraction: exit 130, partial tree removed, extractor stopped
+## E. concurrent extraction
+[PASS] E11 a second extract while the first runs is refused by the lock (before it looks at the tree)
+[PASS] E12 the first extraction's tree and process are untouched by the refused attempt
+[PASS] E13 the first one, when interrupted, removes only its own partial tree
+[PASS] E14 extract after the interrupted one works
+[PASS] E15 a further extract is refused and the finished tree is left intact
+## X. enter and teardown on the real userland (no apt)
+[PASS] X1 enter ran bash inside the real Ubuntu 16.04 userland as uid 12345
+[PASS] X2 the shell reported Ubuntu 16.04 (PRETTY_NAME="Ubuntu 16.04.6 LTS")
+[PASS] X3 identity inside: uid 12345, only group 12345
+[PASS] X4 files created in /src belong to the normal user
+[PASS] X5 the source directory itself kept its owner
+[PASS] X6 /dev/null, /dev/urandom, process substitution (/dev/fd), /proc and $HOME work
+[PASS] X7 /dev contains only the minimal set: fd full null ptmx pts random shm stderr stdin stdout tty urandom zero
+[PASS] X8 host disk devices are NOT visible inside the chroot
+[PASS] X9 no mounts left
+[PASS] X10 builder entry added once to the REAL userland's passwd (re-running adds nothing)
+[PASS] X11 second enter did not duplicate the account
+[PASS] X12 teardown on the real tree: clean, prints rm --one-file-system
+SUMMARY pass=28 fail=0
+exit=0

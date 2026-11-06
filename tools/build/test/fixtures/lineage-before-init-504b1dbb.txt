@@ -1,0 +1,6 @@
+# Source: LineageOS/lineage_wiki commit 504b1dbb (2026-10-20), _includes/templates/device_build_before_init.md. AUTHORITATIVE per the project owner.
+# MAIN LIST ("To build LineageOS, you'll need:"; yasm only for x86 targets)
+bc bison build-essential ccache curl erofs-utils flex g++-multilib gcc-multilib git git-lfs gnupg gperf imagemagick kmod protobuf-compiler python3-protobuf lib32readline-dev lib32z1-dev libdw-dev libelf-dev libgnutls28-dev lz4 libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc xxd yasm zip zlib1g-dev
+# CONDITIONAL (applies to LineageOS 14.1): Ubuntu older than 23.10: lib32ncurses5-dev libncurses5 libncurses5-dev ; Ubuntu older than 20.04: libwxgtk3.0-dev
+# JDK for 14.1-15.1: openjdk-8-jdk ; Python 2 for 11.0-16.0: python-is-python2 (Ubuntu 20.04+ package name)
+# CONDITIONAL (does NOT apply to 14.1): maven (13.0 only); libwxgtk2.8-dev (Ubuntu older than 16.04); libxml2-16 (Ubuntu 26.04+); libtinfo5/libncurses5 deb (Ubuntu 23.10+); openjdk-7-jdk (11.0-13.0)

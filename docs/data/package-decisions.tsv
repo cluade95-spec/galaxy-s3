@@ -1,0 +1,61 @@
+package	origin	xenial_package	decision	reason
+bc	authoritative-main	bc	install	in Xenial, same name
+bison	authoritative-main	bison	install	in Xenial, same name
+build-essential	authoritative-main	build-essential	install	in Xenial, same name
+curl	authoritative-main	curl	install	in Xenial, same name
+flex	authoritative-main	flex	install	in Xenial, same name
+g++-multilib	authoritative-main	g++-multilib	install	in Xenial, same name
+gcc-multilib	authoritative-main	gcc-multilib	install	in Xenial, same name
+git	authoritative-main	git	install	in Xenial, same name
+gnupg	authoritative-main	gnupg	install	in Xenial, same name
+gperf	authoritative-main	gperf	install	in Xenial, same name
+imagemagick	authoritative-main	imagemagick	install	in Xenial, same name
+lib32z1-dev	authoritative-main	lib32z1-dev	install	in Xenial, same name
+libsdl1.2-dev	authoritative-main	libsdl1.2-dev	install	in Xenial, same name
+libssl-dev	authoritative-main	libssl-dev	install	in Xenial, same name
+libxml2	authoritative-main	libxml2	install	in Xenial, same name
+libxml2-utils	authoritative-main	libxml2-utils	install	in Xenial, same name
+lzop	authoritative-main	lzop	install	in Xenial, same name
+pngcrush	authoritative-main	pngcrush	install	in Xenial, same name
+rsync	authoritative-main	rsync	install	in Xenial, same name
+schedtool	authoritative-main	schedtool	install	in Xenial, same name
+squashfs-tools	authoritative-main	squashfs-tools	install	in Xenial, same name
+xsltproc	authoritative-main	xsltproc	install	in Xenial, same name
+zip	authoritative-main	zip	install	in Xenial, same name
+zlib1g-dev	authoritative-main	zlib1g-dev	install	in Xenial, same name
+ccache	authoritative-main	ccache	install	in the authoritative list and in Xenial (earlier revision of this audit had it optional; it is a speed-only tool)
+kmod	authoritative-main	kmod	install	in Xenial; added to the wiki for newer branches (a386e6ad 2026-10-13); whether 14.1 uses it is UNVERIFIED; installed because the list is authoritative
+protobuf-compiler	authoritative-main	protobuf-compiler	install	in Xenial; added to the wiki for newer branches (452c35cb 2025-04-20); whether 14.1 uses it is UNVERIFIED; installed because the list is authoritative
+libdw-dev	authoritative-main	libdw-dev	install	in Xenial; added to the wiki for newer branches (e817b8c3 2025-04-13: required for android16-6.12 and up); whether 14.1 uses it is UNVERIFIED; installed because the list is authoritative
+libelf-dev	authoritative-main	libelf-dev	install	in Xenial; added to the wiki for newer branches (53efb60a 2022-08-22: GKI needs libelf-dev); whether 14.1 uses it is UNVERIFIED; installed because the list is authoritative
+libgnutls28-dev	authoritative-main	libgnutls28-dev	install	in Xenial; added to the wiki for newer branches (not traced); whether 14.1 uses it is UNVERIFIED; installed because the list is authoritative
+lib32readline-dev	authoritative-main	lib32readline6-dev	install-renamed	virtual name in Xenial with one provider (lib32readline6-dev, 6.3-8ubuntu2); the real package is used
+lz4	authoritative-main	liblz4-tool	install-renamed	no package named lz4 in Xenial; /usr/bin/lz4 is in liblz4-tool (Xenial Contents index). Wiki: lz4 added 1b9b2997 2025-01-21 replacing liblz4-tool, dropped c25b4960 2025-04-30
+xxd	authoritative-main	vim-common	install-renamed	no package named xxd in Xenial; /usr/bin/xxd is in vim-common (Xenial Contents index)
+erofs-utils	authoritative-main	-	unavailable-omitted	not in Xenial. Added by the wiki 7c1a3c95 2026-08-19 for EROFS images of recent branches; not a 14.1 requirement as far as known (UNVERIFIED for this tree)
+git-lfs	authoritative-main	-	unavailable-omitted	not in Xenial. Added by the wiki for WebView LFS (489e0b18 2023-03-14, LineageOS 20+); not a 14.1 requirement as far as known (UNVERIFIED)
+python3-protobuf	authoritative-main	-	unavailable-omitted	not in Xenial. Added with protobuf-compiler (452c35cb 2025-04-20) for recent branches; UNVERIFIED for 14.1
+yasm	authoritative-main	-	omitted-by-doc	the list itself installs yasm only for x86 targets; this device is ARMv7
+lib32ncurses5-dev	authoritative-conditional-14.1	lib32ncurses5-dev	install	14.1 section: Ubuntu older than 23.10 installs these three
+libncurses5	authoritative-conditional-14.1	libncurses5	install	14.1 section: Ubuntu older than 23.10 installs these three
+libncurses5-dev	authoritative-conditional-14.1	libncurses5-dev	install	14.1 section: Ubuntu older than 23.10 installs these three
+libwxgtk3.0-dev	authoritative-conditional-14.1	libwxgtk3.0-dev	install	Ubuntu older than 20.04 installs it; in xenial-updates/universe
+openjdk-8-jdk	authoritative-conditional-14.1	openjdk-8-jdk	install	JDK for LineageOS 14.1-15.1; Xenial has 8u292
+python-is-python2	authoritative-conditional-14.1	python2.7	install-renamed	python-is-python2 is a 20.04+ package; on Xenial python2.7 is installed and /usr/bin/python is linked to it by the script
+maven	authoritative-conditional-other	-	omitted-by-doc	'LineageOS 13.0 only' in the list
+libwxgtk2.8-dev	authoritative-conditional-other	-	omitted-by-doc	'Ubuntu older than 16.04 (xenial)' only; absent in Xenial
+libxml2-16	authoritative-conditional-other	-	omitted-by-doc	'Ubuntu 26.04 or newer' only; absent in Xenial
+libtinfo5	authoritative-conditional-other	-	omitted-by-doc	manual .deb for Ubuntu 23.10+ only; Xenial has libncurses5 natively
+openjdk-7-jdk	authoritative-conditional-other	-	omitted-by-doc	LineageOS 11.0-13.0 only; absent in Xenial
+libc6-dev-i386	extra-aosp	libc6-dev-i386	install	AOSP Nougat Ubuntu list (32-bit C library headers); not in the authoritative LineageOS list (EXTRA)
+x11proto-core-dev	extra-aosp	x11proto-core-dev	install	AOSP Nougat Ubuntu list; not in the authoritative LineageOS list (EXTRA)
+libx11-dev	extra-aosp	libx11-dev	install	AOSP Nougat Ubuntu list; not in the authoritative LineageOS list (EXTRA)
+libgl1-mesa-dev	extra-aosp	libgl1-mesa-dev	install	AOSP Nougat Ubuntu list; not in the authoritative LineageOS list (EXTRA)
+unzip	extra-aosp	unzip	install	AOSP Nougat Ubuntu list; not in the authoritative LineageOS list (EXTRA)
+git-core	extra-aosp	git	install-renamed	AOSP name (transitional); git is used
+lib32z-dev	extra-aosp	lib32z1-dev	install-renamed	AOSP name (virtual in Xenial); lib32z1-dev is used
+make	extra-chroot	make	install	minimal chroot; also pulled in by build-essential; listed explicitly (EXTRA)
+ca-certificates	extra-chroot	ca-certificates	install	minimal chroot needs it for HTTPS (EXTRA)
+python-networkx	extra-aosp	python-networkx	optional	AOSP: only for SELinux policy analysis; INSTALL_OPTIONAL=1
+libesd0-dev	historic	libesd0-dev	optional	in the 2018 LineageOS page (d8faa0c0), absent from the current list: obsolete sound daemon; INSTALL_OPTIONAL=1
+liblz4-tool	historic	liblz4-tool	install-renamed	2018 list had it; dropped 2025-04-30; kept as the Xenial package that provides lz4

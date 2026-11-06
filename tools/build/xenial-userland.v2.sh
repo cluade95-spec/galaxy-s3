@@ -1,0 +1,470 @@
+#!/bin/bash
+# PROPOSED REPLACEMENT for tools/build/xenial-userland.sh (Phase 10 audit, REVISION 2). The original is NOT modified.
+# NOT yet run on any real machine, and NOT tested on WSL2 (see docs/phase-10-xenial-userland-audit.md, section "Limitations").
+# Reproducible Ubuntu 16.04 (xenial) build userland in a plain directory + chroot, intended for a WSL2 Ubuntu 24.04 host.
+# Changes NO host package. Root (sudo) is needed only for extract/install/enter/teardown (chroot and mount). `fetch` needs no root.
+#
+#   xenial-userland.sh fetch    ROOT_PARENT                 download over HTTPS, verify the OpenPGP signature of SHA256SUMS against a PINNED
+#                                                           Ubuntu key fingerprint, then the pinned SHA-256; fail closed
+#   xenial-userland.sh extract  ROOT_PARENT                 re-verify, then unpack to ROOT_PARENT/xenial-root (root); no device nodes are created
+#   xenial-userland.sh install  ROOT_PARENT                 apt-get the build packages inside the chroot (root)
+#   xenial-userland.sh enter    ROOT_PARENT [--root] [--uid N --gid N] [--kill-leftovers] [SRC [CMD...]]
+#                                                           run CMD (default bash) as YOUR uid/gid (default: SUDO_UID/SUDO_GID); SRC is bind-mounted at /src
+#   xenial-userland.sh teardown ROOT_PARENT                 refuses if anything still runs in the chroot; otherwise unmounts; prints the rm command (root)
+#   xenial-userland.sh list-packages [lineage|aosp|essential|optional|all]    print a package set (no root, no network)
+#
+# Everything lives under ROOT_PARENT/xenial-root. Keep ROOT_PARENT and SRC on the WSL ext4 filesystem (for example under $HOME), NOT under /mnt/c.
+# Exit codes: 0 ok; 1 error; 3 session ended but processes remain inside the chroot (mounts left in place); 4 teardown refused (active processes);
+#             128+N interrupted by signal N (everything started was stopped and unmounted first).
+set -euo pipefail
+umask 022
+
+# ---------------------------------------------------------------- pinned trust anchors (see docs/phase-10-xenial-userland-audit.md)
+# Ubuntu CD Image Automatic Signing Key (2012) <cdimage@ubuntu.com>. Cross-checked in Phase 10 against (1) the host's ubuntu-keyring package,
+# (2) keyserver.ubuntu.com and (3) the signature on the real SHA256SUMS. Compare the fingerprint yourself before the first use.
+UBUNTU_CDIMAGE_KEY_FPR=843938DF228D22F7B3742BC0D94AA3F0EFE21092
+KEYRING_FILE=/usr/share/keyrings/ubuntu-archive-keyring.gpg
+KEYRING_PKG=ubuntu-keyring
+BASE=https://cdimage.ubuntu.com/ubuntu-base/releases/16.04/release
+TAR=ubuntu-base-16.04.6-base-amd64.tar.gz
+TAR_SHA256=9c160b522568c0c3f2c396cfe7c966f1a63aa1a5e9f6f966a74fdf3571ad49a0
+MIN_FREE_KIB_FETCH=$((4 * 1024 * 1024)); MIN_FREE_KIB_EXTRACT=$((1024 * 1024)); MIN_FREE_KIB_INSTALL=$((3 * 1024 * 1024))
+BUILDER_NAME=builder
+JAVA_SECURITY_REL=etc/java-8-openjdk/security/java.security
+
+# ---------------------------------------------------------------- package sets
+# AUTHORITATIVE SOURCE (per the project owner): LineageOS/lineage_wiki, _includes/templates/device_build_before_init.md at commit 504b1dbb
+# (2026-10-20), the list under "To build LineageOS, you'll need:" plus its conditional lists for LineageOS 14.1 (Ubuntu older than 23.10:
+# lib32ncurses5-dev libncurses5 libncurses5-dev; Ubuntu older than 20.04: libwxgtk3.0-dev; JDK: openjdk-8-jdk; Python 2).
+# NOTE: that file first exists in 2020 and is written for current branches; for 14.1 it is the best available authoritative list, not a 14.1-era
+# one. Every package and the reason for each rename/omission is in docs/data/package-decisions.tsv and the audit document.
+# LINEAGE = the authoritative list translated to Xenial (renames: lib32readline-dev->lib32readline6-dev, lz4->liblz4-tool, xxd->vim-common;
+#           NOT in Xenial and therefore omitted: erofs-utils git-lfs python3-protobuf; omitted by the list itself for 14.1: yasm (x86 only), maven (13.0 only))
+PKGS_LINEAGE="bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick kmod protobuf-compiler lib32readline6-dev lib32z1-dev libdw-dev libelf-dev libgnutls28-dev liblz4-tool libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools vim-common xsltproc zip zlib1g-dev lib32ncurses5-dev libncurses5 libncurses5-dev libwxgtk3.0-dev openjdk-8-jdk python2.7"
+# AOSP = not in the authoritative list: AOSP Nougat "Initializing a Build Environment" (nougat-mr1-dev) packages plus what a minimal chroot needs
+PKGS_AOSP="libc6-dev-i386 x11proto-core-dev libx11-dev libgl1-mesa-dev unzip make ca-certificates"
+# OPTIONAL (INSTALL_OPTIONAL=1): python-networkx = AOSP, only for SELinux policy analysis; libesd0-dev = in the 2018 LineageOS page, dropped from the current one
+PKGS_OPTIONAL="python-networkx libesd0-dev"
+
+die() { echo "ERROR: $*" >&2; exit 1; }
+info() { echo "== $*"; }
+
+# ---------------------------------------------------------------- verification library (sourced by the tests)
+# verify_signed_sums KEYRING FPR SUMS SIG : succeed only if SIG is a good, unexpired signature over SUMS made by the key with primary
+# fingerprint FPR, using only that one key taken from KEYRING.
+verify_signed_sums() {
+  local keyring="$1" fpr="$2" sums="$3" sig="$4" tmp rc=0 st
+  command -v gpg >/dev/null && command -v gpgv >/dev/null || { echo "gpg and gpgv are required (package gnupg / gpgv)"; return 1; }
+  [ -s "$keyring" ] || { echo "keyring $keyring missing or empty"; return 1; }
+  [ -s "$sums" ] && [ -s "$sig" ] || { echo "SHA256SUMS or its signature missing or empty"; return 1; }
+  case "$fpr" in *[!0-9A-F]*|"") echo "bad fingerprint"; return 1;; esac
+  [ "${#fpr}" = 40 ] || { echo "fingerprint must be 40 hex digits"; return 1; }
+  tmp=$(mktemp -d) || return 1
+  # Extract ONLY the pinned key into a private keyring; never trust whatever else the shared keyring holds.
+  if ! GNUPGHOME="$tmp" gpg --batch --no-default-keyring --keyring "$keyring" --export "$fpr" > "$tmp/key.gpg" 2> "$tmp/export.err"; then
+    echo "could not read the keyring"; rm -rf "$tmp"; return 1
+  fi
+  local got
+  got=$(GNUPGHOME="$tmp" gpg --batch --show-keys --with-colons --fingerprint "$tmp/key.gpg" 2>/dev/null | awk -F: '$1=="pub"{p=1} $1=="fpr"&&p{print $10; p=0}')
+  [ "$got" = "$fpr" ] || { echo "pinned key $fpr is not in $keyring (found: ${got:-none})"; rm -rf "$tmp"; return 1; }
+  st=$(GNUPGHOME="$tmp" gpgv --keyring "$tmp/key.gpg" --status-fd 1 "$sig" "$sums" 2>"$tmp/gpgv.err") || rc=$?
+  if [ "$rc" != 0 ]; then echo "gpgv rejected the signature: $(grep -E 'BADSIG|EXPKEYSIG|REVKEYSIG|ERRSIG|NO_PUBKEY' <<<"$st" | head -1)"; rm -rf "$tmp"; return 1; fi
+  if grep -qE '^\[GNUPG:\] (BADSIG|EXPSIG|EXPKEYSIG|REVKEYSIG|ERRSIG|NO_PUBKEY)' <<<"$st"; then echo "signature status not clean"; rm -rf "$tmp"; return 1; fi
+  if ! awk -v f="$fpr" '$1=="[GNUPG:]" && $2=="GOODSIG"{g=1} $1=="[GNUPG:]" && $2=="VALIDSIG" && $3==f && $NF==f{v=1} END{exit !(g&&v)}' <<<"$st"; then
+    echo "no GOODSIG+VALIDSIG made by the pinned fingerprint $fpr"; rm -rf "$tmp"; return 1
+  fi
+  rm -rf "$tmp"; return 0
+}
+
+# check_keyring_provenance FILE : the keyring must be the file the ubuntu-keyring package installed, unmodified since.
+check_keyring_provenance() {
+  local f="$1" owner out
+  command -v dpkg >/dev/null || { echo "dpkg not found: cannot establish keyring provenance"; return 1; }
+  owner=$(dpkg -S "$f" 2>/dev/null | sed 's/: .*//') || true
+  [ "$owner" = "$KEYRING_PKG" ] || { echo "$f is not owned by package $KEYRING_PKG (owner: ${owner:-none})"; return 1; }
+  out=$(dpkg --verify "$KEYRING_PKG" 2>&1 | grep -F "$f" || true)
+  [ -z "$out" ] || { echo "$f was modified after installation: $out"; return 1; }
+}
+
+# sums_line_ok SUMS NAME PINNED : SUMS lists NAME exactly once and its hash equals PINNED
+sums_line_ok() {
+  local sums="$1" name="$2" pinned="$3" n h
+  n=$(awk -v n="$name" '{f=$2; sub(/^\*/,"",f)} f==n{c++} END{print c+0}' "$sums")
+  [ "$n" = 1 ] || { echo "$name appears $n times in $sums (expected 1)"; return 1; }
+  h=$(awk -v n="$name" '{f=$2; sub(/^\*/,"",f)} f==n{print $1}' "$sums")
+  [ "$h" = "$pinned" ] || { echo "signed SHA256SUMS lists $h for $name, the pinned value is $pinned"; return 1; }
+}
+
+# tar_listing_safe FILE : no absolute names, no .. components, device nodes only below dev/ (the real ubuntu-base tarball has 79 of them
+# there; extract skips everything below dev/ and the chroot gets its own minimal /dev)
+tar_listing_safe() {
+  local f="$1" bad
+  bad=$(tar -tzvf "$f" 2>/dev/null | awk '{t=substr($1,1,1); n=$6; if ((t=="b"||t=="c") && n !~ /^(\.\/)?dev\//) print "device node outside dev/: " $0}') || true
+  [ -z "$bad" ] || { echo "$bad" | head -3; return 1; }
+  if tar -tzf "$f" 2>/dev/null | grep -E '^/|(^|/)\.\.(/|$)' >/dev/null; then echo "archive has absolute or parent-relative names"; return 1; fi
+  tar -tzf "$f" >/dev/null 2>&1 || { echo "archive is not a readable tar.gz"; return 1; }
+}
+
+# verify_all DIR : full chain on the files in DIR (signature, signed list vs pin, tarball hash)
+verify_all() {
+  local d="$1" h
+  check_keyring_provenance "$KEYRING_FILE" || return 1
+  verify_signed_sums "$KEYRING_FILE" "$UBUNTU_CDIMAGE_KEY_FPR" "$d/SHA256SUMS" "$d/SHA256SUMS.gpg" || return 1
+  sums_line_ok "$d/SHA256SUMS" "$TAR" "$TAR_SHA256" || return 1
+  [ -f "$d/$TAR" ] || { echo "$d/$TAR missing"; return 1; }
+  h=$(sha256sum "$d/$TAR" | awk '{print $1}')
+  [ "$h" = "$TAR_SHA256" ] || { echo "tarball SHA-256 $h differs from the pinned/signed $TAR_SHA256"; return 1; }
+}
+
+# ---------------------------------------------------------------- path and filesystem safety helpers
+need_root() { [ "$(id -u)" = 0 ] || die "run with sudo: chroot and mount need root; nothing else on the host is changed"; }
+abs() { realpath -m -- "$1"; }
+reject_odd_path() { case "$1" in *$'\n'*|*$'\r'*|*$'\t'*|*\\*) die "path contains a control character or backslash: refusing";; esac; }
+fs_type() { stat -f -c %T -- "$1" 2>/dev/null || echo unknown; }
+refuse_windows_fs() {   # WSL2: /mnt/c is DrvFs (9p): no Unix owners, not case-sensitive by default; the Android tree and the chroot must not live there
+  local p t; p=$(abs "$1"); t=$(fs_type "$p")
+  case "$p" in /mnt/[a-zA-Z]|/mnt/[a-zA-Z]/*) die "$p is on a Windows drive (/mnt/<drive>). Use the Linux filesystem, for example under \$HOME." ;; esac
+  case "$t" in v9fs|9p|drvfs|ntfs|fuseblk|cifs|smb|smb2|msdos|vfat|exfat) die "$p is on a '$t' filesystem. Use the Linux ext4 filesystem." ;; esac
+}
+require_exec_fs() {   # programs must be able to run from the userland's filesystem
+  local o
+  command -v findmnt >/dev/null || { echo "WARNING: findmnt not found; cannot check mount options of $1" >&2; return 0; }
+  o=$(findmnt -n -o OPTIONS -T "$1" 2>/dev/null || true)
+  case ",$o," in *,noexec,*) die "$1 is on a filesystem mounted noexec ($o); programs inside the userland could not run";; esac
+}
+free_kib() { df -Pk "$1" | awk 'NR==2{print $4}'; }
+need_free() { local f; f=$(free_kib "$1"); [ "$f" -ge "$2" ] || die "less than $(( $2 / 1024 )) MiB free in $1"; }
+esc_mnt() { printf '%s' "$1" | sed -e 's/\\/\\134/g' -e 's/ /\\040/g' -e 's/\t/\\011/g'; }   # /proc/mounts escaping
+unesc_mnt() { printf '%s' "$1" | sed -e 's/\\040/ /g' -e 's/\\011/\t/g' -e 's/\\134/\\/g'; }
+# NOTE: the escaped path goes to awk through the ENVIRON array, never through `awk -v` (which would turn the \040 of a path with spaces back into a space)
+mounted() { M=$(esc_mnt "$(abs "$1")") awk '$2==ENVIRON["M"]{f=1} END{exit !f}' /proc/mounts; }
+any_mount_below() { M=$(esc_mnt "$(abs "$1")") awk '$2==ENVIRON["M"] || index($2, ENVIRON["M"] "/")==1 {f=1} END{exit !f}' /proc/mounts; }
+mounts_below() {   # mount points strictly below $1, deepest first, unescaped
+  local mp
+  M=$(esc_mnt "$(abs "$1")") awk 'index($2, ENVIRON["M"] "/")==1 {print length($2) "\t" $2}' /proc/mounts | sort -rn | cut -f2- | while IFS= read -r mp; do unesc_mnt "$mp"; echo; done
+}
+
+parse_root() {   # sets PARENT (absolute) and ROOT
+  reject_odd_path "${1:?ROOT_PARENT required}"
+  PARENT=$(abs "$1"); ROOT="$PARENT/xenial-root"
+  case "$PARENT" in /|/usr|/usr/*|/etc|/etc/*|/bin|/sbin|/lib*|/boot|/boot/*|/proc|/sys|/dev) die "unsafe ROOT_PARENT $PARENT" ;; esac
+}
+check_root_tree() {   # the userland must be a plain tree of real directories: we mount into it and write files in it as root
+  local d
+  [ -d "$ROOT" ] && [ ! -L "$ROOT" ] || die "$ROOT is not a real directory"
+  [ "$(stat -c %u "$ROOT")" = 0 ] || die "$ROOT is not owned by root"
+  for d in proc dev etc etc/apt home tmp usr usr/sbin var var/log; do
+    [ -d "$ROOT/$d" ] && [ ! -L "$ROOT/$d" ] || die "$ROOT/$d is missing or is a symlink; refusing to mount or write into it"
+  done
+  [ ! -L "$ROOT/src" ] || die "$ROOT/src is a symlink; refusing"
+  [ -x "$ROOT/bin/bash" ] || die "$ROOT is not a usable userland (run extract and install)"
+}
+inside_root() {   # inside_root FILE : the file resolves (symlinks followed) to somewhere below ROOT
+  local p; p=$(realpath -e -- "$1" 2>/dev/null) || return 1
+  case "$p" in "$ROOT"/*) return 0;; *) return 1;; esac
+}
+safe_write() {   # safe_write FILE MODE < content : replace FILE; a symlink at FILE is removed, never followed
+  local f="$1" mode="$2"
+  rm -f -- "$f"
+  ( set -C; cat > "$f" ) || die "could not create $f"
+  chmod "$mode" "$f"
+}
+
+# ---------------------------------------------------------------- processes, signals, mounts
+CHILD=""; SIGNAL_SEEN=""; SESSION_MOUNTED=""; FETCH_TMP=""; PARTIAL_ROOT=""; INT_POLICY=abort; KILL_LEFTOVERS=""
+
+chroot_pids() {   # chroot_pids ROOT : lines "PID KIND COMM"; KIND=root (running inside the chroot) or cwd (outside, but its cwd is inside)
+  # one `find` over /proc/PID/{root,cwd} and one awk (a fork per process made this scan take ~0.5 s)
+  { find /proc -mindepth 2 -maxdepth 2 \( -name root -o -name cwd \) -printf '%h\t%f\t%l\n' 2>/dev/null || true; } \
+  | R="$1" SELF="$$" awk -F'\t' '
+      { pid=$1; sub(/^\/proc\//, "", pid); if (pid !~ /^[0-9]+$/ || pid == ENVIRON["SELF"]) next
+        t=$3; sub(/ \(deleted\)$/, "", t); if ($2 == "root") root[pid]=t; else cwd[pid]=t }
+      END { r=ENVIRON["R"]
+            for (p in root) {
+              if (root[p] == r || index(root[p], r "/") == 1) k="root"
+              else if (cwd[p] == r || index(cwd[p], r "/") == 1) k="cwd"
+              else continue
+              print p, k } }' \
+  | while read -r pid kind; do echo "$pid $kind $(cat "/proc/$pid/comm" 2>/dev/null || echo '?')"; done
+}
+report_active() {   # report_active "$(chroot_pids ...)"
+  {
+    echo "ERROR: processes are still using the chroot, so NOTHING was unmounted:"
+    while read -r pid kind comm; do
+      [ -n "$pid" ] || continue
+      if [ "$kind" = root ]; then echo "  pid $pid ($comm): running inside the chroot"; else echo "  pid $pid ($comm): outside the chroot, but its current directory is inside it"; fi
+    done <<<"$1"
+    echo "To end the session safely:"
+    echo "  1. In each terminal where you ran 'enter', leave the shell (type exit, or press Ctrl-D). 'enter' then unmounts by itself."
+    echo "  2. Stop background programs you started inside it (for example the Jack server of a LineageOS 14.1 tree: run its jack-admin kill-server inside the session)."
+    echo "  3. If a host shell has its current directory below the chroot, cd out of it."
+    echo "  4. Then run teardown again. This script does not kill processes for you in teardown. A stuck process you must stop yourself (kill PID)."
+    echo "     (A session started with 'enter --kill-leftovers' stops leftover programs when its shell exits.)"
+  } >&2
+}
+kill_chroot_procs() {   # kill_chroot_procs ROOT [GRACE_SECONDS] : TERM, wait, then KILL; only processes whose ROOT is inside the chroot
+  local r="$1" grace="${2:-8}" pids i
+  pids=$(chroot_pids "$r" | awk '$2=="root"{print $1}')
+  [ -n "$pids" ] || return 0
+  kill -TERM $pids 2>/dev/null || true
+  for ((i = 0; i < grace * 5; i++)); do sleep 0.2; [ -z "$(chroot_pids "$r" | awk '$2=="root"')" ] && return 0; done
+  pids=$(chroot_pids "$r" | awk '$2=="root"{print $1}'); [ -z "$pids" ] || kill -KILL $pids 2>/dev/null || true
+  sleep 0.5; [ -z "$(chroot_pids "$r" | awk '$2=="root"')" ]
+}
+wait_no_procs() {   # wait_no_procs ROOT SECONDS
+  local i; for ((i = 0; i < $2 * 5; i++)); do [ -z "$(chroot_pids "$1" | awk '$2=="root"')" ] && return 0; sleep 0.2; done; return 1
+}
+
+# umount_chroot : refuses (status 2, nothing unmounted) while any process is inside or has its cwd inside; otherwise unmounts everything below ROOT, deepest first
+umount_chroot() {
+  local live mp rc=0
+  live=$(chroot_pids "$ROOT")
+  if [ -n "$live" ]; then report_active "$live"; return 2; fi
+  while IFS= read -r mp; do
+    [ -n "$mp" ] || continue
+    umount -- "$mp" || { echo "ERROR: could not unmount $mp. Do NOT delete $ROOT." >&2; rc=1; }
+  done < <(mounts_below "$ROOT")
+  return $rc
+}
+mount_chroot() {   # proc + a MINIMAL private /dev (never the host's /dev): null zero full random urandom tty, pts, shm, fd links
+  local n
+  SESSION_MOUNTED=1
+  mount -t proc proc "$ROOT/proc"
+  mount -t tmpfs -o mode=755,nosuid,noexec,size=2m tmpfs "$ROOT/dev"
+  for n in null zero full random urandom tty; do : > "$ROOT/dev/$n"; mount --bind "/dev/$n" "$ROOT/dev/$n"; done
+  mkdir -p "$ROOT/dev/pts" "$ROOT/dev/shm"
+  mount -t devpts -o newinstance,ptmxmode=0666,mode=0620 devpts "$ROOT/dev/pts" || echo "WARNING: could not mount devpts (continuing without /dev/pts)" >&2
+  [ ! -e "$ROOT/dev/pts/ptmx" ] || ln -s pts/ptmx "$ROOT/dev/ptmx"
+  mount -t tmpfs -o mode=1777,nosuid,nodev,size=64m tmpfs "$ROOT/dev/shm"
+  ln -s /proc/self/fd "$ROOT/dev/fd"; ln -s /proc/self/fd/0 "$ROOT/dev/stdin"; ln -s /proc/self/fd/1 "$ROOT/dev/stdout"; ln -s /proc/self/fd/2 "$ROOT/dev/stderr"
+}
+
+on_signal() {   # on_signal NAME NUMBER : INT is only ignored for an interactive 'enter' (the terminal already delivers it to the shell inside)
+  local name="$1" num="$2"
+  if [ "$name" = INT ] && [ "$INT_POLICY" = ignore ]; then return 0; fi
+  SIGNAL_SEEN=$name
+  trap '' INT TERM HUP QUIT          # a second signal must not interrupt the cleanup
+  echo "interrupted ($name): stopping what was started and cleaning up..." >&2
+  [ -z "$CHILD" ] || kill -TERM "$CHILD" 2>/dev/null || true
+  exit $((128 + num))
+}
+cleanup_exit() {   # EXIT trap: runs after normal exit, die, and every handled signal; idempotent
+  local rc=$?
+  trap '' INT TERM HUP QUIT; trap - EXIT
+  [ -z "$FETCH_TMP" ] || rm -rf -- "$FETCH_TMP"
+  [ -z "$PARTIAL_ROOT" ] || rm -rf --one-file-system -- "$PARTIAL_ROOT"   # an interrupted or failed extraction leaves nothing behind
+  if [ -n "$SESSION_MOUNTED" ]; then
+    if [ -n "$SIGNAL_SEEN" ] || [ "$rc" != 0 ]; then kill_chroot_procs "$ROOT" 8 || true; fi
+    umount_chroot || { echo "WARNING: mounts below $ROOT were left in place; run teardown after stopping what uses them." >&2; [ "$rc" != 0 ] || rc=1; }
+  fi
+  exit "$rc"
+}
+install_traps() {   # install_traps abort|ignore
+  INT_POLICY="$1"
+  trap 'on_signal INT 2' INT; trap 'on_signal TERM 15' TERM; trap 'on_signal HUP 1' HUP; trap 'on_signal QUIT 3' QUIT
+  trap cleanup_exit EXIT
+}
+run_child() {   # run_child CMD... : run in the background and `wait`, so a trapped TERM/HUP/QUIT acts at once instead of after the command ends
+  local rc
+  "$@" <&0 9>&- &
+  CHILD=$!
+  while :; do
+    rc=0; wait "$CHILD" || rc=$?
+    kill -0 "$CHILD" 2>/dev/null || break
+  done
+  CHILD=""
+  return "$rc"
+}
+take_lock() {   # one script instance at a time per ROOT_PARENT; the child processes do not inherit the lock (9>&-)
+  command -v flock >/dev/null || die "flock (package util-linux) is required"
+  exec 9>"$PARENT/.xenial-userland.lock"
+  flock -n 9 || die "another xenial-userland.sh instance is running for $PARENT"
+}
+end_session() {   # end_session : after the session command has exited. Returns 0 (unmounted), 1 (unmount error), 3 (processes remain, mounts kept)
+  if ! wait_no_procs "$ROOT" 3; then
+    if [ -n "$KILL_LEFTOVERS" ]; then echo "stopping programs left running inside the chroot (--kill-leftovers)" >&2; kill_chroot_procs "$ROOT" 8 || true
+    else report_active "$(chroot_pids "$ROOT")"; SESSION_MOUNTED=""; return 3; fi
+  fi
+  umount_chroot || return 1
+  SESSION_MOUNTED=""
+  return 0
+}
+
+# ---------------------------------------------------------------- commands
+download() { exec curl --proto '=https' --tlsv1.2 -fsS --retry 2 -o "$2" "$1"; }   # always run via run_child (a background subshell)
+
+cmd_fetch() {
+  parse_root "$1"; refuse_windows_fs "$(dirname "$PARENT")"
+  [ "$(id -u)" != 0 ] || echo "note: fetch does not need root; the files will be root-owned if you run it with sudo" >&2
+  command -v curl >/dev/null || die "curl is required"
+  mkdir -p "$PARENT"; refuse_windows_fs "$PARENT"; need_free "$PARENT" "$MIN_FREE_KIB_FETCH"
+  install_traps abort
+  FETCH_TMP=$(mktemp -d "$PARENT/.fetch.XXXXXX")
+  info "downloading over HTTPS (TLS 1.2+): SHA256SUMS, SHA256SUMS.gpg and $TAR"
+  local f; for f in SHA256SUMS SHA256SUMS.gpg "$TAR"; do
+    run_child download "$BASE/$f" "$FETCH_TMP/$f" || die "download of $f failed"
+  done
+  info "verifying: keyring provenance, signature by pinned key $UBUNTU_CDIMAGE_KEY_FPR, signed list vs pinned hash, tarball hash"
+  verify_all "$FETCH_TMP" || die "authenticity NOT established: nothing was kept (fail closed)"
+  tar_listing_safe "$FETCH_TMP/$TAR" || die "tarball content check failed: nothing was kept"
+  for f in SHA256SUMS SHA256SUMS.gpg "$TAR"; do mv -f -- "$FETCH_TMP/$f" "$PARENT/$f"; chmod a-w "$PARENT/$f"; done
+  echo "OK: $TAR is authentic (signed by Ubuntu CD Image Automatic Signing Key, fingerprint $UBUNTU_CDIMAGE_KEY_FPR)."
+}
+
+cmd_extract() {
+  need_root; parse_root "$1"; refuse_windows_fs "$PARENT"; require_exec_fs "$PARENT"
+  [ -f "$PARENT/$TAR" ] || die "run fetch first"
+  take_lock   # held until this process exits (including its cleanup): a concurrent extract is refused before it can look at, create or remove $ROOT
+  [ ! -e "$ROOT" ] && [ ! -L "$ROOT" ] || die "$ROOT exists; refusing to overwrite"
+  need_free "$PARENT" "$MIN_FREE_KIB_EXTRACT"
+  info "re-verifying the stored files before use (they may have been changed since fetch)"
+  verify_all "$PARENT" || die "verification failed; not extracting"
+  tar_listing_safe "$PARENT/$TAR" || die "tarball content check failed; not extracting"
+  install_traps abort
+  mkdir -p "$ROOT"; PARTIAL_ROOT="$ROOT"
+  # no device nodes: everything below dev/ is skipped; the chroot gets its own minimal /dev at mount time
+  run_child tar --numeric-owner --exclude='dev/*' --exclude='./dev/*' -xpzf "$PARENT/$TAR" -C "$ROOT" || die "extraction failed; the partial tree is removed"
+  mkdir -p "$ROOT/dev"; chmod 755 "$ROOT/dev"; chmod 1777 "$ROOT/tmp"; PARTIAL_ROOT=""
+  echo "unpacked to $ROOT"
+}
+
+relax_java_tls() {   # relax_java_tls FILE : remove TLSv1 and TLSv1.1 from jdk.tls.disabledAlgorithms. Documented requirement for LineageOS 14.1-15.1 builds.
+  local f="$1" new
+  [ -f "$f" ] && [ ! -L "$f" ] || { echo "no regular file $f"; return 1; }
+  grep -q '^jdk\.tls\.disabledAlgorithms[[:space:]]*=' "$f" || { echo "no jdk.tls.disabledAlgorithms in $f"; return 1; }
+  [ -e "$f.orig-xenial-userland" ] || cp -p -- "$f" "$f.orig-xenial-userland"
+  new=$(mktemp "$f.XXXXXX")
+  awk '/^jdk\.tls\.disabledAlgorithms[ \t]*=/{inp=1}
+       inp{l=$0; c=(l ~ /\\[ \t]*$/); gsub(/TLSv1\.1,[ \t]*/,"",l); gsub(/TLSv1,[ \t]*/,"",l); print l; if(!c) inp=0; next}
+       {print}' "$f" > "$new" || { rm -f "$new"; return 1; }
+  chmod --reference="$f" "$new"; mv -f -- "$new" "$f"
+  if java_tls_disabled_tokens "$f" | grep -qx -e 'TLSv1' -e 'TLSv1.1'; then echo "TLSv1/TLSv1.1 still listed in $f"; return 1; fi
+}
+java_tls_disabled_tokens() {   # one token per line of the jdk.tls.disabledAlgorithms property
+  awk '/^jdk\.tls\.disabledAlgorithms[ \t]*=/{inp=1; sub(/^[^=]*=/,"")}
+       inp{l=$0; c=(l ~ /\\[ \t]*$/); sub(/\\[ \t]*$/,"",l); n=split(l,a,","); for(i=1;i<=n;i++){t=a[i]; gsub(/^[ \t]+|[ \t]+$/,"",t); if(t!="") print t} if(!c) inp=0}' "$1"
+}
+
+cmd_install() {
+  need_root; parse_root "$1"; refuse_windows_fs "$PARENT"; require_exec_fs "$PARENT"
+  check_root_tree; take_lock; need_free "$PARENT" "$MIN_FREE_KIB_INSTALL"
+  [ -s "$ROOT/usr/share/keyrings/ubuntu-archive-keyring.gpg" ] || die "no Ubuntu archive keyring inside the chroot: apt could not authenticate packages"
+  [ -z "${INSTALL_ALLOW_UNAUTHENTICATED:-}" ] || die "unauthenticated installs are not supported"
+  any_mount_below "$ROOT" && die "something is already mounted below $ROOT; run teardown first"
+  local live; live=$(chroot_pids "$ROOT"); [ -z "$live" ] || { report_active "$live"; exit 4; }
+  safe_write "$ROOT/etc/resolv.conf" 644 < /etc/resolv.conf
+  printf 'deb http://archive.ubuntu.com/ubuntu xenial main universe\ndeb http://archive.ubuntu.com/ubuntu xenial-updates main universe\ndeb http://security.ubuntu.com/ubuntu xenial-security main universe\n' | safe_write "$ROOT/etc/apt/sources.list" 644
+  # never start services from package scripts inside the chroot (they would run on the WSL host kernel)
+  printf '#!/bin/sh\nexit 101\n' | safe_write "$ROOT/usr/sbin/policy-rc.d" 755
+  local pk="$PKGS_LINEAGE $PKGS_AOSP"; [ -z "${INSTALL_OPTIONAL:-}" ] || pk="$pk $PKGS_OPTIONAL"
+  install_traps abort
+  mount_chroot
+  info "apt-get update and install (this can take a while; Ctrl-C stops it and unmounts)"
+  run_child chroot "$ROOT" /usr/bin/env -i PATH=/usr/sbin:/usr/bin:/sbin:/bin DEBIAN_FRONTEND=noninteractive LANG=C /bin/bash -c "
+    set -e; apt-get update
+    apt-get install -y --no-install-recommends $pk
+    [ -e /usr/bin/python ] || ln -s python2.7 /usr/bin/python" || die "apt step failed; the chroot may hold half-configured packages (run install again, or: enter --root ... dpkg --configure -a)"
+  if [ -z "${KEEP_JAVA_TLS_DEFAULTS:-}" ]; then
+    inside_root "$ROOT/$JAVA_SECURITY_REL" || die "$JAVA_SECURITY_REL is missing or resolves outside the userland"
+    relax_java_tls "$ROOT/$JAVA_SECURITY_REL" || die "could not relax TLS settings in $JAVA_SECURITY_REL"
+    info "removed TLSv1 and TLSv1.1 from jdk.tls.disabledAlgorithms inside the chroot (required by the LineageOS wiki for 14.1-15.1; original kept as java.security.orig-xenial-userland). Set KEEP_JAVA_TLS_DEFAULTS=1 to skip."
+  fi
+  run_child chroot "$ROOT" /usr/bin/env -i PATH=/usr/sbin:/usr/bin:/sbin:/bin /bin/bash -c '
+    set -e; java -version 2>&1 | head -2; javac -version 2>&1; python --version 2>&1; make --version | head -1
+    java -version 2>&1 | grep -q "1\.8\." && javac -version 2>&1 | grep -q "1\.8\." || { echo "JDK is not 1.8"; exit 1; }
+    python --version 2>&1 | grep -q "2\.7" || { echo "python is not 2.7"; exit 1; }
+    dpkg-query -W -f="\${Package} \${Version}\n" | sort > /var/log/xenial-userland-installed.list' || die "version checks failed"
+  [ -f "$ROOT/var/log/xenial-userland-installed.list" ] && [ ! -L "$ROOT/var/log/xenial-userland-installed.list" ] || die "package record missing"
+  cp -- "$ROOT/var/log/xenial-userland-installed.list" "$PARENT/xenial-userland-installed.list"
+  echo "installed package versions recorded in $PARENT/xenial-userland-installed.list (keep it for reproducibility)"
+  end_session || exit $?
+}
+
+ensure_builder_user() {   # ensure_builder_user ROOT UID GID : add UID/GID to the chroot's passwd/group; never writes outside ROOT, never follows symlinks
+  local root="$1" uid="$2" gid="$3" n g f
+  for f in etc/passwd etc/group; do [ -f "$root/$f" ] && [ ! -L "$root/$f" ] || die "$root/$f is not a regular file; refusing"; done
+  [ ! -L "$root/home" ] && [ ! -L "$root/home/$BUILDER_NAME" ] || die "$root/home/$BUILDER_NAME is a symlink; refusing"
+  n=$(awk -F: -v u="$uid" '$3==u{print $1}' "$root/etc/passwd")
+  g=$(awk -F: -v g="$gid" '$3==g{print $1}' "$root/etc/group")
+  if [ -n "$n" ] && [ "$n" != "$BUILDER_NAME" ]; then die "uid $uid is already used inside the chroot by '$n'; refusing to reuse it"; fi
+  if [ -n "$g" ] && [ "$g" != "$BUILDER_NAME" ]; then die "gid $gid is already used inside the chroot by '$g'; refusing to reuse it"; fi
+  [ -n "$g" ] || printf '%s:x:%s:\n' "$BUILDER_NAME" "$gid" >> "$root/etc/group"
+  [ -n "$n" ] || printf '%s:x:%s:%s:builder:/home/%s:/bin/bash\n' "$BUILDER_NAME" "$uid" "$gid" "$BUILDER_NAME" >> "$root/etc/passwd"
+  mkdir -p "$root/home/$BUILDER_NAME"; chown -h "$uid:$gid" "$root/home/$BUILDER_NAME"; chmod 755 "$root/home/$BUILDER_NAME"
+}
+
+cmd_enter() {
+  need_root; parse_root "$1"; shift
+  local as_root="" uid="" gid="" SRC=""
+  while [ $# -gt 0 ]; do case "$1" in
+    --root) as_root=1; shift;; --uid) uid="${2:?}"; shift 2;; --gid) gid="${2:?}"; shift 2;; --kill-leftovers) KILL_LEFTOVERS=1; shift;;
+    --) shift; break;; -*) die "unknown option $1";; *) break;; esac; done
+  SRC="${1:-}"; [ $# -eq 0 ] || shift
+  refuse_windows_fs "$PARENT"; require_exec_fs "$PARENT"; check_root_tree; take_lock
+  any_mount_below "$ROOT" && die "something is already mounted below $ROOT (another session, or a leftover from a crash?). One session at a time. Run teardown."
+  local live; live=$(chroot_pids "$ROOT"); [ -z "$live" ] || { report_active "$live"; exit 4; }
+  if [ -z "$as_root" ]; then
+    uid="${uid:-${SUDO_UID:-}}"; gid="${gid:-${SUDO_GID:-}}"
+    [ -n "$uid" ] && [ -n "$gid" ] || die "cannot tell which user to run as: run with sudo from your normal user, or pass --uid N --gid N, or --root explicitly"
+    case "$uid$gid" in *[!0-9]*) die "uid/gid must be numbers";; esac
+    [ "$uid" != 0 ] && [ "$gid" != 0 ] || die "uid/gid 0 requested without --root"
+  elif [ -n "$SRC" ]; then
+    echo "WARNING: --root with a source tree: files created in /src will be owned by root (the problem this script avoids)." >&2
+  fi
+  if [ -n "$SRC" ]; then
+    reject_odd_path "$SRC"; SRC=$(abs "$SRC"); [ -d "$SRC" ] || die "SRC $SRC is not a directory"
+    case "$SRC" in /|/usr|/etc|/bin|/sbin|/lib*|/boot|/proc|/sys|/dev|/root|/home) die "refusing to bind-mount $SRC" ;; esac
+    case "$SRC/" in "$ROOT"/*|"$PARENT"/*) die "SRC must not be inside $PARENT" ;; esac
+    refuse_windows_fs "$SRC"
+    if [ -z "$as_root" ]; then
+      local owner; owner=$(stat -c %u "$SRC")
+      [ "$owner" = "$uid" ] || die "SRC $SRC is owned by uid $owner, not $uid. Create it yourself first (mkdir) so ownership stays yours; this script never runs chown on it."
+    fi
+  fi
+  [ -n "$as_root" ] || ensure_builder_user "$ROOT" "$uid" "$gid"
+  install_traps ignore
+  mount_chroot
+  if [ -n "$SRC" ]; then
+    mkdir -p "$ROOT/src"
+    mount --bind "$SRC" "$ROOT/src"
+    mount -o remount,bind,nosuid,nodev "$ROOT/src" || die "could not apply nosuid,nodev to the bind mount"
+  fi
+  local home=/root user=root runas=()
+  if [ -z "$as_root" ]; then home="/home/$BUILDER_NAME"; user="$BUILDER_NAME"; runas=(--userspec="$uid:$gid" --groups="$gid"); fi
+  local rc=0 erc=0
+  # env --default-signal: a background job would otherwise start with SIGINT ignored, and Ctrl-C would not reach the programs in the session
+  run_child env --default-signal=INT,QUIT chroot "${runas[@]}" "$ROOT" /usr/bin/env -i HOME="$home" USER="$user" LOGNAME="$user" TERM="${TERM:-xterm}" LANG=C.UTF-8 \
+      PATH=/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin "${@:-/bin/bash}" || rc=$?
+  end_session || erc=$?
+  [ "$erc" = 0 ] || exit "$erc"
+  exit "$rc"
+}
+
+cmd_teardown() {
+  need_root; parse_root "$1"
+  [ -d "$ROOT" ] || { echo "$ROOT does not exist: nothing to tear down."; exit 0; }
+  # 1. BEFORE touching any mount: refuse if anything still runs in the chroot (or sits in a directory below it)
+  local live; live=$(chroot_pids "$ROOT")
+  if [ -n "$live" ]; then report_active "$live"; exit 4; fi
+  take_lock
+  # 2. unmount everything below ROOT, deepest first
+  umount_chroot || die "unmount problems; do NOT remove $ROOT"
+  if any_mount_below "$ROOT"; then echo "still mounted below $ROOT:" >&2; grep -F " $(esc_mnt "$ROOT")" /proc/mounts >&2 || true; die "do NOT remove it"; fi
+  echo "no mounts remain below $ROOT. To delete the userland, run yourself:  rm -rf --one-file-system '$ROOT'"
+}
+
+cmd_list_packages() {
+  case "${1:-all}" in
+    lineage) echo $PKGS_LINEAGE;; aosp) echo $PKGS_AOSP;; essential) echo $PKGS_LINEAGE $PKGS_AOSP;; optional) echo $PKGS_OPTIONAL;;
+    all) echo $PKGS_LINEAGE $PKGS_AOSP $PKGS_OPTIONAL;; *) die "unknown set";; esac
+}
+
+main() {
+  local c="${1:?usage: $0 fetch|extract|install|enter|teardown ROOT_PARENT ... | list-packages [set]}"; shift
+  case "$c" in
+    fetch) cmd_fetch "$@";; extract) cmd_extract "$@";; install) cmd_install "$@";; enter) cmd_enter "$@";; teardown) cmd_teardown "$@";;
+    list-packages) cmd_list_packages "$@";; *) die "unknown command $c";;
+  esac
+}
+# run main only when executed, not when sourced by the tests
+if [ "${BASH_SOURCE[0]}" = "$0" ]; then main "$@"; fi

@@ -1,0 +1,113 @@
+=== test-verify
+## A. real Ubuntu files
+[PASS] A1 real signature verifies with the pinned CD-image key
+[PASS] A2 signed list has the tarball exactly once with the pinned hash
+[PASS] A3 wrong pinned hash is rejected
+[PASS] A4 unknown file name is rejected
+[PASS] A5 SHA256SUMS altered after signing -> signature fails
+[PASS] A6 truncated signature fails
+[PASS] A7 missing signature file fails closed
+[PASS] A8 empty signature file fails closed
+[PASS] A9 a DIFFERENT genuine Ubuntu key (2018 archive key) is not accepted for this signature
+[PASS] A10 pinned fingerprint absent from keyring fails
+[PASS] A11 empty keyring fails
+[PASS] A12 short fingerprint (key id) is refused
+[PASS] A13 lower-case fingerprint is refused (exact match only)
+[PASS] A14 host keyring is the one ubuntu-keyring installed (provenance)
+[PASS] A15 a file not owned by ubuntu-keyring is refused (provenance)
+[PASS] A16 no gpg binary fails closed
+## B. synthetic keys (key substitution, impostor, expired key)
+[PASS] B0 generated two test keys
+[PASS] B1 genuine signature by pinned test key verifies (keyring also holds the impostor key)
+[PASS] B2 impostor signature rejected although its key is in the same keyring
+[PASS] B3 payload changed after signing
+[PASS] B4 signature by a key that has expired is rejected
+## C. tarball content checks (crafted tarballs)
+[PASS] C1 ordinary tarball accepted
+[PASS] C2 absolute path rejected
+[PASS] C3 '..' path rejected
+[PASS] C4 non-tar rejected
+[PASS] C5 the real ubuntu-base tarball already on this machine passes (79 device nodes, all under dev/)
+SUMMARY pass=26 fail=0
+=== test-packages
+[PASS] P1 every package the script installs is a real Xenial amd64 package (recorded index data)
+[PASS] P2 no package listed twice across the sets
+[PASS] P3 every package of the authoritative main list (37 names) has a decision row
+[PASS] P4 every authoritative package has an allowed decision (install, install-renamed, unavailable-omitted, omitted-by-doc)
+[PASS] P5 script 'essential' set == packages with decision install/install-renamed (46)
+[PASS] P6 script 'optional' set == decision 'optional'
+[PASS] P7 every row has a reason
+[PASS] P8 'erofs-utils' is recorded as MISSING in Xenial
+[PASS] P8 'git-lfs' is recorded as MISSING in Xenial
+[PASS] P8 'python3-protobuf' is recorded as MISSING in Xenial
+[PASS] P9 lib32readline-dev is not installed by that name
+[PASS] P9 lib32readline-gplv2-dev is not installed by that name
+[PASS] P9 libwxgtk2.8-dev is not installed by that name
+[PASS] P9 lz4 is not installed by that name
+[PASS] P9 xxd is not installed by that name
+[PASS] P9 erofs-utils is not installed by that name
+[PASS] P9 git-lfs is not installed by that name
+[PASS] P9 python3-protobuf is not installed by that name
+[PASS] P9 python-is-python2 is not installed by that name
+[PASS] P9 yasm is not installed by that name
+[PASS] P9 maven is not installed by that name
+[PASS] P9 git-core is not installed by that name
+[PASS] P9 lib32z-dev is not installed by that name
+[PASS] P10 essential set has openjdk-8-jdk
+[PASS] P10 essential set has python2.7
+[PASS] P10 essential set has make
+[PASS] P10 essential set has lib32readline6-dev
+[PASS] P10 essential set has gcc-multilib
+[PASS] P10 essential set has g++-multilib
+[PASS] P10 essential set has libc6-dev-i386
+[PASS] P10 essential set has lib32z1-dev
+[PASS] P10 essential set has lib32ncurses5-dev
+[PASS] P10 essential set has libncurses5
+[PASS] P10 essential set has libncurses5-dev
+[PASS] P10 essential set has zip
+[PASS] P10 essential set has unzip
+[PASS] P10 essential set has git
+[PASS] P10 essential set has ccache
+[PASS] P10 essential set has liblz4-tool
+[PASS] P10 essential set has vim-common
+[PASS] P10 essential set has libwxgtk3.0-dev
+[PASS] P11 optional packages need INSTALL_OPTIONAL=1
+[PASS] P12 no :i386 / add-architecture (lib32* are amd64 packages on Xenial)
+SUMMARY pass=43 fail=0
+=== test-java-tls
+[PASS] J1 tokens before: TLSv1 and TLSv1.1 are listed
+[PASS] J2 relax_java_tls succeeds
+[PASS] J3 exactly TLSv1 and TLSv1.1 removed; every other disabled algorithm kept (SSLv3|RC4|DES|MD5withRSA|DH keySize < 1024|EC keySize < 224|3DES_EDE_CBC|anon|NULL|include jdk.disabled.namedCurves|)
+[PASS] J4 unrelated lines untouched (certpath TLSServer text, legacyAlgorithms)
+[PASS] J5 legacyAlgorithms line identical
+[PASS] J6 original kept as .orig-xenial-userland
+[PASS] J7 file mode preserved
+[PASS] J8 idempotent (second run succeeds)
+[PASS] J9 backup not overwritten by the second run
+[PASS] J10 tokens on a continuation line are removed too
+[PASS] J11 unrecognised layout (token last, no comma) fails closed instead of claiming success
+[PASS] J12 file without the property is refused
+[PASS] J13 a symlink is refused (never followed)
+[PASS] J14 missing file refused
+SUMMARY pass=14 fail=0
+=== test-fetch
+[PASS] F1 genuine tarball + signed list accepted (note: fetch does not need root; the files will be root-owned if you run it with sudo
+== downloading over HTTPS (TLS 1.2+): SHA256SUMS, SHA256SUMS.gpg and ubuntu-base-16.04.6-base-amd64.tar.gz
+== verifying: keyring provenance, signature by pinned key 843938DF228D22F7B3742BC0D94AA3F0EFE21092, signed list vs pinned hash, tarball hash
+OK: ubuntu-base-16.04.6-base-amd64.tar.gz is authentic (signed by Ubuntu CD Image Automatic Signing Key, fingerprint 843938DF228D22F7B3742BC0D94AA3F0EFE21092).)
+[PASS] F2 the three files were kept
+[PASS] F3 kept files are read-only (mode 444)
+[PASS] F4 no temporary download directory left behind
+[PASS] F5 badtar: refused (rc=1) and NOTHING kept (ERROR: authenticity NOT established: nothing was kept (fail closed))
+[PASS] F5 badsums: refused (rc=1) and NOTHING kept (ERROR: authenticity NOT established: nothing was kept (fail closed))
+[PASS] F5 badsig: refused (rc=1) and NOTHING kept (ERROR: authenticity NOT established: nothing was kept (fail closed))
+[PASS] F5 fail: refused (rc=1) and NOTHING kept (ERROR: download of SHA256SUMS failed)
+[PASS] F6 a /mnt/c target is refused before anything is created
+[PASS] F7 TERM during the download: exit 143, curl-stand-in stopped, temp dir removed, nothing kept
+[PASS] F7 HUP during the download: exit 129, curl-stand-in stopped, temp dir removed, nothing kept
+[PASS] F7 QUIT during the download: exit 131, curl-stand-in stopped, temp dir removed, nothing kept
+[PASS] F7 INT during the download: exit 130, curl-stand-in stopped, temp dir removed, nothing kept
+SUMMARY pass=13 fail=0
+
+Root tests (need sudo; each re-executes itself in a private mount namespace, so nothing leaks into your real mounts): sudo /home/user/galaxy-s3/tools/build/test/run-root-tests.sh
+exit=0
