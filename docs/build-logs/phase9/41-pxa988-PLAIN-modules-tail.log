@@ -1,0 +1,30 @@
+  CC      drivers/marvell/marvell-telephony/drivers/hwmap/hwmap.mod.o
+  CC      drivers/marvell/marvell-telephony/drivers/shmem/msocket/msocketk.mod.o
+  CC      drivers/marvell/marvell-telephony/drivers/usim_event/usimeventk.mod.o
+  CC      drivers/marvell/physrw/physrw.mod.o
+  CC      drivers/marvell/sd8787/mbtc_src/mbt8xxx.mod.o
+  CC      drivers/marvell/sd8787/wlan_src/mlan.mod.o
+  CC      drivers/marvell/sd8787/wlan_src/sd8xxx.mod.o
+  CC      drivers/marvell/security/wtpsp/drv/src/geu.mod.o
+  CC      drivers/media/dvb/siano/smsmdtv.mod.o
+  CC      drivers/scsi/scsi_wait_scan.mod.o
+  LD [M]  drivers/char/maxscend/cmmb_mxd.ko
+  LD [M]  drivers/marvell/graphics/galcore_src/galcore.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/ccinetdev/ccinetdev.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/cidatastub/cci_datastub.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/cidatatty/cidatattydev.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/citty/build/citty.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/cp_load/cploaddev.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/diag/diag.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/diag/gs_diag.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/errorhandler/build/seh.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/hwmap/hwmap.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/shmem/msocket/msocketk.ko
+  LD [M]  drivers/marvell/marvell-telephony/drivers/usim_event/usimeventk.ko
+  LD [M]  drivers/marvell/physrw/physrw.ko
+  LD [M]  drivers/marvell/sd8787/mbtc_src/mbt8xxx.ko
+  LD [M]  drivers/marvell/sd8787/wlan_src/mlan.ko
+  LD [M]  drivers/marvell/sd8787/wlan_src/sd8xxx.ko
+  LD [M]  drivers/marvell/security/wtpsp/drv/src/geu.ko
+  LD [M]  drivers/media/dvb/siano/smsmdtv.ko
+  LD [M]  drivers/scsi/scsi_wait_scan.ko

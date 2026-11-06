@@ -1,0 +1,109 @@
+# PROPOSED, NOT APPLIED to the pinned kernel (Phase 9). Hand adaptation for the 3.4.5 Samsung binder.c.
+# Upstream: 7f3dc0088b98533f17128058fac73cd8b2752ef1 ('binder: fix proc->files use-after-free'); Google carried it in kernel/common
+# deprecated/android-3.18 as e3ed622e7, which does not apply to this older code. Tested only in a disposable copy (compiles, Phase 8 binder
+# tests pass); the race itself was not reproduced.
+# Fixes a use of a stale files_struct pointer: binder_vma_close() queues work that drops proc->files while another thread may still use it.
+
+--- a/drivers/staging/android/binder.c
++++ b/drivers/staging/android/binder.c
+@@ -292,6 +292,7 @@
+ 	struct mm_struct *vma_vm_mm;
+ 	struct task_struct *tsk;
+ 	struct files_struct *files;
++	struct mutex files_lock;	/* protects files */
+ 	struct hlist_node deferred_work_node;
+ 	int deferred_work;
+ 	void *buffer;
+@@ -366,7 +367,7 @@
+ /*
+  * copied from get_unused_fd_flags
+  */
+-int task_get_unused_fd_flags(struct binder_proc *proc, int flags)
++static int __task_get_unused_fd_flags(struct binder_proc *proc, int flags)
+ {
+ 	struct files_struct *files = proc->files;
+ 	int fd, error;
+@@ -433,7 +434,7 @@
+ /*
+  * copied from fd_install
+  */
+-static void task_fd_install(
++static void __task_fd_install(
+ 	struct binder_proc *proc, unsigned int fd, struct file *file)
+ {
+ 	struct files_struct *files = proc->files;
+@@ -463,7 +464,7 @@
+ /*
+  * copied from sys_close
+  */
+-static long task_close_fd(struct binder_proc *proc, unsigned int fd)
++static long __task_close_fd(struct binder_proc *proc, unsigned int fd)
+ {
+ 	struct file *filp;
+ 	struct files_struct *files = proc->files;
+@@ -498,6 +499,35 @@
+ out_unlock:
+ 	spin_unlock(&files->file_lock);
+ 	return -EBADF;
++}
++
++/* proc->files can be released through the deferred worker (binder_vma_close) at any time: hold files_lock while it is used. */
++int task_get_unused_fd_flags(struct binder_proc *proc, int flags)
++{
++	int ret;
++
++	mutex_lock(&proc->files_lock);
++	ret = __task_get_unused_fd_flags(proc, flags);
++	mutex_unlock(&proc->files_lock);
++	return ret;
++}
++
++static void task_fd_install(
++	struct binder_proc *proc, unsigned int fd, struct file *file)
++{
++	mutex_lock(&proc->files_lock);
++	__task_fd_install(proc, fd, file);
++	mutex_unlock(&proc->files_lock);
++}
++
++static long task_close_fd(struct binder_proc *proc, unsigned int fd)
++{
++	long ret;
++
++	mutex_lock(&proc->files_lock);
++	ret = __task_close_fd(proc, fd);
++	mutex_unlock(&proc->files_lock);
++	return ret;
+ }
+ 
+ static inline void binder_lock(const char *tag)
+@@ -2936,7 +2966,9 @@
+ 	binder_insert_free_buffer(proc, buffer);
+ 	proc->free_async_space = proc->buffer_size / 2;
+ 	barrier();
++	mutex_lock(&proc->files_lock);
+ 	proc->files = get_files_struct(proc->tsk);
++	mutex_unlock(&proc->files_lock);
+ 	proc->vma = vma;
+ 	proc->vma_vm_mm = vma->vm_mm;
+ 
+@@ -2970,6 +3002,7 @@
+ 	proc = kzalloc(sizeof(*proc), GFP_KERNEL);
+ 	if (proc == NULL)
+ 		return -ENOMEM;
++	mutex_init(&proc->files_lock);
+ 	get_task_struct(current);
+ 	proc->tsk = current;
+ 	INIT_LIST_HEAD(&proc->todo);
+@@ -3182,9 +3215,11 @@
+ 
+ 		files = NULL;
+ 		if (defer & BINDER_DEFERRED_PUT_FILES) {
++			mutex_lock(&proc->files_lock);
+ 			files = proc->files;
+ 			if (files)
+ 				proc->files = NULL;
++			mutex_unlock(&proc->files_lock);
+ 		}
+ 
+ 		if (defer & BINDER_DEFERRED_FLUSH)

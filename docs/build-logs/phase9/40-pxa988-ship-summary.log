@@ -1,0 +1,47 @@
+/home/user/galaxy-s3/tools/selinux/patches/android-3.4-selinux-backport.patch:2441: space before tab in indent.
+                	printk(KERN_WARNING "SELinux:  Invalid class %hu\n", tclass);
+warning: 1 line adds whitespace errors.
+applied to the copy: android-3.4-selinux-backport.patch
+  HOSTCC  scripts/basic/fixdep
+  GEN     SCRATCH/pxa/out-SHIP/Makefile
+  HOSTCC  scripts/kconfig/conf.o
+  SHIPPED scripts/kconfig/zconf.tab.c
+  SHIPPED scripts/kconfig/zconf.lex.c
+  SHIPPED scripts/kconfig/zconf.hash.c
+  HOSTCC  scripts/kconfig/zconf.tab.o
+In file included from scripts/kconfig/zconf.tab.c:2502:
+In function 'dep_stack_insert',
+    inlined from 'sym_check_print_recursive' at SCRATCH/pxa/src-SHIP/scripts/kconfig/symbol.c:1027:3,
+    inlined from 'sym_check_deps' at SCRATCH/pxa/src-SHIP/scripts/kconfig/symbol.c:1198:3:
+SCRATCH/pxa/src-SHIP/scripts/kconfig/symbol.c:1003:19: warning: storing the address of local variable 'cv_stack' in 'check_top' [-Wdangling-pointer=]
+ 1003 |         check_top = stack;
+      |         ~~~~~~~~~~^~~~~~~
+SCRATCH/pxa/src-SHIP/scripts/kconfig/symbol.c: In function 'sym_check_deps':
+SCRATCH/pxa/src-SHIP/scripts/kconfig/symbol.c:1024:26: note: 'cv_stack' declared here
+ 1024 |         struct dep_stack cv_stack;
+      |                          ^~~~~~~~
+SCRATCH/pxa/src-SHIP/scripts/kconfig/symbol.c:994:4: note: 'check_top' declared here
+  994 | } *check_top;
+      |    ^~~~~~~~~
+  HOSTLD  scripts/kconfig/conf
+#
+# configuration written to .config
+#
+== SHIP: zImage 3987120 bytes; modules: 20
+warnings in security/ and binder: 0
+c02dbaf0 T avc_has_extended_perms
+c02d9d44 T security_binder_transaction
+c02ee814 T security_compute_xperms_decision
+CONFIG_AUDIT=y
+CONFIG_AUDITSYSCALL=y
+CONFIG_SAMSUNG_PRODUCT_SHIP=y
+CONFIG_EXT4_FS_SECURITY=y
+CONFIG_SEC_RESTRICT_ROOTING=y
+CONFIG_SEC_RESTRICT_SETUID=y
+CONFIG_SEC_RESTRICT_FORK=y
+CONFIG_SEC_RESTRICT_ROOTING_LOG=y
+CONFIG_SECURITY=y
+CONFIG_SECURITY_NETWORK=y
+CONFIG_SECURITY_SELINUX=y
+CONFIG_SECURITY_SELINUX_DEVELOP=y
+CONFIG_DEFAULT_SECURITY_SELINUX=y

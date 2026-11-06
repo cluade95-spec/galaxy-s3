@@ -1,0 +1,20 @@
+# PROPOSED, NOT APPLIED to the pinned kernel (Phase 9). Variant of PB3 for a binder.c that ALREADY has the five SELinux hook calls
+# (tools/selinux/patches/binder-lsm-hooks.patch). Apply the hooks patch first, then this one. Use the plain PB3 file only on the unhooked source.
+# Phase 9 lesson: `git apply -C1` placed the plain PB3 in the wrong branch of binder_transaction (the compiler warned); never use reduced context.
+# Upstream: 7aa135fcf26377f92dc0680a57566b4c7f3e281b; see PB3 for the details.
+
+--- a/drivers/staging/android/binder.c
++++ b/drivers/staging/android/binder.c
+@@ -1490,6 +1490,12 @@
+ 		if (target_proc == NULL) {
+ 			return_error = BR_DEAD_REPLY;
+ 			goto err_dead_binder;
++		}
++		if (target_proc == proc) {
++			binder_user_error("binder: %d:%d got transaction to context manager from process owning it\n",
++					  proc->pid, thread->pid);
++			return_error = BR_FAILED_REPLY;
++			goto err_invalid_target_handle;
+ 		}
+ 		if (security_binder_transaction(proc->tsk, target_proc->tsk) < 0) {
+ 			return_error = BR_FAILED_REPLY;

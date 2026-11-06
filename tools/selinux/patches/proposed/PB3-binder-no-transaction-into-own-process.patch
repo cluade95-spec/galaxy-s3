@@ -1,0 +1,20 @@
+# PROPOSED, NOT APPLIED to the pinned kernel (Phase 9). Adapted by hand for the 3.4.5 Samsung binder.c from the upstream change(s) named below.
+# Tested only in a disposable copy: compiles for ARM and passes the Phase 8 QEMU binder test set. Not exploit-tested.
+# Upstream: 7aa135fcf26377f92dc0680a57566b4c7f3e281b ('ANDROID: binder: prevent transactions into own process'); Google carried it in
+# kernel/common deprecated/android-3.18 as 0ebe34f7b. Hand adaptation to the 3.4 control flow.
+
+--- a/drivers/staging/android/binder.c
++++ b/drivers/staging/android/binder.c
+@@ -1489,6 +1489,12 @@
+ 		if (target_proc == NULL) {
+ 			return_error = BR_DEAD_REPLY;
+ 			goto err_dead_binder;
++		}
++		if (target_proc == proc) {
++			binder_user_error("binder: %d:%d got transaction to context manager from process owning it\n",
++					  proc->pid, thread->pid);
++			return_error = BR_FAILED_REPLY;
++			goto err_invalid_target_handle;
+ 		}
+ 		if (!(tr->flags & TF_ONE_WAY) && thread->transaction_stack) {
+ 			struct binder_transaction *tmp;

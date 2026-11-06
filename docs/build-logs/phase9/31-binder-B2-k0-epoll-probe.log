@@ -1,0 +1,233 @@
+Uncompressing Linux... done, booting the kernel.
+<6>Booting Linux on physical CPU 0
+<6>Initializing cgroup subsys cpuset
+<5>Linux version 3.4.5+ (experimental@goldenvess3g-qemu) (gcc version 4.6.x-google 20120106 (prerelease) (GCC) ) #2 Thu Nov 5 21:03:11 UTC 2026
+CPU: ARMv7 Processor [410fc090] revision 0 (ARMv7), cr=10c53c7d
+CPU: PIPT / VIPT nonaliasing data cache, VIPT nonaliasing instruction cache
+Machine: ARM-Versatile Express
+<6>cma: CMA: reserved 16 MiB at 6f000000
+Memory policy: ECC disabled, Data cache writeback
+<7>On node 0 totalpages: 65536
+<7>free_area_init_node: node 0, pgdat 8045c9f4, node_mem_map 8047e000
+<7>  Normal zone: 512 pages used for memmap
+<7>  Normal zone: 0 pages reserved
+<7>  Normal zone: 65024 pages, LIFO batch:15
+<6>sched_clock: 32 bits at 24MHz, resolution 41ns, wraps every 178956ms
+<7>pcpu-alloc: s0 r0 d32768 u32768 alloc=1*32768<c>
+<7>pcpu-alloc: <c>[0] <c>0 <c>
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 65024
+<5>Kernel command line: console=ttyAMA0 rdinit=/init loglevel=7 gvmode=epoll slub_debug=FZPU gvklog=1
+<6>PID hash table entries: 1024 (order: 0, 4096 bytes)
+<6>Dentry cache hash table entries: 32768 (order: 5, 131072 bytes)
+<6>Inode-cache hash table entries: 16384 (order: 4, 65536 bytes)
+<6>Memory: 256MB = 256MB total
+<5>Memory: 238604k/238604k available, 23540k reserved, 0K highmem
+<5>Virtual kernel memory layout:
+    vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+    fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
+    vmalloc : 0x90800000 - 0xff000000   (1768 MB)
+    lowmem  : 0x80000000 - 0x90000000   ( 256 MB)
+      .text : 0x80008000 - 0x803fbca8   (4048 kB)
+      .init : 0x803fc000 - 0x8042e000   ( 200 kB)
+      .data : 0x8042e000 - 0x8045d2e0   ( 189 kB)
+       .bss : 0x8045d304 - 0x8047d218   ( 128 kB)
+<6>SLUB: Genslabs=11, HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+<6>NR_IRQS:256
+<6>Console: colour dummy device 80x30
+<6>Calibrating delay loop... <c>1803.87 BogoMIPS (lpj=9019392)
+<6>pid_max: default: 32768 minimum: 301
+<6>Security Framework initialized
+<6>SELinux:  Initializing.
+<7>SELinux:  Starting in permissive mode
+<6>Mount-cache hash table entries: 512
+<6>CPU: Testing write buffer coherency: ok
+<6>hw perfevents: enabled with ARMv7 Cortex-A9 PMU driver, 7 counters available
+<6>Setting up static identity map for 0x60323728 - 0x60323780
+<6>devtmpfs: initialized
+<6>NET: Registered protocol family 16
+<6>DMA: preallocated 256 KiB pool for atomic coherent allocations
+<6>L310 cache controller enabled
+<6>l2x0: 8 ways, CACHE_ID 0x410000c8, AUX_CTRL 0x02420000, Cache size: 131072 B
+<6>hw-breakpoint: debug architecture 0x4 unsupported.
+<6>Serial: AMBA PL011 UART driver
+<6>mb:uart0: ttyAMA0 at MMIO 0x10009000 (irq = 37) is a PL011 rev1
+Booting Linux on physical CPU 0
+Initializing cgroup subsys cpuset
+Linux version 3.4.5+ (experimental@goldenvess3g-qemu) (gcc version 4.6.x-google 20120106 (prerelease) (GCC) ) #2 Thu Nov 5 21:03:11 UTC 2026
+CPU: ARMv7 Processor [410fc090] revision 0 (ARMv7), cr=10c53c7d
+CPU: PIPT / VIPT nonaliasing data cache, VIPT nonaliasing instruction cache
+Machine: ARM-Versatile Express
+cma: CMA: reserved 16 MiB at 6f000000
+Memory policy: ECC disabled, Data cache writeback
+sched_clock: 32 bits at 24MHz, resolution 41ns, wraps every 178956ms
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 65024
+Kernel command line: console=ttyAMA0 rdinit=/init loglevel=7 gvmode=epoll slub_debug=FZPU gvklog=1
+PID hash table entries: 1024 (order: 0, 4096 bytes)
+Dentry cache hash table entries: 32768 (order: 5, 131072 bytes)
+Inode-cache hash table entries: 16384 (order: 4, 65536 bytes)
+Memory: 256MB = 256MB total
+Memory: 238604k/238604k available, 23540k reserved, 0K highmem
+Virtual kernel memory layout:
+    vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+    fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
+    vmalloc : 0x90800000 - 0xff000000   (1768 MB)
+    lowmem  : 0x80000000 - 0x90000000   ( 256 MB)
+      .text : 0x80008000 - 0x803fbca8   (4048 kB)
+      .init : 0x803fc000 - 0x8042e000   ( 200 kB)
+      .data : 0x8042e000 - 0x8045d2e0   ( 189 kB)
+       .bss : 0x8045d304 - 0x8047d218   ( 128 kB)
+SLUB: Genslabs=11, HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+NR_IRQS:256
+Console: colour dummy device 80x30
+Calibrating delay loop... 1803.87 BogoMIPS (lpj=9019392)
+pid_max: default: 32768 minimum: 301
+Security Framework initialized
+SELinux:  Initializing.
+Mount-cache hash table entries: 512
+CPU: Testing write buffer coherency: ok
+hw perfevents: enabled with ARMv7 Cortex-A9 PMU driver, 7 counters available
+Setting up static identity map for 0x60323728 - 0x60323780
+devtmpfs: initialized
+NET: Registered protocol family 16
+DMA: preallocated 256 KiB pool for atomic coherent allocations
+L310 cache controller enabled
+l2x0: 8 ways, CACHE_ID 0x410000c8, AUX_CTRL 0x02420000, Cache size: 131072 B
+hw-breakpoint: debug architecture 0x4 unsupported.
+Serial: AMBA PL011 UART driver
+mb:uart0: ttyAMA0 at MMIO 0x10009000 (irq = 37) is a PL011 rev1
+console [ttyAMA0] enabled
+mb:uart1: ttyAMA1 at MMIO 0x1000a000 (irq = 38) is a PL011 rev1
+mb:uart2: ttyAMA2 at MMIO 0x1000b000 (irq = 39) is a PL011 rev1
+mb:uart3: ttyAMA3 at MMIO 0x1000c000 (irq = 40) is a PL011 rev1
+bio: create slab <bio-0> at 0
+SCSI subsystem initialized
+usbcore: registered new interface driver usbfs
+usbcore: registered new interface driver hub
+usbcore: registered new device driver usb
+Advanced Linux Sound Architecture Driver Version 1.0.25.
+Switching to clocksource v2m-timer1
+NET: Registered protocol family 2
+IP route cache hash table entries: 2048 (order: 1, 8192 bytes)
+TCP established hash table entries: 8192 (order: 4, 65536 bytes)
+TCP bind hash table entries: 8192 (order: 3, 32768 bytes)
+TCP: Hash tables configured (established 8192 bind 8192)
+TCP: reno registered
+UDP hash table entries: 256 (order: 0, 4096 bytes)
+UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)
+NET: Registered protocol family 1
+RPC: Registered named UNIX socket transport module.
+RPC: Registered udp transport module.
+RPC: Registered tcp transport module.
+RPC: Registered tcp NFSv4.1 backchannel transport module.
+Unpacking initramfs...
+Freeing initrd memory: 224K
+audit: initializing netlink socket (disabled)
+type=2000 audit(0.490:1): initialized
+Registering sdcardfs 0.1
+jffs2: version 2.2. (NAND) © 2001-2006 Red Hat, Inc.
+msgmni has been set to 498
+io scheduler noop registered (default)
+clcd-pl11x ct:clcd: PL111 rev2 at 0x10020000
+clcd-pl11x ct:clcd: CT-CA9X4 hardware, XVGA display
+v2m_cfg_write: writing 03c8eee0 to 00110001
+v2m_cfg_write: writing 00000000 to 00710000
+v2m_cfg_write: writing 00000002 to 00b10000
+Console: switching to colour frame buffer device 128x48
+smsc911x: Driver version 2008-10-21
+smsc911x: Device not READY in 100ms aborting
+isp1760 isp1760: NXP ISP1760 USB Host Controller
+isp1760 isp1760: new USB bus registered, assigned bus number 1
+isp1760 isp1760: Scratch test failed.
+isp1760 isp1760: can't setup
+isp1760 isp1760: USB bus 1 deregistered
+isp1760: Failed to register the HCD device
+Initializing USB Mass Storage driver...
+usbcore: registered new interface driver usb-storage
+USB Mass Storage support registered.
+mousedev: PS/2 mouse device common for all mice
+rtc-pl031 mb:rtc: rtc core: registered pl031 as rtc0
+mmci-pl18x mb:mmci: mmc0: PL181 manf 41 rev0 at 0x10005000 irq 41,42 (pio)
+usbcore: registered new interface driver usbhid
+usbhid: USB HID core driver
+aaci-pl041 mb:aaci: ARM AC'97 Interface PL041 rev0 at 0x10004000, irq 43
+aaci-pl041 mb:aaci: FIFO 512 entries
+input: AT Raw Set 2 keyboard as /devices/mb:kmi0/serio0/input/input0
+oprofile: using arm/armv7-ca9
+TCP: cubic registered
+NET: Registered protocol family 17
+VFP support v0.3: implementor 41 architecture 3 part 30 variant 9 rev 0
+rtc-pl031 mb:rtc: setting system clock to 2026-11-06 04:20:40 UTC (1793938840)
+ALSA device list:
+  #0: ARM AC'97 Interface PL041 rev0 at 0x10004000, irq 43
+ Freeing init memory: 200K
+
+=== GV-SELINUX-TEST start ===
+kernel: Linux version 3.4.5+ (experimental@goldenvess3g-qemu) (gcc version 4.6.x-google 20120106 (prerelease) (GCC) ) #2 Thu Nov 5 21:03:11 UTC 2026 
+input: ImExPS/2 Generic Explorer Mouse as /devices/mb:kmi1/serio1/input/input1
+sync transaction written: 0
+epoll_ctl ADD binder fd: 0
+binder: release 535:535 transaction 2 out, still active
+BINDER_THREAD_EXIT: 0
+=============================================================================
+BUG kmalloc-256 (Not tainted): Poison overwritten
+-----------------------------------------------------------------------------
+
+INFO: 0x8ebefe2c-0x8ebefe33. First byte 0x2c instead of 0x6b
+INFO: Allocated in binder_get_thread+0x80/0x124 age=0 cpu=0 pid=535
+	__slab_alloc.constprop.67+0x30c/0x34c
+	kmem_cache_alloc+0xc4/0xcc
+	binder_get_thread+0x80/0x124
+	binder_ioctl+0xb8/0x624
+	do_vfs_ioctl+0x84/0x584
+	sys_ioctl+0x70/0x78
+	ret_fast_syscall+0x0/0x30
+INFO: Freed in binder_free_thread+0xd4/0x140 age=0 cpu=0 pid=535
+	__slab_free+0x30/0x254
+	binder_free_thread+0xd4/0x140
+	binder_ioctl+0x350/0x624
+	do_vfs_ioctl+0x84/0x584
+	sys_ioctl+0x70/0x78
+	ret_fast_syscall+0x0/0x30
+INFO: Slab 0x80655de0 objects=9 used=9 fp=0x  (null) flags=0x0080
+INFO: Object 0x8ebefe00 @offset=3584 fp=0x8ebefc40
+
+Bytes b4 8ebefdf0: 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a  ZZZZZZZZZZZZZZZZ
+Object 8ebefe00: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  kkkkkkkkkkkkkkkk
+Object 8ebefe10: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  kkkkkkkkkkkkkkkk
+Object 8ebefe20: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 2c fe be 8e  kkkkkkkkkkkk,...
+Object 8ebefe30: 2c fe be 8e 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  ,...kkkkkkkkkkkk
+Object 8ebefe40: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  kkkkkkkkkkkkkkkk
+Object 8ebefe50: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  kkkkkkkkkkkkkkkk
+Object 8ebefe60: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  kkkkkkkkkkkkkkkk
+Object 8ebefe70: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  kkkkkkkkkkkkkkkk
+Object 8ebefe80: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  kkkkkkkkkkkkkkkk
+Object 8ebefe90: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  kkkkkkkkkkkkkkkk
+Object 8ebefea0: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  kkkkkkkkkkkkkkkk
+Object 8ebefeb0: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  kkkkkkkkkkkkkkkk
+Object 8ebefec0: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  kkkkkkkkkkkkkkkk
+Object 8ebefed0: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  kkkkkkkkkkkkkkkk
+Object 8ebefee0: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b  kkkkkkkkkkkkkkkk
+Object 8ebefef0: 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b 6b a5  kkkkkkkkkkkkkkk.
+Redzone 8ebeff00: bb bb bb bb                                      ....
+Padding 8ebeffa8: 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a 5a  ZZZZZZZZZZZZZZZZ
+Padding 8ebeffb8: 5a 5a 5a 5a 5a 5a 5a 5a                          ZZZZZZZZ
+[<800135c4>] (unwind_backtrace+0x0/0xf8) from [<80099aac>] (check_bytes_and_report+0xc0/0xe4)
+[<80099aac>] (check_bytes_and_report+0xc0/0xe4) from [<80099ca4>] (check_object+0x1d4/0x238)
+[<80099ca4>] (check_object+0x1d4/0x238) from [<8031f51c>] (alloc_debug_processing+0x98/0x174)
+[<8031f51c>] (alloc_debug_processing+0x98/0x174) from [<8031fe24>] (__slab_alloc.constprop.67+0x30c/0x34c)
+[<8031fe24>] (__slab_alloc.constprop.67+0x30c/0x34c) from [<8009afcc>] (kmem_cache_alloc+0xc4/0xcc)
+[<8009afcc>] (kmem_cache_alloc+0xc4/0xcc) from [<80258598>] (binder_get_thread+0x80/0x124)
+[<80258598>] (binder_get_thread+0x80/0x124) from [<8025daa4>] (binder_ioctl+0xb8/0x624)
+[<8025daa4>] (binder_ioctl+0xb8/0x624) from [<800ae46c>] (do_vfs_ioctl+0x84/0x584)
+[<800ae46c>] (do_vfs_ioctl+0x84/0x584) from [<800ae9dc>] (sys_ioctl+0x70/0x78)
+[<800ae9dc>] (sys_ioctl+0x70/0x78) from [<8000dd00>] (ret_fast_syscall+0x0/0x30)
+FIX kmalloc-256: Restoring 0x8ebefe2c-0x8ebefe33=0x6b
+
+FIX kmalloc-256: Marking all objects used
+probe child: wait4=535 status=0
+KLOG[after-probe] ring bytes=9722 avc=0 avc-denied-enforced=0 ioctlcmd=0 audit_lost=0
+KLOG[end] ring bytes=9722 avc=0 avc-denied-enforced=0 ioctlcmd=0 audit_lost=0
+=== GV-SELINUX-TEST end ===
+Restarting system.
+v2m_cfg_write: writing 00000000 to 00900000
+qemu exit=0

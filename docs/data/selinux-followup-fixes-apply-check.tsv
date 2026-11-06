@@ -1,0 +1,22 @@
+commit	branch	date	subject	git_apply_check_against_patched_tree
+804d58534	a318	2017-08-03	selinux: use GFP_NOWAIT in the AVC kmem_caches	error: patch failed: security/selinux/avc.c:549
+73ec15e6a	a318	2017-05-12	selinux: do not check open permission on sockets	error: patch failed: security/selinux/hooks.c:2936
+0c9ce9eee	a318	2019-01-16	LSM: Check for NULL cred-security on free	APPLIES
+942ec5b0c	a318	2019-12-17	selinux: ensure we cleanup the internal AVC counters on error in avc_u	APPLIES
+c2103c267	a318	2018-12-21	selinux: never allow relabeling on context mounts	error: patch failed: security/selinux/hooks.c:399
+9ae2dad35	a318	2019-07-25	selinux: fix memory leak in policydb_init()	APPLIES
+f643372c9	a318	2019-01-09	selinux: fix GPF on invalid policy	APPLIES
+b1ebe5e9a	a318	2018-05-25	selinux: KASAN: slab-out-of-bounds in xattr_getsecurity	APPLIES
+989dcfa49	a318	2017-03-06	selinux: check for address length in selinux_socket_bind()	APPLIES
+28eb4b7b1	a318	2017-11-28	selinux: ensure the context is NUL terminated in security_context_to_s	APPLIES
+cc8650608	a318	2017-12-05	selinux: skip bounded transition processing if the policy isn't loaded	APPLIES
+669d07053	a318	2018-02-01	selinux: general protection fault in sock_has_perm	APPLIES
+e4a8a7b8d	a318	2017-01-31	BACKPORT: UPSTREAM: selinux: fix off-by-one in setprocattr	APPLIES
+9da02d84f	a318	2015-03-23	selinux: fix sel_write_enforce broken return value	APPLIES
+b25a2f956	a318	2020-04-28	selinux: properly handle multiple messages in selinux_netlink_send()	error: patch failed: security/selinux/hooks.c:4870
+b6c410582	a318	2020-06-10	selinux: fix double free	APPLIES
+a6fd655b1	a318	2020-02-01	selinux: sel_avc_get_stat_idx should increase position index	APPLIES
+f0f61c29d	a318	2015-06-04	selinux: fix setting of security labels on NFS	error: patch failed: security/selinux/hooks.c:405
+e24d71029	a310	2017-01-31	BACKPORT: UPSTREAM: selinux: fix off-by-one in setprocattr	APPLIES
+43ab3a2a8	a310	2016-04-05	BACKPORT: selinux: restrict kernel module loading	APPLIES
+df46bc83c	a310	2015-09-18	selinux: do not check open perm on ftruncate call	error: patch failed: security/selinux/hooks.c:2822

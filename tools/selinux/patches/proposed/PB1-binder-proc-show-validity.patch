@@ -1,0 +1,35 @@
+# PROPOSED, NOT APPLIED to the pinned kernel (Phase 9). Adapted by hand for the 3.4.5 Samsung binder.c from the upstream change(s) named below.
+# Tested only in a disposable copy: compiles for ARM and passes the Phase 8 QEMU binder test set. Not exploit-tested.
+# Source: Google kernel/common deprecated/android-3.4, 'android: drivers: workaround debugfs race in binder' (b0bd81a6 / 7a9c5be5, 2015-05-28).
+# Fixes a use of a freed binder_proc through the debugfs 'proc/<pid>' file. Security impact limited to whoever may read binder debugfs.
+
+--- a/drivers/staging/android/binder.c
++++ b/drivers/staging/android/binder.c
+@@ -3589,13 +3589,25 @@
+ 
+ static int binder_proc_show(struct seq_file *m, void *unused)
+ {
++	struct binder_proc *itr;
+ 	struct binder_proc *proc = m->private;
++	struct hlist_node *pos;
+ 	int do_lock = !binder_debug_no_lock;
++	bool valid_proc = false;
+ 
+ 	if (do_lock)
+ 		binder_lock(__func__);
+-	seq_puts(m, "binder proc state:\n");
+-	print_binder_proc(m, proc, 1);
++
++	hlist_for_each_entry(itr, pos, &binder_procs, proc_node) {
++		if (itr == proc) {
++			valid_proc = true;
++			break;
++		}
++	}
++	if (valid_proc) {
++		seq_puts(m, "binder proc state:\n");
++		print_binder_proc(m, proc, 1);
++	}
+ 	if (do_lock)
+ 		binder_unlock(__func__);
+ 	return 0;
